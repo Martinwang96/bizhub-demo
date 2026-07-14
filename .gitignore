@@ -1,23 +1,34 @@
-# Dependencies
+# 依赖
 node_modules/
 
-# Build output
+# 构建产物
 dist/
-*.tsbuildinfo
+dist-ssr/
 
-# EdgeOne deployment config
-.edgeone/
-
-# Logs
+# 日志
 *.log
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
-# Editor / OS
-.vscode/
-.idea/
-.DS_Store
-Thumbs.db
-
-# Env
+# 环境变量 / 密钥(切勿提交)
 .env
 .env.local
+.env.*.local
+
+# 编辑器 / 系统
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# 杂项
+.cache/
+.temp/
+.edgeone/
