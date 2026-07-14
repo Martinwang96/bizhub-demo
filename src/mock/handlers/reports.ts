@@ -1,6 +1,6 @@
 import type { Router, MockRequest } from '../router';
 import { ok, fail, html, jsonResponse } from '../envelope';
-import { ownedReports, sharedReports, reportViewHtml } from '../fixtures/reports';
+import { ownedReports, sharedReports, reportViewHtmlMap, reportViewHtml } from '../fixtures/reports';
 
 function findReport(id: string) {
   return [...ownedReports, ...sharedReports].find((r) => r.reportId === id);
@@ -22,7 +22,9 @@ export function registerReportRoutes(r: Router): void {
     return rpt ? ok(rpt) : fail('报表不存在', 404);
   });
 
-  r.get('/api/reports/:id/view', () => html(reportViewHtml));
+  r.get('/api/reports/:id/view', (req: MockRequest) =>
+    html(reportViewHtmlMap[req.params.id] ?? reportViewHtml),
+  );
 
   r.post('/api/reports', (req: MockRequest) => {
     const body = (req.body ?? {}) as { title?: string };

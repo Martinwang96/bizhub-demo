@@ -15,6 +15,32 @@ import styles from './ReportsPage.module.css';
 
 type Tab = 'owned' | 'shared';
 
+/**
+ * 报表缩略图：通过 fetch 拿到看板 HTML（被 demo mock 拦截），再用 srcDoc 渲染。
+ * 避免 iframe src 直接请求 /api/... 在静态托管时 404。
+ */
+function ThumbFrame({ reportId, title }: { reportId: string; title: string }) {
+  const [html, setHtml] = useState('');
+  useEffect(() => {
+    let cancelled = false;
+    fetch(reportViewUrl(reportId), { credentials: 'include' })
+      .then((r) => r.text())
+      .then((t) => { if (!cancelled) setHtml(t); })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, [reportId]);
+  return (
+    <iframe
+      className={styles.thumbFrame}
+      srcDoc={html}
+      sandbox="allow-scripts"
+      title={title}
+      scrolling="no"
+      tabIndex={-1}
+    />
+  );
+}
+
 function fmtTime(ts: number): string {
   const ms = ts < 1e12 ? ts * 1000 : ts;
   const d = new Date(ms);
@@ -247,14 +273,7 @@ export default function ReportsPage() {
                   </div>
                 )}
                 <div className={styles.thumb}>
-                  <iframe
-                    className={styles.thumbFrame}
-                    src={reportViewUrl(r.reportId)}
-                    sandbox="allow-scripts allow-same-origin"
-                    title={r.title}
-                    scrolling="no"
-                    tabIndex={-1}
-                  />
+                  <ThumbFrame reportId={r.reportId} title={r.title} />
                   <div className={styles.thumbMask} />
                 </div>
                 <div className={styles.cardBody}>

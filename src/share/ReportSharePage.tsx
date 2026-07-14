@@ -10,6 +10,30 @@ import {
 } from '../chat/api/reports';
 import styles from './SharePage.module.css';
 
+/**
+ * 分享看板 iframe：通过 fetch 拿到 HTML（被 demo mock 拦截），再用 srcDoc 渲染。
+ * 避免 iframe src 直接请求 /api/... 在静态托管时 404。
+ */
+function ShareFrame({ token, title }: { token: string; title: string }) {
+  const [html, setHtml] = useState('');
+  useEffect(() => {
+    let cancelled = false;
+    fetch(reportShareViewUrl(token), { credentials: 'include' })
+      .then((r) => r.text())
+      .then((t) => { if (!cancelled) setHtml(t); })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, [token]);
+  return (
+    <iframe
+      className={styles.reportShareFrame}
+      srcDoc={html}
+      title={title}
+      sandbox="allow-scripts"
+    />
+  );
+}
+
 function fmtDate(ts?: number): string {
   if (!ts) return '';
   const raw = ts < 1e12 ? ts * 1000 : ts;
@@ -121,14 +145,7 @@ export default function ReportSharePage() {
 
       <main className={`${styles.body} ${styles.reportShareBody}`}>
         <section className={styles.reportShareCard} aria-label="分享看板预览">
-          {token && (
-            <iframe
-              className={styles.reportShareFrame}
-              src={reportShareViewUrl(token)}
-              title={share?.title || '分享看板'}
-              sandbox="allow-scripts allow-same-origin"
-            />
-          )}
+          {token && <ShareFrame token={token} title={share?.title || '分享看板'} />}
         </section>
       </main>
 

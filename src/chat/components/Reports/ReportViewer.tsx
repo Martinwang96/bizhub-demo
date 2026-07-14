@@ -1,4 +1,4 @@
-import { useCallback, useRef, type ReactNode } from 'react';
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import styles from './ReportViewer.module.css';
 
 /** 传给 actions 渲染函数的上下文（把下载能力上抛，便于收进下拉菜单）。 */
@@ -27,6 +27,8 @@ interface Props {
  */
 export default function ReportViewer({ src, fileName = 'report.html', leadingActions, actions, hideDownload, onClose }: Props) {
   const cacheRef = useRef<string | null>(null);
+  const [html, setHtml] = useState<string>('');
+  const [failed, setFailed] = useState(false);
 
   const fetchHtml = useCallback(async (): Promise<string> => {
     if (cacheRef.current !== null) return cacheRef.current;
@@ -36,6 +38,19 @@ export default function ReportViewer({ src, fileName = 'report.html', leadingAct
     cacheRef.current = text;
     return text;
   }, [src]);
+
+  // 通过 fetch 拿到看板 HTML（fetch 被 demo mock 拦截，静态托管下也能工作），
+  // 再用 srcDoc 渲染——避免 iframe src 直接请求 /api/... 在静态托管时 404。
+  useEffect(() => {
+    let cancelled = false;
+    setHtml('');
+    setFailed(false);
+    cacheRef.current = null;
+    fetchHtml()
+      .then((h) => { if (!cancelled) setHtml(h); })
+      .catch(() => { if (!cancelled) setFailed(true); });
+    return () => { cancelled = true; };
+  }, [src, fetchHtml]);
 
   const handleDownload = useCallback(async () => {
     try {
@@ -81,12 +96,18 @@ export default function ReportViewer({ src, fileName = 'report.html', leadingAct
       </div>
 
       <div className={styles.body}>
-        <iframe
-          className={styles.frame}
-          src={src}
-          sandbox="allow-scripts"
-          title="报表预览"
-        />
+        {failed ? (
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#86909c', fontSize: 14 }}>
+            看板加载失败，请稍后重试
+          </div>
+        ) : (
+          <iframe
+            className={styles.frame}
+            srcDoc={html}
+            sandbox="allow-scripts"
+            title="报表预览"
+          />
+        )}
       </div>
     </div>
   );
