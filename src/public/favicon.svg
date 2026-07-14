@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Biz-Hub 经营分析智能平台 favicon
+  与 BrandLogo (src/shared/components/BrandLogo.tsx) 严格一致：
+  - 实色圆角方块（primary #0052D9）
+  - 白色 stacked data layers，stroke 线性图形
+  - 不使用渐变 / 不使用发光阴影
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <rect x="0" y="0" width="32" height="32" rx="6" ry="6" fill="#0052D9"/>
+  <g transform="translate(4 4) scale(1)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+    <path d="M2 17l10 5 10-5"/>
+    <path d="M2 12l10 5 10-5"/>
+  </g>
+</svg>

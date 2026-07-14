@@ -1,0 +1,122 @@
+.step {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-2);
+  border-radius: var(--r-sm);
+  font-size: var(--fs-md);
+  color: var(--muted);
+  cursor: default;
+  transition: background var(--t-fast);
+}
+
+.step:hover {
+  background: var(--bg);
+}
+
+.stepDone {
+  color: var(--think-text);
+  cursor: pointer;
+}
+
+.stepDenied {
+  color: var(--danger);
+}
+
+@keyframes iconSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* icon 容器：对齐 TodoPanel 的 .icon，统一 16px */
+.icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconRunning {
+  animation: iconSpin 1s linear infinite;
+  color: var(--ai-accent);
+}
+
+.iconDone {
+  color: var(--accent);
+}
+
+.iconDenied {
+  color: var(--danger);
+}
+
+.label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 400px;
+  flex: 1;
+}
+
+.expandArrow {
+  font-size: 10px;
+  color: var(--muted);
+  transition: transform var(--t-fast);
+  display: inline-block;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.expandArrowOpen {
+  transform: rotate(90deg);
+}
+
+/* Detail */
+.detail {
+  overflow: hidden;
+  transition: max-height var(--t-slow) var(--ease), opacity var(--t-mid) var(--ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iconRunning { animation: none; }
+}
+
+.detailCollapsed {
+  max-height: 0;
+  opacity: 0;
+  padding: 0;
+}
+
+.detailExpanded {
+  max-height: 2000px;
+  opacity: 1;
+  padding: var(--s-1) var(--s-2) var(--s-2) 30px;
+}
+
+.detailSection {
+  margin-bottom: var(--s-1);
+}
+
+.detailTitle {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: var(--s-1);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.detailPre {
+  margin: 0;
+  font-size: var(--fs-sm);
+  max-height: 200px;
+  overflow: auto;
+  background: var(--shell-bg-deep);
+  color: var(--shell-text);
+  padding: var(--s-2) var(--s-3);
+  border-radius: var(--r-sm);
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: Menlo, Consolas, monospace;
+}

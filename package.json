@@ -1,0 +1,38 @@
+{
+  "name": "demo-site",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b --noEmit && rimraf dist && vite build",
+    "typecheck": "tsc -b --noEmit",
+    "typecheck:test": "tsc -p tsconfig.test.json --noEmit",
+    "test": "tsx --test tests/*.test.ts",
+    "check": "npm run typecheck && npm run typecheck:test && npm test",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "dompurify": "^3.1.6",
+    "echarts": "^6.0.0",
+    "echarts-for-react": "^3.0.6",
+    "jszip": "^3.10.1",
+    "marked": "^14.1.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.27.0",
+    "tdesign-icons-react": "^0.6.4",
+    "tdesign-react": "^1.16.9",
+    "zustand": "^4.5.5"
+  },
+  "devDependencies": {
+    "@types/dompurify": "^3.0.5",
+    "@types/node": "^25.7.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "rimraf": "^6.0.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.2"
+  }
+}

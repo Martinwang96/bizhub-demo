@@ -1,0 +1,191 @@
+/*
+ * ProcessPanel 样式
+ *
+ * 形态：
+ *  - 裸态（containerBare，折叠时使用）：无背景/边框/阴影，仅展示
+ *    "icon + 当前路径" 单行；hover 才浮起背景与边框，提示可点开。
+ *  - 卡片态（containerCard，展开后使用）：保留原有边框/背景/阴影。
+ */
+
+.container {
+  border-radius: var(--r-md);
+  overflow: hidden;
+  transition:
+    border-color var(--t-mid),
+    background-color var(--t-mid),
+    box-shadow var(--t-mid);
+}
+
+/* —— 卡片态（展开） —— */
+.containerCard {
+  border: 1px solid var(--line);
+  background: var(--card);
+  box-shadow: var(--shadow-xs);
+}
+
+.containerCard.containerActive {
+  border-color: var(--primary-ring);
+}
+
+/* —— 裸态：折叠时使用 —— */
+.containerBare {
+  border: 1px solid transparent;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* hover 浮起：渐显背景 + 边框，邀请用户点开 */
+.containerBare:hover {
+  border-color: var(--line);
+  background: var(--card);
+  box-shadow: var(--shadow-xs);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-3) var(--s-4);
+  cursor: pointer;
+  user-select: none;
+  transition: background var(--t-fast);
+}
+
+/* 卡片态保持原 hover 反馈；裸态外层已经在 hover 浮起，这里不再叠加 hover 背景 */
+.containerCard .header:hover {
+  background: var(--bg);
+}
+
+.header:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--primary-ring);
+}
+
+/* —— Icon 区 —— */
+.icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+}
+
+.iconDone {
+  color: var(--accent);
+}
+
+/* —— BizHub 三层堆叠"思考"呼吸动效 ——
+ * 三条 path 错相位地做轻微上下浮动 + 透明度脉动，
+ * 形成"层在思考"的呼吸感。
+ */
+@keyframes bizhubLayerPulse {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-1.2px);
+    opacity: 0.55;
+  }
+}
+
+.bizhubLayer {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bizhubLayerPulse 1.4s var(--ease, ease-in-out) infinite;
+}
+
+.bizhubLayer1 { animation-delay: 0s; }
+.bizhubLayer2 { animation-delay: 0.18s; }
+.bizhubLayer3 { animation-delay: 0.36s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bizhubLayer { animation: none; }
+}
+
+/* —— Summary 文字 —— */
+.summary {
+  flex: 1;
+  font-size: var(--fs-md);
+  font-weight: 500;
+  color: var(--sub);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+/* 当前路径文字切换时的渐入效果（每次 key 改变都会重放） */
+@keyframes summaryFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.summaryText {
+  display: inline-block;
+  animation: summaryFadeIn var(--t-mid, 220ms) var(--ease, ease-out) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .summaryText { animation: none; }
+}
+
+.meta {
+  font-weight: 400;
+  color: var(--muted);
+  margin-left: var(--s-1);
+}
+
+/* —— 折叠/展开箭头 —— */
+.arrow {
+  font-size: 10px;
+  color: var(--muted);
+  transition: transform var(--t-mid), opacity var(--t-fast);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.arrowOpen {
+  transform: rotate(180deg);
+}
+
+/* 裸态默认隐藏箭头，hover 时再淡入提示可展开 */
+.containerBare .arrow {
+  opacity: 0;
+}
+
+.containerBare:hover .arrow {
+  opacity: 1;
+}
+
+/* —— Body —— */
+.body {
+  overflow: hidden;
+  transition: max-height var(--t-slow) var(--ease), opacity var(--t-mid) var(--ease);
+}
+
+.containerCard .body {
+  border-top: 1px solid var(--line);
+}
+
+.bodyCollapsed {
+  max-height: 0;
+  opacity: 0;
+  border-top-color: transparent;
+  padding: 0;
+}
+
+.bodyExpanded {
+  max-height: 5000px;
+  opacity: 1;
+  /* 内容由 ToolStep 自身 padding 控制，外层给统一 padding 保持缩进 */
+  padding: var(--s-2) var(--s-2);
+}

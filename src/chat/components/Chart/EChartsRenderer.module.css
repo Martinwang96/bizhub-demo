@@ -1,0 +1,24 @@
+.chart {
+  width: 100%;
+  height: 100%;
+  min-height: 460px;
+}
+
+/* 移动端：用基于视口高度的固定高度，避免被父容器（mobileChartDrawer.body）拉得过高，
+   把 echarts 画布拉成"窄而高"，绘图区被挤成中间一条。
+   抽屉收紧后这里同步收紧上限，避免画布反而高于抽屉。 */
+@media (max-width: 900px) {
+  .chart {
+    height: clamp(260px, 44dvh, 420px);
+    min-height: 260px;
+    max-height: 420px;
+  }
+}
+
+@media (max-width: 640px) {
+  .chart {
+    height: clamp(240px, 42dvh, 380px);
+    min-height: 240px;
+    max-height: 380px;
+  }
+}

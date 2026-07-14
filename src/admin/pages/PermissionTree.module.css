@@ -1,0 +1,338 @@
+.tree {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  /* 不绘制外框/背景/内边距：四块（产品 / 层级 / Skill / 行权限）已各自带卡片边，
+     外层「共享权限」壳（.dialogTreeBox 等）已退化为透明占位；此处保持透明避免「框中框」。 */
+  background: transparent;
+  overflow: visible;
+}
+
+.treeToolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  color: var(--sub);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+.toolbarBtn {
+  height: 28px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--text);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.toolbarBtn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.rootBlock {
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: #fff;
+  overflow: hidden;
+}
+
+.rootHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: var(--bg-soft, #F6F8FB);
+  border-bottom: 1px solid var(--line);
+  font-weight: 700;
+  color: var(--text);
+}
+
+.rootTitle {
+  font-size: var(--fs-md);
+  flex: 1;
+}
+
+.rootCount {
+  font-size: 12px;
+  color: var(--sub);
+  font-weight: 600;
+  background: var(--card);
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-variant-numeric: tabular-nums;
+}
+
+.rootBody {
+  padding: var(--s-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+/*
+ * 展开/收起按钮：内含 tdesign-icons-react 的 ChevronRight/ChevronDown SVG（1em，跟随 font-size）。
+ * 用 font-size: 14px 控制 SVG 视觉尺寸；padding:0 + line-height:1 消除按钮内文本基线留白；
+ * color 由 .collapseBtn 提供，SVG 通过 strokeColor="currentColor" 自动继承。
+ */
+.collapseBtn {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: var(--sub);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.collapseBtn:hover {
+  color: var(--primary);
+}
+
+.collapsePlaceholder {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.empty,
+.emptySm {
+  color: var(--sub);
+  font-size: var(--fs-sm);
+  padding: 12px;
+  text-align: center;
+}
+
+.emptySm {
+  padding: 6px 4px;
+  text-align: left;
+  font-size: 12px;
+}
+
+/* 产品树节点 */
+.treeNode {
+  display: flex;
+  flex-direction: column;
+}
+
+.treeRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px;
+  border-radius: var(--r-xs);
+  transition: background var(--t-fast) var(--ease);
+}
+
+.treeRow:hover {
+  background: rgba(31, 107, 255, 0.04);
+}
+
+.treeChildren {
+  display: flex;
+  flex-direction: column;
+}
+
+.nodeName {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-md);
+  color: var(--text);
+}
+
+.nodeId {
+  font-size: 12px;
+  color: var(--sub);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+
+/* 层级
+ * 去掉原来的虚线外框：外层 .rootBlock 已是一层框，这里再来一层会让
+ * 「共享权限」面板出现"框中框中框"的视觉拥挤（参考 image.png）。
+ * 改用顶部细分隔线区分两组（产品聚合层 / 组织架构层），更克制。 */
+.layerBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 4px 0;
+}
+
+.layerBlock + .layerBlock {
+  border-top: 1px dashed var(--line);
+  padding-top: 8px;
+  margin-top: 4px;
+}
+
+.layerHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.layerTitle {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  flex: 1;
+}
+
+.layerCount {
+  font-size: 12px;
+  color: var(--sub);
+  font-variant-numeric: tabular-nums;
+}
+
+.layerOptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.layerChip {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  background: var(--card);
+  transition: background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+
+.layerChip:hover:not(.layerChipDisabled) {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.layerChipActive {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.layerChipDisabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.hiddenInput {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+}
+
+/* Skill
+ * 直接平铺去重后的 skill 列表（不再按 datasource 二级分类），
+ * 因此移除 .skillCategory / .skillCatHead 等容器样式。 */
+.skillList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.skillItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xs);
+  cursor: pointer;
+  font-size: 13px;
+  transition: background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+}
+
+.skillItem:hover:not(.skillItemDisabled) {
+  border-color: var(--primary);
+}
+
+.skillItemActive {
+  background: rgba(31, 107, 255, 0.08);
+  border-color: var(--primary);
+}
+
+.skillItemDisabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.skillName {
+  font-weight: 600;
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.skillMeta {
+  font-size: 12px;
+  color: var(--sub);
+}
+
+/* 「已下线」角标：与 SkillsTab 标签样式同级（中性灰底 + 警示色文字），
+   提示 admin 该 sid 在 registry 已 status==unavailable，仅展示不可新增勾选。 */
+.skillBadgeOff {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 6px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
+  color: var(--warning, #c08a00);
+  background: var(--warning-soft, rgba(255, 178, 0, 0.12));
+  border: 1px solid var(--warning-border, rgba(255, 178, 0, 0.32));
+  border-radius: 9999px;
+}
+
+/* 「公共」角标：系统自带公共 skill（如 dashboard-report），蓝色调。
+   提示 admin 该 sid 无需逐用户授权，默认全员可用。 */
+.skillBadgePublic {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 6px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #1d6bff;
+  background: rgba(29, 107, 255, 0.08);
+  border: 1px solid rgba(29, 107, 255, 0.24);
+  border-radius: 9999px;
+}
+
+.summaryRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px dashed var(--line);
+  border-radius: var(--r-sm);
+  background: var(--bg-soft, #F6F8FB);
+}
+
+.summaryLabel {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.summaryHint {
+  color: var(--sub);
+  font-size: 12px;
+}

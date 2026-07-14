@@ -1,0 +1,666 @@
+/* ===== 申请页子组件共用样式 =====
+   遵循 DESIGN.md token：颜色 / 间距 / 圆角 / 阴影 / 过渡 全部走变量。
+   严格使用项目品牌色，禁止引入 mockup 中的紫色 / 新字体。 */
+
+/* 顶部分段控件已抽取至 mobile/shared/MobileSegmentTabs */
+
+/* ───────────────────────── 新建提交段容器 ───────────────────────── */
+.newSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+}
+
+.preValidateHint {
+  padding: var(--s-6) var(--s-4);
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  background: var(--card);
+  border: 1px dashed var(--line);
+  border-radius: var(--r-lg);
+  opacity: 0.8;
+}
+
+.submittedNotice {
+  padding: var(--s-3) var(--s-4);
+  background: var(--accent-soft, #e8f8e8);
+  color: var(--accent, #52c41a);
+  border-radius: var(--r-md);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+}
+
+/* ───────────────────────── 通用步骤块 ─────────────────────────
+   STEP 标题在卡片外（独立一行），下方白卡承载具体内容。 */
+.stepGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.stepBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: var(--s-4);
+  background: var(--card);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-xs);
+}
+
+.stepLabel {
+  font-size: var(--fs-xs, 12px);
+  font-weight: 700;
+  color: var(--sub, var(--muted));
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0 var(--s-1);
+}
+
+/* ───────────────────────── Step 1：操作类型 ───────────────────────── */
+.opTypeGroup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-1);
+  padding: var(--s-1);
+  background: var(--surface-2, #f2f3f9);
+  border-radius: var(--r-full);
+}
+
+.opTypeBtn {
+  height: 40px;
+  border: none;
+  background: transparent;
+  border-radius: var(--r-full);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+
+.opTypeBtnActive {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: var(--shadow-xs);
+}
+
+/* ───────────────────────── Step 2：表单字段 ───────────────────────── */
+.fieldRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+}
+
+.fieldLabel {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.required {
+  color: var(--danger);
+  margin-left: 2px;
+}
+
+.input,
+.select {
+  width: 100%;
+  height: 44px;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--text);
+  font-size: var(--fs-md);
+  outline: none;
+  transition:
+    border-color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%234E5969' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+
+.input:focus,
+.select:focus {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-focus, 0 0 0 3px rgba(0, 82, 217, 0.15));
+}
+
+.input::placeholder {
+  color: var(--muted);
+}
+
+.fieldHint {
+  font-size: var(--fs-xs, 12px);
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ───────────────────────── Step 3：文件选择 ───────────────────────── */
+.dropZone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  width: 100%;
+  min-height: 117px;
+  padding: var(--s-4);
+  background: var(--card);
+  border: 2px dashed var(--line-strong, var(--line));
+  border-radius: var(--r-md);
+  color: var(--primary);
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease);
+}
+
+.dropZone:hover,
+.dropZone:focus-visible {
+  background: var(--primary-soft, #e8f3ff);
+  border-color: var(--primary);
+  outline: none;
+}
+
+.dropZoneText {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.dropZoneHint {
+  font-size: var(--fs-xs, 12px);
+  color: var(--muted);
+  text-align: center;
+}
+
+.fileList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fileItem {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-3);
+  background: var(--surface-2, #f2f3f9);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+}
+
+.fileBadge {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 22px;
+  padding: 0 var(--s-2);
+  border-radius: var(--r-xs, 4px);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.fileBadgeSkill {
+  background: var(--accent-soft, #e8f8e8);
+  color: var(--accent, #52c41a);
+}
+
+.fileBadgeRef {
+  background: var(--primary-soft, #e8f3ff);
+  color: var(--primary);
+}
+
+.fileBadgeScript {
+  background: var(--warn-soft, #fff7e6);
+  color: var(--warn, #fa8c16);
+}
+
+/* scripts/ 脚本安全提示（zip 选择块 + 校验结果面板共用） */
+.scriptsWarn {
+  margin: 0;
+  padding: var(--s-2) var(--s-3);
+  background: var(--warn-soft, #fff7e6);
+  color: var(--warn, #fa8c16);
+  border-radius: var(--r-sm);
+  font-size: var(--fs-xs, 12px);
+  line-height: 1.5;
+}
+
+.scriptsGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.fileName {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--fs-sm);
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fileSize {
+  flex: none;
+  font-size: var(--fs-xs, 12px);
+  color: var(--muted);
+}
+
+.fileRemove {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: var(--r-full);
+  background: transparent;
+  color: var(--danger);
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.fileRemove:hover {
+  background: var(--danger-soft, rgba(245, 63, 63, 0.08));
+}
+
+/* ───────────────────────── 校验结果 ───────────────────────── */
+.resultBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: var(--s-4);
+  background: var(--primary-soft, #e8f3ff);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-xs);
+}
+
+.resultHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  height: 26px;
+  padding: 0 var(--s-3);
+  border-radius: var(--r-full);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.statusOk {
+  background: var(--accent-soft, #e8f8e8);
+  color: var(--accent, #52c41a);
+}
+
+.statusWarn {
+  background: var(--warn-soft, #fff7e6);
+  color: var(--warn, #fa8c16);
+}
+
+.statusError {
+  background: var(--danger-soft, #ffece8);
+  color: var(--danger, #f53f3f);
+}
+
+.stagingHint {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.resultRow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+}
+
+.resultLabel {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.skillIdValue {
+  font-family: 'SF Mono', 'Roboto Mono', Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-size: var(--fs-sm);
+  background: var(--card);
+  color: var(--text);
+  padding: 4px 8px;
+  border-radius: var(--r-xs, 4px);
+  border: 1px solid var(--line);
+  word-break: break-all;
+}
+
+/* —— Issues 折叠 —— */
+.issuesGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.issuesToggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 36px;
+  padding: 0 var(--s-3);
+  border: none;
+  background: var(--card);
+  border-radius: var(--r-sm);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.issuesToggle:hover {
+  background: var(--hover-soft, var(--surface-2));
+}
+
+.iconRotated {
+  transform: rotate(180deg);
+  transition: transform var(--t-fast) var(--ease);
+}
+
+.issuesList {
+  margin: 0;
+  padding: var(--s-2);
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  background: var(--card);
+  border-radius: var(--r-sm);
+}
+
+.issueItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-2);
+  padding: var(--s-2);
+  border-radius: var(--r-xs, 4px);
+}
+
+.issueLevel {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  padding: 0 var(--s-2);
+  border-radius: var(--r-xs, 4px);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.issueLevelError {
+  background: var(--danger-soft, #ffece8);
+  color: var(--danger);
+}
+
+.issueLevelWarn {
+  background: var(--warn-soft, #fff7e6);
+  color: var(--warn);
+}
+
+.issueLevelInfo {
+  background: var(--primary-soft, #e8f3ff);
+  color: var(--primary);
+}
+
+.issueMsg {
+  flex: 1;
+  font-size: var(--fs-sm);
+  color: var(--text);
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.issueCode {
+  flex: none;
+  font-family: 'SF Mono', 'Roboto Mono', Menlo, Monaco, monospace;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.issuesEmpty {
+  padding: var(--s-3);
+  background: var(--card);
+  border-radius: var(--r-sm);
+  font-size: var(--fs-sm);
+  color: var(--accent, #52c41a);
+}
+
+.diffBtn {
+  align-self: flex-start;
+  height: 36px;
+  padding: 0 var(--s-4);
+  border: 1px solid var(--primary);
+  border-radius: var(--r-full);
+  background: transparent;
+  color: var(--primary);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.diffBtn:hover {
+  background: var(--primary-soft, #e8f3ff);
+}
+
+/* ───────────────────────── Diff Modal ───────────────────────── */
+.diffOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  animation: diffOverlayIn var(--t-mid, 240ms) var(--ease);
+}
+
+.diffSheet {
+  width: 100%;
+  max-height: 90vh;
+  background: var(--card);
+  border-radius: 22px 22px 0 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: diffSheetIn var(--t-mid, 240ms) var(--ease);
+}
+
+.diffHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--s-3) var(--s-4);
+  border-bottom: 1px solid var(--line);
+  background: var(--card);
+}
+
+.diffTitle {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.diffClose {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: var(--r-full);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.diffClose:hover {
+  background: var(--hover-soft, var(--surface-2));
+}
+
+.diffPre {
+  flex: 1;
+  margin: 0;
+  padding: var(--s-3) var(--s-4);
+  overflow: auto;
+  background: #1d2129;
+  color: #e5e6eb;
+  font-family: 'SF Mono', 'Roboto Mono', Menlo, Monaco, monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: pre;
+  -webkit-overflow-scrolling: touch;
+}
+
+.diffLineAdd { color: #95de64; display: inline; }
+.diffLineDel { color: #ff7875; display: inline; }
+.diffLineMeta { color: #8c8c8c; display: inline; }
+.diffLineCtx { color: #e5e6eb; display: inline; }
+
+@keyframes diffOverlayIn {
+  from { background: rgba(0, 0, 0, 0); }
+  to { background: rgba(0, 0, 0, 0.55); }
+}
+
+@keyframes diffSheetIn {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+/* ───────────────────────── 占位（骨架阶段保留） ───────────────────────── */
+.placeholderSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: var(--s-6) var(--s-4);
+  background: var(--card);
+  border: 1px dashed var(--line);
+  border-radius: var(--r-lg);
+}
+
+.placeholderHint {
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 280px;
+}
+
+/* ───────────────────────── 底部 Sticky 操作条 ───────────────────────── */
+.stickyBar {
+  position: fixed;
+  inset: auto 0 calc(56px + env(safe-area-inset-bottom, 0px)) 0;
+  z-index: var(--z-fab);
+  display: flex;
+  gap: var(--s-2);
+  padding: var(--s-3) var(--s-4);
+  background: var(--card);
+  border-top: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+
+.btnPrimary {
+  flex: 1;
+  height: 44px;
+  border: none;
+  border-radius: var(--r-sm);
+  background: var(--primary);
+  color: #fff;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.btnPrimary:hover:not(:disabled) {
+  background: var(--primary-strong, #0045B5);
+}
+
+.btnPrimary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btnGhost {
+  flex: 1;
+  height: 44px;
+  border: 1px solid var(--line-strong, var(--line));
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--text);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.btnGhost:hover:not(:disabled) {
+  background: var(--hover-soft, var(--surface-2));
+}
+
+.btnGhost:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .opTypeBtn,
+  .input,
+  .select,
+  .dropZone,
+  .issuesToggle,
+  .iconRotated,
+  .diffBtn,
+  .diffClose,
+  .btnPrimary,
+  .btnGhost,
+  .fileRemove {
+    transition-duration: 0.01ms;
+    animation: none;
+  }
+  .diffOverlay,
+  .diffSheet {
+    animation: none;
+  }
+}

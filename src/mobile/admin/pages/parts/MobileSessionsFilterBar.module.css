@@ -1,0 +1,187 @@
+.bar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: var(--s-4);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-xs);
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+/*
+ * 日期区间单行版式：[开始 v] 至 [结束 v]
+ * - DatePicker 现在走 TDesign 自定义弹层（非原生 type=date），无最小宽度撑破问题。
+ * - dateHalf / dateSep 复用 MobileStatsToolbar 同名 class，跨筛选条版式统一。
+ */
+.dateRange {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.fieldLabel {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--sub);
+  letter-spacing: 0.02em;
+}
+
+.input {
+  height: 36px;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-md);
+  width: 100%;
+  min-width: 0;
+  transition:
+    border-color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+}
+
+.input:hover {
+  border-color: rgba(var(--primary-rgb), 0.4);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: var(--shadow-focus);
+}
+
+.inputMono {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.02em;
+}
+
+.chipRow {
+  /* 四个快捷 chip 等宽均匀分布，整行宽度对齐上方 input/日期行 */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-2);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  padding: 0 var(--s-2);
+  min-width: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-full);
+  background: transparent;
+  color: var(--sub);
+  font: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+
+.chip:hover {
+  background: var(--hover-soft);
+  color: var(--primary);
+}
+
+.chip:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.chipActive {
+  background: var(--primary-soft);
+  border-color: rgba(var(--primary-rgb), 0.32);
+  color: var(--primary);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--s-2);
+  padding-top: var(--s-1);
+  border-top: 1px dashed var(--line);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 var(--s-4);
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
+  font: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+
+.btn:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.btnGhost {
+  border-color: var(--line-strong);
+  background: transparent;
+  color: var(--sub);
+}
+
+.btnGhost:hover:not(:disabled) {
+  background: var(--hover-soft);
+  border-color: rgba(var(--primary-rgb), 0.24);
+  color: var(--primary);
+}
+
+.btnPrimary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btnPrimary:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.btnPrimary:active:not(:disabled) {
+  background: var(--primary-press);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .input,
+  .chip,
+  .btn {
+    transition-duration: 0.01ms;
+  }
+}

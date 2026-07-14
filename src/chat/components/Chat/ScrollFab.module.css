@@ -1,0 +1,42 @@
+.fab {
+  position: absolute;
+  left: 50%;
+  bottom: 96px;
+  z-index: var(--z-fab);
+  height: var(--control-h);
+  padding: 0 var(--s-3);
+  border-radius: var(--r-full);
+  background: var(--surface-1);
+  color: var(--primary);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  gap: var(--s-1);
+  font-size: var(--fs-md);
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-50%) translateY(8px);
+  pointer-events: none;
+  transition: opacity var(--t-mid) var(--ease), transform var(--t-mid) var(--ease),
+              border-color var(--t-fast), box-shadow var(--t-fast), background var(--t-fast);
+}
+
+.fabVisible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.fab:hover {
+  background: #FFFFFF;
+  border-color: var(--focus-ring);
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.fab:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-md);
+}

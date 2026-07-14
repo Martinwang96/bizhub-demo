@@ -1,0 +1,383 @@
+/* StatsPage — 数据统计（Management Surface）。所有颜色/圆角/间距/阴影来自 tokens.css。 */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-6);
+}
+
+/* ─── 顶部工具区 ─── */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-4);
+  justify-content: space-between;
+}
+
+.toolGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.toolLabel {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* segmented control（粒度/维度/范围切换） */
+.segment {
+  display: inline-flex;
+  align-items: center;
+  height: var(--control-h);
+  padding: 2px;
+  background: var(--surface-1);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  gap: 2px;
+  box-sizing: border-box;
+}
+
+.segmentBtn {
+  appearance: none;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--sub);
+  font-size: var(--fs-sm);
+  font-weight: 550;
+  padding: 0 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+
+.segmentBtn:hover:not(.segmentBtnActive) {
+  color: var(--primary);
+}
+
+.segmentBtn:focus-visible {
+  outline: none;
+}
+
+.segmentBtnActive {
+  background: var(--card);
+  color: var(--primary);
+  box-shadow: var(--shadow-xs);
+}
+
+.dateRangeField,
+.quickField {
+  display: flex;
+  align-items: center;
+  height: var(--control-h);
+  flex-shrink: 0;
+}
+
+.dateRangeField {
+  width: 300px;
+}
+
+.quickField {
+  width: 132px;
+}
+
+.dateRangeField :global(.t-range-input),
+.dateRangeField :global(.t-range-input:hover),
+.dateRangeField :global(.t-range-input.t-is-focused),
+.quickField :global(.t-input),
+.quickField :global(.t-input:hover),
+.quickField :global(.t-input--focused),
+.quickField :global(.t-input.t-input--focused) {
+  height: var(--control-h) !important;
+  min-height: var(--control-h) !important;
+  background: var(--surface-1) !important;
+  border-color: var(--line) !important;
+  color: var(--sub) !important;
+  box-sizing: border-box;
+}
+
+.dateRangeField :global(.t-input__inner),
+.dateRangeField :global(.t-range-input__inner-separator),
+.dateRangeField :global(.t-range-input__suffix),
+.quickField :global(.t-input__inner),
+.quickField :global(.t-input__suffix) {
+  color: var(--sub) !important;
+  font-size: var(--fs-sm) !important;
+}
+
+.dateRangeField :global(.t-input__inner::placeholder),
+.quickField :global(.t-input__inner::placeholder) {
+  color: var(--sub) !important;
+  opacity: 1;
+}
+
+.userInput {
+  appearance: none;
+  height: var(--control-h);
+  width: 180px;
+  padding: 0 var(--s-3);
+  background: var(--surface-1);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  color: var(--sub);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  line-height: normal;
+  box-sizing: border-box;
+  transition: box-shadow var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+}
+
+.userInput::placeholder { color: var(--sub); }
+
+.userInput:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.btnPrimary,
+.btnGhost {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--control-h);
+  min-height: 0;
+  padding: 0 var(--s-4);
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: normal;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.btnPrimary { background: var(--primary); color: #FFFFFF; }
+.btnPrimary:hover:not(:disabled) { background: var(--primary-hover); }
+.btnPrimary:active:not(:disabled) { transform: scale(var(--press-scale)); }
+.btnPrimary:disabled,
+.btnGhost:disabled { opacity: var(--disabled-opacity); cursor: not-allowed; }
+.btnPrimary:focus-visible,
+.btnGhost:focus-visible { outline: none; }
+
+.btnGhost { background: transparent; color: var(--primary); border-color: var(--line-strong); }
+.btnGhost:hover:not(:disabled) {
+  background: var(--hover-soft);
+  border-color: rgba(var(--primary-rgb), 0.24);
+}
+
+/* ─── 概览卡片区 ─── */
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--s-4);
+}
+
+.statCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--s-4) var(--s-5);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--card);
+  box-shadow: var(--shadow-xs);
+  overflow: hidden;
+}
+
+.statCard::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--primary);
+  border-top-left-radius: var(--r-md);
+  border-bottom-left-radius: var(--r-md);
+}
+
+.statCardWarn::before { background: var(--warn); }
+.statCardSub::before { background: var(--muted); }
+.statCardAccent::before { background: var(--accent); }
+
+.statLabel {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.statNum {
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.statHint { color: var(--sub); font-size: var(--fs-sm); }
+
+/* ─── 卡片 ─── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-xs);
+  padding: var(--s-5) var(--s-6);
+}
+
+.cardHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--s-4);
+  gap: var(--s-3);
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: var(--text);
+}
+
+.muted { color: var(--muted); font-size: var(--fs-sm); }
+
+.chart { width: 100%; }
+
+/* ─── 表格 ─── */
+.tableWrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+}
+
+.table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  color: var(--sub);
+  font-weight: 700;
+  font-size: var(--fs-xs);
+  text-align: left;
+  padding: var(--s-3) var(--s-4);
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.table tbody td {
+  padding: var(--s-3) var(--s-4);
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.table tbody tr:last-child td { border-bottom: 0; }
+
+.table tbody tr:hover { background: var(--hover-soft); }
+
+.num { text-align: left; font-variant-numeric: tabular-nums; }
+
+.mono {
+  font-family: Menlo, Consolas, "Courier New", monospace;
+  font-size: var(--fs-xs);
+  color: var(--sub);
+}
+
+.rowLink {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--primary);
+  font-family: Menlo, Consolas, "Courier New", monospace;
+  font-size: var(--fs-xs);
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.rowLink:hover { color: var(--primary-hover); }
+.rowLink:focus-visible { outline: none; border-radius: var(--r-xs); }
+
+/* ─── 极值卡片（最大/最小耗时，可点击定位） ─── */
+.extremesRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-4);
+}
+
+.extremeCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-4) var(--s-5);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--card);
+  text-align: left;
+  cursor: pointer;
+  transition: box-shadow var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+}
+
+.extremeCard:hover { box-shadow: var(--shadow-sm); border-color: var(--primary); }
+.extremeCard:focus-visible { outline: none; }
+.extremeCard:disabled { cursor: default; opacity: 0.6; }
+
+.extremeHead {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.extremeTag {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--r-xs);
+}
+
+.extremeTagMax { color: var(--warn); background: var(--warn-soft, rgba(232,163,23,0.12)); }
+.extremeTagMin { color: var(--accent); background: var(--accent-soft, rgba(22,163,74,0.10)); }
+
+.extremeNum {
+  font-size: var(--fs-xl, 21px);
+  font-weight: 800;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.extremeMeta {
+  font-family: Menlo, Consolas, "Courier New", monospace;
+  font-size: var(--fs-xs);
+  color: var(--sub);
+  word-break: break-all;
+}
+
+/* ─── 响应式 ─── */
+@media (max-width: 900px) {
+  .statsRow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .extremesRow { grid-template-columns: 1fr; }
+  .toolbar { flex-direction: column; align-items: stretch; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .segmentBtn, .btnPrimary, .btnGhost, .extremeCard, .userInput { transition: none; }
+}

@@ -1,0 +1,117 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay, 1000);
+}
+
+.mask {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: rgba(29, 33, 41, 0.32);
+  cursor: pointer;
+  animation: fadeIn 160ms var(--ease, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+.drawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-1);
+  border-left: 1px solid var(--line);
+  box-shadow: var(--shadow-lg);
+  animation: slideIn 220ms var(--ease, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  padding: var(--s-4) var(--s-5);
+  border-bottom: 1px solid var(--line);
+  background: var(--card);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.closeBtn {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: var(--r-full);
+  background: transparent;
+  color: var(--muted);
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+
+.closeBtn:hover {
+  background: var(--hover-soft);
+  color: var(--primary);
+}
+
+.closeBtn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.body {
+  flex: 1;
+  overflow: auto;
+  padding: var(--s-5);
+  background: var(--surface-1);
+  color: var(--text);
+}
+
+.foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  gap: var(--s-3);
+  padding: var(--s-3) var(--s-5);
+  border-top: 1px solid var(--line);
+  background: var(--card);
+}
+
+@keyframes slideIn {
+  from { transform: translateX(8%); opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mask,
+  .drawer {
+    animation-duration: 0.01ms;
+  }
+  .closeBtn {
+    transition-duration: 0.01ms;
+  }
+}
+
+@media (max-width: 640px) {
+  .drawer {
+    width: 100% !important;
+    border-left: none;
+  }
+}

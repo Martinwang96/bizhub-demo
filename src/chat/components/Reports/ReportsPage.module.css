@@ -1,0 +1,176 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-height: 0;
+  overflow: hidden;
+  padding: 16px 20px;
+  box-sizing: border-box;
+  background: var(--bg);
+}
+
+.pageHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.pageTitle { font-size: 20px; font-weight: 700; margin: 0 0 4px; }
+.pageSub { font-size: 13px; color: #8a9099; }
+
+.tabs { display: flex; gap: 4px; margin-bottom: 16px; }
+.tab {
+  font-size: 14px;
+  padding: 6px 14px;
+  border: none;
+  background: none;
+  color: #8a9099;
+  cursor: pointer;
+  border-radius: 6px;
+}
+.tab:hover { background: #f3f4f6; }
+.tabActive { color: #1f2329; font-weight: 600; background: #eef2ff; }
+.tabCount { font-size: 12px; color: #8a9099; margin-left: 2px; }
+
+.hint { color: #8a9099; font-size: 14px; text-align: center; padding: 48px 0; }
+.errorTip { color: #ef4444; font-size: 14px; padding: 16px 0; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  overflow: auto;
+  align-content: start;
+  flex: 1;
+  min-height: 0;
+  padding: 10px 0 16px;
+}
+
+.card {
+  position: relative;
+  border: 1px solid #e5e8ec;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #fff;
+  transition: box-shadow 0.15s, transform 0.15s, border-color 0.15s;
+}
+.card:hover { box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08); transform: translateY(-2px); }
+.cardSelected { border-color: #3b82f6; box-shadow: 0 0 0 1px #3b82f6; }
+
+/* 多选复选框：随标题排在卡片信息区，避免遮挡缩略图；只有框、无底色 */
+.cardCheckbox {
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: #3b82f6;
+}
+
+/* 卡片右上角「更多操作」下拉按钮 */
+.cardMenu {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+}
+.cardMenuBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #1f2329;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.15s;
+}
+.cardMenuBtn svg { display: block; }
+.cardMenuBtn:hover { color: #3b82f6; }
+
+/* 多选操作条 */
+.selectBar { display: flex; align-items: center; gap: 8px; }
+.selectCount { font-size: 13px; color: #1f2329; margin-right: 2px; }
+
+.thumb { position: relative; height: 160px; overflow: hidden; background: #f5f7fa; }
+.thumbFrame {
+  width: 200%;
+  height: 320px;
+  border: none;
+  transform: scale(0.5);
+  transform-origin: top left;
+  pointer-events: none;
+}
+.thumbMask { position: absolute; inset: 0; }
+
+.cardBody { padding: 10px 12px; }
+.cardTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.cardTitle {
+  flex: 1;
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cardMeta { display: flex; justify-content: space-between; font-size: 12px; color: #8a9099; }
+
+/* 详情：报表独立入口内整页承接，操作挂在报表自身 toolbar */
+.detailPage {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  background: #fff;
+}
+
+.detailIconBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: none;
+  border-radius: 6px;
+  color: #1f2329;
+  cursor: pointer;
+  line-height: 1;
+}
+.detailIconBtn + .detailIconBtn { margin-left: 4px; }
+.detailIconBtn svg { display: block; }
+.detailIconBtn:hover { color: #3b82f6; }
+.detailIconBtnDanger { color: #ef4444; }
+.detailIconBtnDanger:hover { color: #dc2626; }
+
+.btn {
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid #e5e8ec;
+  background: #fff;
+  cursor: pointer;
+}
+.btn:hover { background: #f3f4f6; }
+
+.smallBtn {
+  font-size: 13px;
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: 1px solid #e5e8ec;
+  background: #fff;
+  cursor: pointer;
+}
+.smallBtn:hover { background: #f3f4f6; }
+.smallBtnDanger { color: #ef4444; border-color: #f0c0c0; }
+.smallBtnDanger:hover { background: #fdecec; }

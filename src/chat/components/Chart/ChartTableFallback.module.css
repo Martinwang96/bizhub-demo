@@ -1,0 +1,318 @@
+.wrap {
+  height: 100%;
+  min-height: 260px;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: color-mix(in oklch, var(--bg) 92%, var(--card));
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+}
+
+.table th,
+.table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.table th {
+  position: sticky;
+  top: 0;
+  background: var(--primary-softer);
+  color: var(--text);
+  font-weight: 700;
+}
+
+.table td {
+  color: var(--sub);
+}
+
+.note {
+  padding: var(--s-2) var(--s-3);
+  color: var(--muted);
+  font-size: var(--fs-xs);
+}
+
+.noteHint {
+  margin-left: var(--s-2);
+  color: var(--muted);
+}
+
+/* —— 编辑态：顶部 chip 栏 —— */
+.editBar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-3);
+  background: color-mix(in oklch, var(--bg) 88%, var(--card));
+  border-bottom: 1px solid var(--line);
+}
+
+.chipGroup {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.chipGroupLabel {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: var(--fs-xs);
+  color: var(--text);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+  line-height: 1.4;
+}
+.chip:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+.chipX {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  line-height: 1;
+}
+
+.resetBtn {
+  margin-left: auto;
+  padding: 3px 10px;
+  font-size: var(--fs-xs);
+  color: var(--sub);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+}
+.resetBtn:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+/* —— 表头编辑相关 —— */
+.thEditable {
+  position: sticky;
+  top: 0;
+}
+.thInner {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.thLabel {
+  user-select: none;
+}
+.thMenuWrap {
+  position: relative;
+  display: inline-flex;
+}
+.thMenuBtn {
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--muted);
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.thMenuBtn:hover {
+  color: var(--primary);
+  background: var(--primary-softer);
+}
+
+/* —— 列重排按钮（参与画图的数值列才显示） —— */
+.thReorderWrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  margin-left: 2px;
+}
+.thReorderBtn {
+  width: 16px;
+  height: 18px;
+  padding: 0;
+  font-size: 12px;
+  line-height: 1;
+  color: var(--muted);
+  background: transparent;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  user-select: none;
+}
+.thReorderBtn:hover:not(:disabled) {
+  color: var(--primary);
+  background: var(--primary-softer);
+}
+.thReorderBtn:disabled {
+  color: color-mix(in oklch, var(--muted) 40%, transparent);
+  cursor: not-allowed;
+}
+.thMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  min-width: 92px;
+  padding: 4px 0;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  z-index: 3;
+}
+.thMenuItem {
+  padding: 6px 12px;
+  font-size: var(--fs-xs);
+  color: var(--text);
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.thMenuItem:hover {
+  background: var(--primary-softer);
+  color: var(--primary);
+}
+
+/* —— 列头菜单："图表角色"分组：分隔线 + 禁用态 + 当前态 —— */
+.thMenuDivider {
+  display: block;
+  height: 1px;
+  margin: 4px 8px;
+  background: var(--line);
+}
+.thMenuItemDisabled,
+.thMenuItem:disabled {
+  color: color-mix(in oklch, var(--muted) 60%, transparent);
+  cursor: not-allowed;
+}
+.thMenuItemDisabled:hover,
+.thMenuItem:disabled:hover {
+  background: transparent;
+  color: color-mix(in oklch, var(--muted) 60%, transparent);
+}
+.thMenuItemCurrent {
+  color: var(--muted);
+}
+.thMenuItemCurrent:hover {
+  background: transparent;
+  color: var(--muted);
+}
+
+.colRenameInput {
+  width: 100%;
+  min-width: 80px;
+  padding: 2px 6px;
+  font: inherit;
+  color: var(--text);
+  background: var(--card);
+  border: 1px solid var(--primary);
+  border-radius: var(--r-sm);
+  outline: none;
+}
+
+/* —— 单元格编辑 —— */
+.tdEditable {
+  cursor: text;
+}
+.tdEdited {
+  background: color-mix(in oklch, var(--primary-softer) 60%, transparent);
+}
+.cellEditWrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 140px;
+}
+.cellEditInput {
+  width: 100%;
+  min-width: 88px;
+  padding: 2px 6px;
+  font: inherit;
+  color: var(--text);
+  background: var(--card);
+  border: 1px solid var(--primary);
+  border-radius: var(--r-sm);
+  outline: none;
+}
+.cellUnitInput {
+  width: 64px;
+  padding: 2px 6px;
+  font: inherit;
+  color: var(--text);
+  background: var(--card);
+  border: 1px solid var(--primary);
+  border-radius: var(--r-sm);
+  outline: none;
+}
+
+/* —— 行隐藏态 —— */
+.rowHidden td {
+  color: var(--muted);
+  text-decoration: line-through;
+  background: color-mix(in oklch, var(--bg) 96%, transparent);
+}
+
+/* —— 行首 checkbox 列 —— */
+.rowGutter {
+  width: 28px;
+  padding: 4px 6px !important;
+  text-align: center !important;
+}
+.rowCheckbox {
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .wrap {
+    min-height: 220px;
+    max-height: 52dvh;
+    border-radius: var(--r-sm);
+  }
+  .table {
+    font-size: var(--fs-xs);
+  }
+  .table th,
+  .table td {
+    padding: 7px 8px;
+  }
+}
+
+@media (max-width: 640px) {
+  .wrap {
+    min-height: 200px;
+    max-height: 48dvh;
+  }
+  .table th,
+  .table td {
+    padding: 6px 8px;
+  }
+}

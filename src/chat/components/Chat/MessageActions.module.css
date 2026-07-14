@@ -1,0 +1,106 @@
+.bar {
+  display: flex;
+  align-items: center;
+  gap: var(--s-1);
+  margin-top: var(--s-2);
+  margin-bottom: var(--s-1);
+}
+
+.iconBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--sub);
+  cursor: pointer;
+  transition: background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+  font-family: inherit;
+}
+
+.iconBtn:hover:not(:disabled) {
+  background: var(--hover-soft);
+  color: var(--primary);
+}
+
+.iconBtn:focus-visible {
+  outline: none;
+}
+
+.iconBtn:disabled {
+  cursor: not-allowed;
+  color: var(--muted);
+}
+
+.spinner {
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.errorText {
+  margin-left: var(--s-1);
+  font-size: var(--fs-xs);
+  color: var(--danger);
+  line-height: 1.4;
+  animation: errorFade 3s ease forwards;
+}
+
+/* 版本翻页导航：靠右对齐在回答右下角 */
+.pager {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  margin-left: auto;
+  color: var(--sub);
+}
+
+.pagerBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--sub);
+  cursor: pointer;
+  transition: background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+
+.pagerBtn:hover:not(:disabled) {
+  background: var(--hover-soft);
+  color: var(--primary);
+}
+
+.pagerBtn:focus-visible {
+  outline: none;
+}
+
+.pagerBtn:disabled {
+  cursor: not-allowed;
+  color: var(--muted);
+}
+
+.pagerText {
+  font-size: var(--fs-xs);
+  line-height: 1.4;
+  min-width: 28px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes errorFade {
+  0% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { opacity: 0; }
+}

@@ -1,0 +1,538 @@
+/* ===== Skill Hub 移动端 · 审批页样式 ===== */
+
+/* 主容器：底部 76 + 56 TabBar + safe-area。
+   与 apply 页保持一致的 padding 算法，避免内容被 fixed 元素遮挡。 */
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding:
+    var(--s-2)
+    var(--s-4)
+    calc(56px + 76px + env(safe-area-inset-bottom, 0px) + var(--s-4));
+  background: var(--bg);
+  min-height: 100dvh;
+}
+
+/* —— Sticky 顶部徽标条：吸附在容器顶部 —— */
+.stickyBar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  margin: 0 calc(-1 * var(--s-4)) var(--s-2);
+  padding: var(--s-2) var(--s-4);
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.stickyLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-width: 0;
+}
+
+.countBadge {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 var(--s-3);
+  background: var(--primary-soft, #e8f3ff);
+  color: var(--primary);
+  border-radius: var(--r-full);
+  font-size: var(--fs-xs, 12px);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.refreshLabel {
+  font-size: var(--fs-xs, 12px);
+  color: var(--muted);
+  font-style: italic;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.refreshBtn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  background: var(--card);
+  color: var(--primary);
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.refreshBtn:hover:not(:disabled) {
+  background: var(--primary-soft, #e8f3ff);
+}
+
+.refreshBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* —— 错误条 —— */
+.errorNotice {
+  padding: var(--s-3) var(--s-4);
+  background: var(--danger-soft, #ffece8);
+  color: var(--danger);
+  border-radius: var(--r-md);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+}
+
+/* —— 列表 —— */
+.cardList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+/* —— 单张卡片 —— */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: var(--s-4);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-xs);
+}
+
+.cardHead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+}
+
+.cardHeadTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+}
+
+.skillId {
+  flex: 1;
+  min-width: 0;
+  font-family: 'SF Mono', 'Roboto Mono', Menlo, Monaco, Consolas, monospace;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.modeBadge {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 22px;
+  padding: 0 var(--s-2);
+  border-radius: var(--r-xs, 4px);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.modeBadgeUpdate {
+  background: var(--primary-soft, #e8f3ff);
+  color: var(--primary);
+}
+
+.modeBadgeCreate {
+  background: var(--accent-soft, #e8f8e8);
+  color: var(--accent, #52c41a);
+}
+
+.modeBadgeMuted {
+  background: var(--surface-2, #f2f3f9);
+  color: var(--muted);
+}
+
+.cardMeta {
+  font-size: var(--fs-xs, 12px);
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+}
+
+/* —— 提交备注卡片 —— */
+.remark {
+  display: flex;
+  gap: var(--s-2);
+  padding: var(--s-3);
+  background: var(--primary-soft, #e8f3ff);
+  border-left: 3px solid var(--primary);
+  border-radius: var(--r-sm);
+  font-size: var(--fs-sm);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.remarkIcon {
+  flex: none;
+  color: var(--primary);
+  margin-top: 2px;
+}
+
+/* —— 评论输入 —— */
+.commentLabel {
+  display: block;
+  font-size: var(--fs-xs, 12px);
+  color: var(--muted);
+  margin-bottom: var(--s-1);
+  font-weight: 500;
+}
+
+.commentTextarea {
+  width: 100%;
+  padding: var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--text);
+  font-size: var(--fs-md);
+  font-family: inherit;
+  line-height: 1.5;
+  outline: none;
+  resize: vertical;
+  min-height: 40px;
+  transition:
+    border-color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease),
+    min-height var(--t-fast) var(--ease);
+}
+
+.commentTextarea:focus {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-focus, 0 0 0 3px rgba(0, 82, 217, 0.15));
+  min-height: 84px;
+}
+
+/* —— 操作按钮组 —— */
+.actions {
+  display: flex;
+  gap: var(--s-2);
+}
+
+.btn {
+  flex: 1;
+  height: 40px;
+  padding: 0 var(--s-3);
+  border: none;
+  border-radius: var(--r-sm);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btnSource {
+  background: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+
+.btnSource:hover:not(:disabled) {
+  background: var(--primary-soft, #e8f3ff);
+}
+
+.btnApprove {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btnApprove:hover:not(:disabled) {
+  background: var(--primary-strong, #003e9c);
+}
+
+.btnApprove:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.btnReject {
+  background: transparent;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+}
+
+.btnReject:hover:not(:disabled) {
+  background: var(--danger-soft, rgba(245, 63, 63, 0.08));
+}
+
+/* —— 空 / 骨架 —— */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s-8) var(--s-4);
+  background: var(--card);
+  border: 1px dashed var(--line);
+  border-radius: var(--r-lg);
+  text-align: center;
+}
+
+.emptyTitle {
+  margin: 0 0 var(--s-2);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.emptyDesc {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  max-width: 240px;
+  line-height: 1.6;
+}
+
+.skeletonStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.skeletonCard {
+  height: 168px;
+  border-radius: var(--r-lg);
+  background: linear-gradient(
+    90deg,
+    var(--surface-2, #f2f3f9) 0%,
+    var(--card) 50%,
+    var(--surface-2, #f2f3f9) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShine 1.4s linear infinite;
+}
+
+@keyframes skeletonShine {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+/* —— Approve Sheet 内容 —— */
+.approveSheetBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-2) 0 var(--s-3);
+  text-align: center;
+}
+
+.approveSheetTitle {
+  margin: 0;
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: var(--text);
+}
+
+.approveSheetDesc {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.approveSheetMeta {
+  margin: var(--s-2) 0 0;
+  padding: var(--s-3);
+  background: var(--surface-2, #f2f3f9);
+  border-radius: var(--r-sm);
+  font-size: var(--fs-sm);
+  color: var(--text);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+}
+
+.approveSheetMetaRow {
+  display: flex;
+  gap: var(--s-2);
+  justify-content: space-between;
+}
+
+.approveSheetMetaKey {
+  color: var(--muted);
+  flex: none;
+}
+
+.approveSheetMetaVal {
+  font-family: 'SF Mono', 'Roboto Mono', Menlo, Monaco, Consolas, monospace;
+  color: var(--text);
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.approveSheetFooter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-4) var(--s-3);
+}
+
+.sheetCancelBtn {
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--text);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.sheetCancelBtn:hover:not(:disabled) {
+  background: var(--hover-soft, var(--surface-2));
+}
+
+.sheetCancelBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sheetConfirmBtn {
+  height: 44px;
+  border: none;
+  border-radius: var(--r-sm);
+  background: var(--primary);
+  color: #fff;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.sheetConfirmBtn:hover:not(:disabled) {
+  background: var(--primary-strong, #003e9c);
+}
+
+.sheetConfirmBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* —— Source Drawer 内容（文件列表 + 右侧文本） —— */
+.sourceLayout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  height: 100%;
+}
+
+.sourceFiles {
+  flex: none;
+  display: flex;
+  gap: var(--s-2);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: var(--s-1) 0 var(--s-2);
+  scrollbar-width: none;
+  border-bottom: 1px solid var(--line);
+}
+
+.sourceFiles::-webkit-scrollbar {
+  display: none;
+}
+
+.sourceFileChip {
+  flex: none;
+  height: 32px;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  background: var(--card);
+  color: var(--text);
+  font-size: var(--fs-sm);
+  font-family: 'SF Mono', 'Roboto Mono', Menlo, Monaco, Consolas, monospace;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+
+.sourceFileChipActive {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.sourceContent {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: var(--s-3) 0;
+}
+
+.sourcePre {
+  margin: 0;
+  font-family: 'SF Mono', 'Roboto Mono', Menlo, Monaco, Consolas, monospace;
+  font-size: var(--fs-xs, 12px);
+  line-height: 1.6;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.sourceLoading,
+.sourceError,
+.sourceEmpty {
+  padding: var(--s-4);
+  text-align: center;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+}
+
+.sourceError {
+  color: var(--danger);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .refreshBtn,
+  .commentTextarea,
+  .sheetCancelBtn,
+  .sheetConfirmBtn,
+  .sourceFileChip {
+    transition-duration: 0.01ms;
+  }
+  .skeletonCard {
+    animation: none;
+  }
+}

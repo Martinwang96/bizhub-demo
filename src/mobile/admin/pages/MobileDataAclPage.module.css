@@ -1,0 +1,1486 @@
+/**
+ * MobileDataAclPage.module.css —— 移动端「用户数据权限管理」单列样式
+ * - tokens: 来自 shared/styles/tokens.css
+ * - 与 MobilePermissionsPage.module.css 的 .main / .section / .btn 系列保持同款规范
+ * - 不引入新色值；所有颜色都走 token
+ */
+
+/* ─────────────────────────────────────────────
+   Page shell
+   ───────────────────────────────────────────── */
+.main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+  padding: var(--s-4) var(--s-4) calc(56px + env(safe-area-inset-bottom, 0px) + var(--s-5));
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+.sectionMeta {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+
+.skeletonWrap {
+  padding: var(--s-3) var(--s-1);
+}
+
+.empty {
+  padding: var(--s-6) var(--s-4);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--r-md);
+  background: var(--card);
+  color: var(--sub);
+  font-size: var(--fs-sm);
+  text-align: center;
+}
+
+.cardList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.muted {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+}
+
+/* ─────────────────────────────────────────────
+   ① Stats 2×2
+   ───────────────────────────────────────────── */
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-3);
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  padding: var(--s-3) var(--s-4);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-xs);
+  min-width: 0;
+}
+
+.statCardWarn {
+  background: var(--warn-soft);
+  border-color: oklch(82% 0.12 55);
+}
+
+.statLabel {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.statValue {
+  color: var(--text);
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  word-break: break-all;
+}
+
+.statHint {
+  color: var(--sub);
+  font-size: 11px;
+}
+
+/* ─────────────────────────────────────────────
+   ③ 产业树
+   ───────────────────────────────────────────── */
+.treeBox {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: var(--s-2) var(--s-1);
+  box-shadow: var(--shadow-xs);
+  max-height: 480px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tree {
+  display: flex;
+  flex-direction: column;
+}
+
+.treeEmpty {
+  padding: var(--s-5) var(--s-3);
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  text-align: center;
+}
+
+.treeNode {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 40px;
+  padding: 4px var(--s-2) 4px 0;
+  border-radius: var(--r-sm);
+  color: var(--text);
+  font-size: var(--fs-sm);
+  border-bottom: 1px solid transparent;
+}
+
+.treeNode + .treeNode {
+  border-top: 1px solid var(--line);
+}
+
+.treeNodeLeaf {
+  color: var(--sub);
+}
+
+.treeToggle {
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  border-radius: var(--r-xs);
+  color: var(--sub);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.treeToggle:hover:not(:disabled) {
+  background: var(--hover-soft);
+  color: var(--primary);
+}
+
+.treeToggleEmpty {
+  cursor: default;
+  color: var(--muted);
+  opacity: 0.6;
+}
+
+.treeIconLeaf,
+.treeIconBranch {
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+}
+
+.treeIconBranch {
+  color: var(--primary);
+}
+
+.treeName {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.treeNodeLeaf .treeName {
+  font-weight: 500;
+}
+
+.treeTag {
+  flex: 0 0 auto;
+  max-width: 40%;
+  padding: 2px 8px;
+  border-radius: var(--r-full);
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.treeTagMuted {
+  background: var(--surface-2);
+  color: var(--sub);
+}
+
+.treeTagDanger {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.treeAction {
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  border-radius: var(--r-sm);
+  color: var(--sub);
+  cursor: pointer;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.treeAction:hover {
+  background: var(--hover-soft);
+  color: var(--primary);
+}
+
+.treeAction:active {
+  transform: scale(var(--press-scale));
+}
+
+/* ─────────────────────────────────────────────
+   ④ 权限验证模拟
+   ───────────────────────────────────────────── */
+.simBox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: var(--s-4);
+  box-shadow: var(--shadow-xs);
+}
+
+.formLabel {
+  display: block;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--sub);
+  margin-top: var(--s-1);
+}
+
+.req {
+  color: var(--danger);
+  margin-left: 2px;
+  font-weight: 700;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  height: 40px;
+  padding: 0 var(--s-3);
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  font: inherit;
+  font-size: var(--fs-md);
+  text-align: left;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: var(--shadow-focus);
+}
+
+.input::placeholder {
+  color: var(--muted);
+}
+
+.inputDisabled,
+.input:disabled {
+  background: var(--surface-2);
+  color: var(--sub);
+  cursor: not-allowed;
+}
+
+.textarea {
+  height: auto;
+  min-height: 92px;
+  padding: var(--s-2) var(--s-3);
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.textareaMono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+}
+
+.simBtnRow {
+  display: flex;
+  gap: var(--s-2);
+  margin-top: var(--s-2);
+}
+
+.simBtnRow .btn {
+  flex: 1 1 0;
+}
+
+.codeBlock {
+  margin: var(--s-2) 0 0;
+  padding: var(--s-3);
+  background: var(--shell-bg);
+  color: var(--shell-text);
+  border-radius: var(--r-sm);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: var(--fs-xs);
+  line-height: 1.55;
+  max-height: 320px;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+  -webkit-overflow-scrolling: touch;
+}
+
+.simPlaceholder {
+  margin-top: var(--s-2);
+  padding: var(--s-3);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--r-sm);
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  text-align: center;
+}
+
+/* ─────────────────────────────────────────────
+   ⑤ 历史版本回滚
+   ───────────────────────────────────────────── */
+.historyList {
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+}
+
+.historyRow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-3) var(--s-4);
+  border-bottom: 1px solid var(--line);
+  min-width: 0;
+}
+
+.historyRow:last-child {
+  border-bottom: 0;
+}
+
+.historyInfo {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.historyVerLine {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-width: 0;
+}
+
+.historyVer {
+  font-weight: 700;
+  color: var(--text);
+  font-size: var(--fs-sm);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.historyCurrent {
+  flex: 0 0 auto;
+  padding: 1px 8px;
+  border-radius: var(--r-full);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.historyMeta {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.historyRollback {
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  color: var(--sub);
+  cursor: pointer;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease);
+}
+
+.historyRollback:hover:not(:disabled) {
+  background: var(--hover-soft);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.historyRollback:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+/* ─────────────────────────────────────────────
+   节点操作 ActionSheet（"+/编辑/删除"）
+   ───────────────────────────────────────────── */
+.actionList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.actionItem {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  width: 100%;
+  min-height: 52px;
+  padding: 0 var(--s-4);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+
+.actionItem:hover:not(:disabled) {
+  background: var(--hover-soft);
+  border-color: rgba(var(--primary-rgb), 0.24);
+  color: var(--primary);
+}
+
+.actionItem:active:not(:disabled) {
+  transform: scale(var(--press-scale));
+}
+
+.actionItem:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+.actionDanger {
+  background: var(--danger-soft);
+  border-color: var(--danger-line);
+  color: var(--danger);
+}
+
+.actionDanger:hover:not(:disabled) {
+  background: var(--danger-soft);
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.actionIcon {
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  line-height: 1;
+  color: inherit;
+}
+
+/* ─────────────────────────────────────────────
+   Sheet: 产品节点编辑 / 批量导入
+   ───────────────────────────────────────────── */
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.formDivider {
+  height: 1px;
+  background: var(--line);
+  margin: var(--s-3) 0 var(--s-1);
+}
+
+.formHint {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: -2px;
+}
+
+.errList {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: var(--fs-xs);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  max-height: 160px;
+  overflow: auto;
+}
+
+.previewBox {
+  margin-top: var(--s-2);
+  padding: var(--s-3);
+  background: var(--surface-1);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.previewMeta {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.previewGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: var(--fs-xs);
+  color: var(--sub);
+}
+
+.previewGroup b {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.previewLeaves {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-left: var(--s-3);
+  color: var(--sub);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  word-break: break-all;
+}
+
+/* ─────────────────────────────────────────────
+   Sheet: 用户绑定（产品 / 表）
+   ───────────────────────────────────────────── */
+.sheetSummary {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: var(--sub);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: var(--s-2);
+}
+
+/*
+ * 紧凑款 footer 按钮（专给 UserBindingsSheet 这种「summary + 取消 + 保存」三段式 footer）：
+ * - 覆盖 MobileBottomSheet.module.css 中 .footer > button 的 min-width:88px / padding-inline:s-4
+ * - 用 0,3,0 特异性的复合选择器（.btn.btnGhost.btnSlim / .btn.btnPrimary.btnSlim）
+ *   稳定胜过 0,1,1 的 .footer > button
+ * - height 沿用 .btn 的 44px，仅瘦身横向尺寸；行为 / 语义 / 焦点环不变
+ */
+.btn.btnGhost.btnSlim,
+.btn.btnPrimary.btnSlim {
+  min-width: 0;
+  padding-inline: var(--s-3);
+  font-size: var(--fs-sm);
+}
+
+.tabBar {
+  display: grid;
+  /* 子列数随业务而定（产品/Skill/行权限 3 列），auto-fit 让 N 段 segment 自适应。 */
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 0;
+  padding: 4px;
+  background: var(--surface-2);
+  border-radius: var(--r-sm);
+  margin-bottom: var(--s-3);
+}
+
+.tabBtn {
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  border-radius: var(--r-xs);
+  color: var(--sub);
+  font: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+
+.tabBtnActive {
+  background: var(--card);
+  color: var(--primary);
+  box-shadow: var(--shadow-xs);
+}
+
+.searchInput {
+  margin-bottom: var(--s-3);
+}
+
+.bindTree {
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  max-height: 50vh;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.bindRow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 40px;
+  padding: 4px var(--s-2) 4px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.bindRow:last-child {
+  border-bottom: 0;
+}
+
+.bindToggle {
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  color: var(--sub);
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.bindToggle:hover:not(:disabled) {
+  color: var(--primary);
+}
+
+.bindToggleEmpty {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.bindName {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: var(--text);
+  font-size: var(--fs-sm);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bindNameMatch {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.skillGroup {
+  margin-top: var(--s-3);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  overflow: hidden;
+}
+
+.skillGroup:first-of-type {
+  margin-top: 0;
+}
+
+.skillGroupHead {
+  padding: var(--s-2) var(--s-3);
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid var(--line);
+}
+
+.skillTableRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-3);
+  padding: var(--s-2) var(--s-3);
+  border-bottom: 1px solid var(--line);
+}
+
+.skillTableRow:last-child {
+  border-bottom: 0;
+}
+
+.skillTableRowInvalid {
+  background: var(--danger-soft);
+}
+
+.skillTableInfo {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.skillTableName {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--text);
+  word-break: break-all;
+}
+
+.skillTableRowInvalid .skillTableName {
+  color: var(--danger);
+}
+
+.skillTableDesc {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+/* ─────────────────────────────────────────────
+   按钮（与 MobilePermissionsPage.module.css 同语义）
+   ───────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 var(--s-5);
+  border-radius: var(--r-sm);
+  font: inherit;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.btnGhost {
+  background: transparent;
+  color: var(--sub);
+  border-color: var(--line-strong);
+}
+
+.btnGhost:hover:not(:disabled) {
+  background: var(--hover-soft);
+  border-color: rgba(var(--primary-rgb), 0.24);
+  color: var(--primary);
+}
+
+.btnPrimary {
+  background: var(--primary);
+  color: #FFFFFF;
+}
+
+.btnPrimary:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.btnPrimary:active:not(:disabled) {
+  transform: scale(var(--press-scale));
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.btn:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+/* 小号按钮：枚举值探测等行内紧凑场景使用 */
+.btnSm {
+  padding: 4px 10px;
+  font-size: var(--fs-xs);
+  min-height: 28px;
+  border-radius: var(--r-sm);
+}
+
+/* ─────────────────────────────────────────────
+   行权限编辑器（UserBindingsSheet「行权限」Tab）
+   - rowScopeCard 用 <details> 折叠：未展开仅占用 1 行 summary
+   - 展开后才进入字段/枚举值探测，避免一打开 Sheet 就预热全部表
+   ───────────────────────────────────────────── */
+.rowScopeCard {
+  border: 1px solid var(--border-1);
+  border-radius: var(--r-md);
+  background: var(--surface-1);
+  margin-bottom: var(--s-2);
+  overflow: hidden;
+}
+.rowScopeCard[open] {
+  background: var(--surface-2);
+}
+.rowScopeSummary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-3);
+  cursor: pointer;
+  list-style: none;
+  font-size: var(--fs-sm);
+}
+.rowScopeSummary::-webkit-details-marker { display: none; }
+.rowScopeSummary::before {
+  content: '▸';
+  display: inline-block;
+  margin-right: 4px;
+  color: var(--text-3);
+  transition: transform var(--t-fast) var(--ease-out);
+}
+.rowScopeCard[open] .rowScopeSummary::before {
+  transform: rotate(90deg);
+}
+.rowScopeBadgeOn {
+  color: var(--primary);
+  font-weight: 500;
+}
+.rowScopeBadgeOff {
+  color: var(--text-3);
+}
+.rowScopeBody {
+  padding: var(--s-2) var(--s-3) var(--s-3);
+  border-top: 1px solid var(--border-1);
+}
+.rowScopeActions {
+  display: flex;
+  gap: var(--s-2);
+  margin-bottom: var(--s-2);
+  flex-wrap: wrap;
+}
+.rowScopeColumn {
+  border-top: 1px dashed var(--border-1);
+  padding-top: var(--s-2);
+  margin-top: var(--s-2);
+}
+.rowScopeColumn:first-child {
+  border-top: 0;
+  padding-top: 0;
+  margin-top: 0;
+}
+.rowScopeColumnHead {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: var(--fs-sm);
+  cursor: pointer;
+}
+.rowScopeColumnHead code {
+  font-weight: 500;
+}
+.rowScopeValues {
+  margin-top: var(--s-2);
+  padding-left: var(--s-4);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.rowScopeValueRow {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--s-2);
+  align-items: center;
+  font-size: var(--fs-xs);
+  padding: 4px 0;
+}
+.rowScopeValueRow small {
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+}
+.rowScopeError {
+  color: var(--danger);
+  font-size: var(--fs-xs);
+  background: var(--danger-soft, rgba(220, 53, 69, 0.08));
+  border-radius: var(--r-sm);
+  padding: 6px 8px;
+  line-height: 1.4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .historyRollback,
+  .actionItem,
+  .tabBtn {
+    transition-duration: 0.01ms;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   极窄屏（≤360px）密度微调
+   ───────────────────────────────────────────── */
+@media (max-width: 360px) {
+  .statValue { font-size: var(--fs-lg); }
+  .statCard  { padding: var(--s-2) var(--s-3); }
+}
+
+/* ─────────────────────────────────────────────
+   用户区视图 segment（用户列表 / 用户组）
+   - 与 .tabBar 同款节奏，但放在 section 内、独立命名避免与 sheet 内 .tabBar 互扰
+   ───────────────────────────────────────────── */
+.segment {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 0;
+  padding: 4px;
+  background: var(--surface-2);
+  border-radius: var(--r-sm);
+}
+
+.segmentBtn {
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  border-radius: var(--r-xs);
+  color: var(--sub);
+  font: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+
+.segmentBtnActive {
+  background: var(--card);
+  color: var(--primary);
+  box-shadow: var(--shadow-xs);
+}
+
+/* ─────────────────────────────────────────────
+   用户组：toolbar / 新建组浮层 / 组卡片
+   ───────────────────────────────────────────── */
+.groupToolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--s-2);
+}
+
+/* groupToolbar 内的主按钮做小一号，避免与下方卡片之间过于"空旷" */
+.groupToolbar .btnPrimary {
+  height: 36px;
+  padding: 0 var(--s-4);
+  font-size: var(--fs-sm);
+  border-radius: var(--r-sm);
+}
+
+.createGroupBox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-3);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-xs);
+}
+
+/* 组卡片 */
+.groupCard {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+}
+
+.groupCardMain {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--s-3);
+  background: transparent;
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  min-width: 0;
+}
+
+.groupCardMain:active {
+  background: var(--hover-soft);
+}
+
+.groupCardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+}
+
+.groupCardName {
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.groupCardCount {
+  flex: 0 0 auto;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(var(--primary-rgb), 0.1);
+  color: var(--primary);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+}
+
+.groupCardDesc {
+  color: var(--sub);
+  font-size: var(--fs-sm);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.groupCardMeta {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+
+.groupCardDelete {
+  flex: 0 0 auto;
+  align-self: stretch;
+  padding: 0 var(--s-3);
+  background: transparent;
+  border: 0;
+  border-left: 1px solid var(--line);
+  color: var(--danger);
+  font: inherit;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.groupCardDelete:hover:not(:disabled) {
+  background: rgba(var(--danger-rgb, 220, 38, 38), 0.08);
+}
+
+.groupCardDelete:disabled {
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+/* ─────────────────────────────────────────────
+   GroupManageSheet 内：成员管理 / 模板预览
+   ───────────────────────────────────────────── */
+.formRow {
+  display: flex;
+  gap: var(--s-2);
+  align-items: center;
+  margin-bottom: var(--s-2);
+}
+
+.formRow .input {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.formRow .btn,
+.compactBtn {
+  flex: 0 0 auto;
+  height: 36px;
+  padding: 0 var(--s-3);
+  font-size: var(--fs-sm);
+  white-space: nowrap;
+}
+
+.addMemberMobilePanel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-3);
+  margin-bottom: var(--s-3);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+}
+
+.selectedChipsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.selectedChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: rgba(var(--primary-rgb), 0.1);
+  color: var(--primary);
+  border: 1px solid rgba(var(--primary-rgb), 0.24);
+  border-radius: 999px;
+  font: inherit;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.selectedChip:active { transform: scale(var(--press-scale)); }
+
+.addCandidateList {
+  display: flex;
+  flex-direction: column;
+  max-height: 200px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+}
+
+.addCandidateRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-3);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-sm);
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.addCandidateRow:last-child { border-bottom: 0; }
+
+.addCandidateRow:active { background: var(--hover-soft); }
+
+.addCandidateRow small {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+
+.memberList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.memberRow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-3);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+}
+
+.memberRowMain {
+  flex: 1 1 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  background: transparent;
+  border: 0;
+  padding: 4px 0;
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-sm);
+  text-align: left;
+  cursor: pointer;
+  min-width: 0;
+}
+
+.memberRowMain:active { opacity: 0.75; }
+
+.avatar {
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(var(--primary-rgb), 0.12);
+  color: var(--primary);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.memberLogin {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 600;
+}
+
+/* 模板只读预览 */
+.templatePreview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.templateGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-2);
+}
+
+.templateCell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--s-3);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+}
+
+.templateLabel {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+
+.templateValue {
+  color: var(--text);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.templateChips {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.templateChipsLabel {
+  color: var(--sub);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+
+.templateChipsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.templateChip {
+  display: inline-flex;
+  padding: 3px 10px;
+  background: var(--surface-2);
+  color: var(--sub);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+
+/* 批量复权 */
+.copyPanel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.copyTargetBox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-3);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+}
+
+.copyTargetHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+  color: var(--text);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+.copyApplyBtn {
+  width: 100%;
+  margin-top: var(--s-1);
+}
+
+/* ── 层级 layers tab（与 PC tagLeaf / tagMuted 等价的可点击 chip） ── */
+.layerWrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: var(--s-2) 0;
+}
+
+.layerSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.layerSectionLabel {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--text);
+}
+
+.layerChipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.layerChip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  background: var(--surface-2);
+  color: var(--sub);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: background var(--anim-fast), color var(--anim-fast), border-color var(--anim-fast);
+}
+
+.layerChip:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.layerChipOn {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.layerChip:active:not(:disabled) {
+  transform: scale(var(--press-scale));
+}

@@ -1,0 +1,141 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay, 1000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mask {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: rgba(29, 33, 41, 0.42);
+  cursor: pointer;
+  animation: fadeIn 160ms var(--ease, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+.modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 64px);
+  background: var(--surface-1);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  animation: scaleIn 200ms var(--ease, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-4);
+  flex-shrink: 0;
+  padding: var(--s-4) var(--s-5);
+  border-bottom: 1px solid var(--line);
+  background: var(--card);
+}
+
+.titleGroup {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  color: var(--text);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+.meta {
+  margin-top: var(--s-2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  align-items: center;
+  color: var(--sub);
+  font-size: var(--fs-sm);
+}
+
+.closeBtn {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: var(--r-full);
+  background: var(--primary-soft);
+  color: var(--primary);
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.closeBtn:hover {
+  background: var(--primary);
+  color: #FFFFFF;
+}
+
+.closeBtn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--s-5);
+  background: var(--surface-1);
+  color: var(--text);
+}
+
+.bodyBleed {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  background: var(--surface-1);
+  color: var(--text);
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mask,
+  .modal {
+    animation-duration: 0.01ms;
+  }
+  .closeBtn {
+    transition-duration: 0.01ms;
+  }
+}
+
+@media (max-width: 640px) {
+  .modal {
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+  .root {
+    align-items: stretch;
+  }
+}

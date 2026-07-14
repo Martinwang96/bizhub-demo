@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="经营分析智能平台图标">
+  <rect x="3" y="3" width="58" height="58" rx="14" fill="#2f5fe3"/>
+  <g fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M32 16 18 23l14 7 14-7-14-7Z"/>
+    <path d="M18 31l14 7 14-7"/>
+    <path d="M18 39l14 7 14-7"/>
+  </g>
+</svg>

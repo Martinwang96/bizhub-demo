@@ -1,0 +1,129 @@
+/* ============================================================
+   PermissionSummaryButton — 共享样式
+   ------------------------------------------------------------
+   用于「用户绑定」「用户组」表格里同款"产品 N / Skill N / 行 N"按钮。
+   设计目标：
+   1) 视觉与 mockup 一致：浅蓝渐变描边 + 圆角 + 数字 chip。
+   2) 多行同列 always 对齐 ——
+      宿主容器（.summaryGroup）使用 CSS Grid 三等分；按钮 width 100% 撑满
+      所在 grid 列；按钮内部 label 与 count 间距随数字位数自然变化，但按钮
+      整体左右边界严格对齐相邻行。
+   3) 数字 chip 用 `min-width` 而非 `width`，超长（4 位以上）也能撑开但
+      不会破坏列对齐（因为按钮自身宽度由 grid 列决定）。
+   ============================================================ */
+.summaryGroup {
+  display: grid;
+  /* 三等分但每列保留最小可读宽度（label 「产品/Skill/行」 + 22px count chip
+     + 8×2 padding ≈ 56px），低于该值就让 grid 把整组裁剪而不是把按钮内
+     的文字+chip 挤碎。配合下方 @media 的 2 列/1 列流式回退方案，避免
+     在窄列（如 .gColCounts: 20%）下出现「行 0」被塞到下一行 / 与上一行
+     不齐的视觉错乱。 */
+  grid-template-columns: repeat(3, minmax(56px, 1fr));
+  gap: 6px;
+  align-items: center;
+  /* min-width: 0 让本 grid 在 td/flex 子项中可被压缩，
+     而不是把父级单元格撑破造成横向溢出。 */
+  min-width: 0;
+  /* 宽列里居中收紧（max-width 240）；窄列里随父级 100% 撑开。 */
+  width: 100%;
+  max-width: 240px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  min-height: var(--control-h);
+  padding: 3px 8px;
+  border: 1px solid rgba(var(--primary-rgb), 0.22);
+  border-radius: var(--r-sm);
+  background: linear-gradient(180deg, var(--card), var(--primary-softer));
+  color: var(--primary);
+  font: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    transform var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease),
+    background var(--t-fast) var(--ease);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(var(--primary-rgb), 0.42);
+  box-shadow: var(--shadow-xs);
+  background: var(--primary-soft);
+}
+
+.btn:active {
+  transform: scale(var(--press-scale));
+}
+
+.btn:focus-visible {
+  outline: none;
+}
+
+.btnMuted {
+  border-color: var(--line);
+  background: var(--surface-1);
+  color: var(--muted);
+}
+
+.label {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+}
+
+.count {
+  display: inline-grid;
+  place-items: center;
+  /* 固定宽度容纳到 3 位数（999），确保 1/2/3 位数视觉宽度一致；
+     超过 3 位时再 min-width 撑开（但概率极低）。
+     缩小到 22px 让按钮整体更紧凑（之前 30px 视觉过长）。*/
+  width: 22px;
+  min-width: 22px;
+  height: 20px;
+  padding: 0 2px;
+  border-radius: var(--r-full);
+  background: var(--card);
+  color: currentColor;
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   响应式断点
+   ------------------------------------------------------------
+   原实现里 @media(max-width: 640px) 反而把 minmax 提到 80px，
+   3×80 + 2×6 = 252 > 240（容器 max-width），结果窄屏出现
+   按钮溢出 / 第三颗按钮被挤到下一行的现象（用户截图所反映）。
+
+   现按"列宽优先级"重新分级：
+     · 默认（足够宽）：3 列 minmax(56px,1fr)，整组 ≤ 240px 居中。
+     · ≤ 640px：取消 max-width 让按钮组随父级单元格 100% 自然分配，
+                 3 列 minmax 仍生效 → 每颗按钮按比例缩小但仍可读。
+     · ≤ 420px：实在塞不下三颗时降级为 auto-fit + minmax(72px,1fr)，
+                 行内能放几颗放几颗，超出自动换行；同时取消居中 max-width，
+                 让按钮 wrap 后整体不再超出列宽。
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .summaryGroup {
+    max-width: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .summaryGroup {
+    /* auto-fit + minmax 让窄屏自适应换行：宽够时仍 3 列，不够时 2 列、再不够 1 列；
+       换行后行间留出 6px 与列 gap 一致，整体节奏不变。 */
+    grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+    row-gap: 6px;
+  }
+}

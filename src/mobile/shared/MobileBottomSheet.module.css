@@ -1,0 +1,159 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  pointer-events: none;
+}
+
+.root.rootOpen {
+  pointer-events: auto;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(29, 33, 41, 0.32);
+  opacity: 0;
+  transition: opacity var(--t-mid) var(--ease-expo);
+}
+
+.rootOpen .scrim {
+  opacity: 1;
+}
+
+/*
+ * 关键：sheet 必须从主导航 TabBar (56px + safe-area) 上方开始，
+ * 否则 footer (取消/保存) 会被底部 TabBar 完全遮住 —— 这是用户截图反映的"保存按钮看不到"的根因。
+ * --mobile-tabbar-h 由 MobileShell 在挂载主 TabBar 时声明（默认 56px + safe-area）。
+ * 这里给一个兜底默认值，避免单独使用 sheet（无主导航）的页面出错。
+ */
+.sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: var(--mobile-tabbar-h, 0px);
+  display: flex;
+  flex-direction: column;
+  max-height: calc(88dvh - var(--mobile-tabbar-h, 0px));
+  background: var(--surface-1);
+  border-top-left-radius: var(--r-2xl);
+  border-top-right-radius: var(--r-2xl);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(calc(100% + var(--mobile-tabbar-h, 0px)));
+  transition: transform var(--t-mid) var(--ease-expo);
+}
+
+.rootOpen .sheet {
+  transform: translateY(0);
+}
+
+.header {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--s-2) var(--s-5) 0;
+}
+
+.handle {
+  display: block;
+  width: 36px;
+  height: 4px;
+  margin: var(--s-2) 0 var(--s-3);
+  border-radius: var(--r-full);
+  background: var(--line-strong);
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: var(--s-3);
+  border-bottom: 1px solid var(--line);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.closeBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  border-radius: var(--r-full);
+  color: var(--sub);
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+
+.closeBtn:hover {
+  background: var(--hover-soft);
+  color: var(--primary);
+}
+
+.closeBtn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--s-4) var(--s-5) var(--s-5);
+}
+
+.footer {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--s-2);
+  padding: var(--s-3) var(--s-4);
+  background: var(--surface-1);
+  border-top: 1px solid var(--line);
+  /* 防止任意业务按钮把内容挤出可视区：禁止外溢 + 整行换行兜底 */
+  flex-wrap: wrap;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/*
+ * 业务规范：footer 内的 <button> 默认最小宽度 88px、字体不缩，
+ * 极窄屏（< 360px）或按钮 ≥ 3 个时，flex: 1 1 auto 让按钮平分剩余宽度，
+ * 保证「取消 / 保存」在所有断点下完整可见、不被切。
+ */
+.footer > button {
+  flex: 0 1 auto;
+  min-width: 88px;
+  max-width: 100%;
+  white-space: nowrap;
+  /* 允许 footer 收缩按钮的水平内边距，避免业务 .btn padding-inline 过大被切 */
+  padding-inline: var(--s-4);
+}
+
+@media (max-width: 360px) {
+  .footer > button {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-inline: var(--s-3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrim,
+  .sheet {
+    transition-duration: 0.01ms;
+  }
+}

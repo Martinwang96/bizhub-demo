@@ -1,0 +1,2112 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-6);
+}
+
+/* ─── stats ─── */
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--s-4);
+}
+
+.statCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--s-4) var(--s-5);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--card);
+  box-shadow: var(--shadow-xs);
+  overflow: hidden;
+}
+
+.statCard::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--primary);
+  border-top-left-radius: var(--r-md);
+  border-bottom-left-radius: var(--r-md);
+}
+
+.statCardWarn::before { background: var(--warn); }
+
+.statLabel {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.statNum {
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.15;
+  word-break: break-word;
+}
+
+.statHint { color: var(--sub); font-size: var(--fs-sm); }
+
+/* ─── user list ─── */
+.userToolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--s-4);
+  padding-bottom: var(--s-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.userSearchInput {
+  flex: 1 1 220px;
+  min-width: 180px;
+}
+
+.selectionSummary {
+  margin-left: auto;
+  color: var(--sub);
+  font-size: var(--fs-sm);
+}
+
+.userList {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+}
+
+.userListHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: var(--s-2) var(--s-4);
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  background: var(--surface-1);
+  border-bottom: 1px solid var(--line);
+}
+
+.userRow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-3) var(--s-4);
+  border-bottom: 1px solid var(--line);
+  background: var(--card);
+}
+
+.userRowSelected {
+  background: var(--primary-softer);
+}
+
+.userSelectBox {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  color: var(--sub);
+  font-size: var(--fs-sm);
+  user-select: none;
+}
+
+.userRowBypass {
+  background: var(--surface-1);
+}
+
+.userMain { flex: 1; min-width: 0; }
+
+.userName {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.userMeta {
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  margin-top: 2px;
+}
+
+.userCounts {
+  display: flex;
+  gap: var(--s-2);
+  flex-shrink: 0;
+}
+
+.badge {
+  background: var(--primary-soft);
+  color: var(--primary);
+  padding: 4px 10px;
+  border-radius: var(--r-sm);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  min-width: 56px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.badgeMuted {
+  background: var(--surface-2);
+  color: var(--muted);
+}
+
+/* PermissionSummaryButton 样式已迁移到 ./PermissionSummaryButton.module.css，
+   并由 PermissionSummaryButton.tsx 独立组件承载，供"用户绑定"与"用户组"
+   两张表格共用。 */
+
+/* ─── tree ─── */
+.treeMeta {
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  margin-bottom: var(--s-3);
+}
+
+.tree {
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  max-height: 560px;
+  overflow: auto;
+  padding: var(--s-2) 0;
+}
+
+.treeEmpty {
+  padding: var(--s-10);
+  text-align: center;
+  color: var(--muted);
+}
+
+.treeNode {
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  border-radius: var(--r-xs);
+  transition: background var(--t-fast) var(--ease);
+}
+
+.treeNode:hover {
+  background: var(--hover-soft);
+}
+
+.treeNode:hover .treeActions {
+  opacity: 1;
+}
+
+.treeToggle {
+  width: 16px;
+  height: 16px;
+  display: inline-grid;
+  place-items: center;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  cursor: pointer;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.treeToggle:focus-visible {
+  outline: none;
+  border-radius: var(--r-xs);
+}
+
+.treeToggleEmpty {
+  visibility: hidden;
+}
+
+.treeName {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--fs-md);
+  color: var(--text);
+}
+
+.treeId {
+  color: var(--muted);
+  font-family: Menlo, Consolas, monospace;
+  font-size: var(--fs-xs);
+  margin-right: var(--s-2);
+}
+
+.treeActions {
+  opacity: 0;
+  transition: opacity var(--t-fast) var(--ease);
+  display: inline-flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.treeActionBtn {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--sub);
+  padding: 2px 8px;
+  border-radius: var(--r-xs);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+
+.treeActionBtn:hover:not(:disabled) {
+  background: var(--card);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.treeActionBtn:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+.treeActionBtn:focus-visible {
+  outline: none;
+}
+
+.treeActionDanger:hover:not(:disabled) {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.treeActionDangerActive {
+  border-color: var(--danger-line);
+  background: var(--danger-soft);
+  color: var(--danger);
+  font-weight: 700;
+}
+
+/* ─── tag ─── */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 var(--s-2);
+  min-height: 22px;
+  border-radius: var(--r-full);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.tagPrimary { background: var(--primary-soft); color: var(--primary); }
+.tagSuccess { background: var(--accent-soft); color: var(--accent); }
+.tagWarn { background: var(--warn-soft); color: var(--warn); }
+.tagDanger { background: var(--danger-soft); color: var(--danger); }
+.tagMuted { background: var(--surface-2); color: var(--muted); }
+
+.tagLeaf {
+  background: var(--warn-soft);
+  color: var(--warn);
+  border-radius: var(--r-xs);
+  padding: 2px 6px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+
+.muted { color: var(--muted); }
+
+/* ─── split row (sim + history) ─── */
+.splitRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-5);
+  align-items: stretch;
+}
+
+/* grid item 默认 min-width: auto，内容（如 simRow 中的输入框）会撑开列宽，
+   导致左右两列不等宽。强制 min-width: 0 让 1fr 严格等分。
+   同时让 SectionCard 用 flex 列布局填满 cell，便于底部内容等高对齐。 */
+.splitRow > * {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  justify-content: flex-start;
+}
+
+/* SectionCard 内部 <header> 强制位于顶部（不被 flex 居中/拉伸）；
+   左右两卡 header 顶边对齐到 grid cell 顶部。
+   并锁定 header 整体高度（标题区固定）使左右描述无论字数多少都对齐。 */
+.splitRow > section > header {
+  flex: 0 0 auto;
+  margin-top: 0;
+  min-height: 96px;
+  align-content: flex-start;
+}
+
+/* 主内容区（codeBlock / historyList / empty）撑满剩余高度，使两卡底边对齐 */
+.splitRow .codeBlock,
+.splitRow .historyList,
+.splitRow .empty {
+  flex: 1 1 auto;
+  min-height: 220px;
+}
+
+/* SectionCard 的 header description 在两侧字数不同会导致换行差异，
+   强制描述段落最小高度为 2 行（fs-md=14px * line-height 1.65 ≈ 23.1px，2行 ≈ 47px），
+   使左右两个 SectionCard 标题区等高对齐。
+   通过 tag 选择器穿透 CSS Modules（SectionCard 内部使用 hash 类名）。 */
+.splitRow > section > header p {
+  min-height: 47px;
+}
+
+/* 模拟鉴权未触发时占位，避免左侧只有 simRow 一行而右侧 history 撑高 */
+.simPlaceholder {
+  flex: 1 1 auto;
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  border: 1px dashed var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface-1);
+}
+
+/* ─── simulate ─── */
+.simRow {
+  display: flex;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--s-3);
+}
+
+/* simRow 直接子项默认能收缩（避免在窄列中撑开父容器） */
+.simRow > .input {
+  min-width: 0;
+  flex: 1 1 140px;
+  color: var(--sub);
+}
+
+.simRow > .input::placeholder {
+  color: var(--sub);
+}
+
+.simRow > .input.inputWide {
+  flex: 2 1 200px;
+}
+
+.input {
+  min-height: 36px;
+  padding: var(--s-2) var(--s-3);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-md);
+  outline: none;
+  transition:
+    border-color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+}
+
+.input:focus-visible {
+  border-color: var(--primary);
+}
+
+.input::placeholder { color: var(--muted); }
+.input:disabled { opacity: var(--disabled-opacity); cursor: not-allowed; }
+
+.inputWide { flex: 1 1 200px; }
+
+.textarea {
+  font-family: Menlo, Consolas, monospace;
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  resize: vertical;
+  min-height: 120px;
+}
+
+.searchInput { width: 100%; margin-bottom: var(--s-3); }
+
+.checkLabel,
+.dimensionSwitch {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  color: var(--sub);
+  font-size: var(--fs-sm);
+  cursor: pointer;
+  user-select: none;
+}
+
+.dimensionSwitch {
+  width: fit-content;
+  margin-bottom: var(--s-3);
+  padding: var(--s-2) var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface-1);
+  color: var(--text);
+  font-weight: 700;
+}
+
+.codeBlock {
+  margin: 0;
+  padding: var(--s-3) var(--s-4);
+  background: var(--shell-bg);
+  color: var(--shell-sub);
+  font-family: Menlo, Consolas, monospace;
+  font-size: var(--fs-xs);
+  border-radius: var(--r-sm);
+  max-height: 320px;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* ─── history ─── */
+.historyList {
+  display: flex;
+  flex-direction: column;
+  max-height: 320px;
+  overflow: auto;
+}
+
+.historyRow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-3) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.historyRow:last-child { border-bottom: none; }
+
+.historyVer {
+  font-family: Menlo, Consolas, monospace;
+  font-size: var(--fs-xs);
+  color: var(--text);
+  font-weight: 700;
+}
+
+.historyWho {
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  flex: 1;
+  min-width: 0;
+}
+
+/* ─── buttons ─── */
+.btnPrimary,
+.btnGhost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--control-h);
+  padding: 0 var(--s-3);
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.btnPrimary { background: var(--primary); color: #FFFFFF; }
+.btnPrimary:hover:not(:disabled) { background: var(--primary-hover); }
+.btnPrimary:active:not(:disabled) { transform: scale(var(--press-scale)); }
+.btnPrimary:disabled,
+.btnGhost:disabled { opacity: var(--disabled-opacity); cursor: not-allowed; }
+.btnPrimary:focus-visible,
+.btnGhost:focus-visible { outline: none; }
+
+.btnGhost { background: transparent; color: var(--primary); border-color: var(--line-strong); }
+.btnGhost:hover:not(:disabled) {
+  background: var(--hover-soft);
+  border-color: rgba(var(--primary-rgb), 0.24);
+}
+
+/* ─── empty ─── */
+.empty {
+  padding: var(--s-8);
+  text-align: center;
+  color: var(--muted);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--r-md);
+}
+
+/* ─── Drawer forms ─── */
+.formGrid {
+  display: grid;
+  gap: var(--s-4);
+}
+
+.formRow {
+  display: grid;
+  gap: var(--s-2);
+}
+
+.formLabel {
+  color: var(--sub);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.formHint {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+}
+
+.formDivider {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: var(--s-2) 0;
+}
+
+.req {
+  color: var(--danger);
+  margin-left: 2px;
+}
+
+.drawerSummary {
+  color: var(--sub);
+  font-size: var(--fs-sm);
+}
+
+.drawerActions {
+  display: flex;
+  gap: var(--s-2);
+}
+
+/* ─── readonly permission detail modal ─── */
+.permissionDetailModal {
+  max-height: min(680px, calc(100vh - 180px));
+  overflow: auto;
+}
+
+.permissionDetailGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-3);
+}
+
+.permissionDetailStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.permissionMetricCard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--s-3) var(--s-4);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface-1);
+}
+
+.permissionMetricCard span {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+}
+
+.permissionMetricCard b {
+  color: var(--text);
+  font-size: var(--fs-xl);
+  font-variant-numeric: tabular-nums;
+}
+
+.permissionDetailSection,
+.permissionDetailSectionWide {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  min-width: 0;
+  padding: var(--s-4);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--card);
+}
+
+.permissionDetailSectionWide {
+  grid-column: 1 / -1;
+}
+
+.permissionDetailSection h4,
+.permissionDetailSectionWide h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: var(--fs-md);
+  font-weight: 800;
+}
+
+.permissionSectionHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+}
+
+.permissionMiniBadge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 0 var(--s-2);
+  border-radius: var(--r-full);
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.permissionSubTitle,
+.permissionScopeMeta,
+.permissionHint {
+  color: var(--muted);
+  font-size: var(--fs-sm);
+}
+
+.permissionHint {
+  padding: var(--s-2) var(--s-3);
+  border: 1px solid color-mix(in oklch, var(--warn) 28%, transparent);
+  border-radius: var(--r-sm);
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.permissionEmpty {
+  padding: var(--s-5);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--surface-1);
+  color: var(--muted);
+  text-align: center;
+  font-size: var(--fs-sm);
+}
+
+.permissionChipList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+
+.permissionChip,
+.permissionValueChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  background: var(--surface-1);
+  color: var(--text);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+}
+
+.permissionChip small {
+  color: var(--muted);
+  font-family: Menlo, Consolas, monospace;
+  font-weight: 600;
+}
+
+.permissionChipWarn {
+  border-color: color-mix(in oklch, var(--warn) 28%, transparent);
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.permissionValueChip {
+  border-color: rgba(var(--primary-rgb), 0.18);
+  background: var(--primary-softer);
+  color: var(--primary);
+  word-break: break-all;
+}
+
+.permissionList,
+.permissionTableList,
+.permissionColumnList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.permissionListItem,
+.permissionTableItem,
+.permissionColumnItem {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-3);
+  min-width: 0;
+  padding: var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface-1);
+}
+
+.permissionListItem b {
+  color: var(--text);
+  font-size: var(--fs-sm);
+}
+
+.permissionListItem p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+}
+
+.permissionListItem code,
+.permissionTableItem code,
+.permissionColumnItem code {
+  color: var(--primary);
+  font-family: Menlo, Consolas, monospace;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+}
+
+.permissionTableItem span {
+  flex: 1;
+  min-width: 0;
+  color: var(--sub);
+  font-size: var(--fs-sm);
+}
+
+.permissionTableItem small {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+}
+
+.permissionColumnItem {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* ─── user binding modal ─── */
+.bindingModal {
+  display: flex;
+  flex-direction: column;
+  /* 撑满 Modal .body（flex:1 + min-height:0），让内部 body 区域获得有限高度并独立滚动，
+     footer 作为非滚动 flex 子项始终钉在最外层底部，不随内容滚动溢出。 */
+  height: 100%;
+  min-height: min(680px, calc(100vh - 180px));
+}
+
+.bindingModalBody {
+  flex: 1 1 auto;
+  min-height: 0;
+  /* 内容区独立滚动；footer 不在此容器内，因此恒定固定在底部 */
+  overflow-y: auto;
+  /* Modal 用 bodyBleed（去掉外层 padding），由本容器接管内边距 */
+  padding: var(--s-5);
+}
+
+.bindingModalPanel {
+  display: grid;
+  gap: var(--s-4);
+}
+
+.batchTargetBox,
+.batchResultBox {
+  display: grid;
+  gap: var(--s-3);
+  margin-bottom: var(--s-4);
+  padding: var(--s-3) var(--s-4);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface-1);
+}
+
+/* bodyBleed 后 .batchResultBox 作为 .bindingModal 直接子项（脱离了内边距容器），
+   补齐左右外边距使其与上方滚动区内容对齐，不贴到弹窗边缘。 */
+.bindingModal > .batchResultBox {
+  margin: 0 var(--s-5) var(--s-4);
+}
+
+.batchTargetList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  max-height: 92px;
+  overflow: auto;
+}
+
+.bindingCopyRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  margin-bottom: var(--s-4);
+  padding: var(--s-3) var(--s-4);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface-1);
+}
+
+.bindingCopyPanel {
+  margin-bottom: var(--s-4);
+}
+
+.batchResultBox {
+  margin: var(--s-4) 0 0;
+  background: var(--warn-soft);
+  border-color: color-mix(in oklch, var(--warn) 28%, transparent);
+  color: var(--warn);
+  font-size: var(--fs-sm);
+}
+
+.batchResultLine {
+  display: flex;
+  gap: var(--s-3);
+  align-items: flex-start;
+}
+
+.batchResultLine code {
+  min-width: 120px;
+  color: inherit;
+}
+
+.userPasteMode {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-4);
+}
+
+.bindingModalFooter {
+  /* 非滚动 flex 子项：作为 .bindingModal 的最外层底部，恒定固定，不随内容区滚动 */
+  flex: 0 0 auto;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding: var(--s-3) var(--s-5);
+  border-top: 1px solid var(--line);
+  background: var(--card);
+  box-shadow: 0 -8px 20px rgba(37, 53, 84, 0.06);
+}
+
+.bindingModalFooter .drawerSummary {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* 弹窗底部操作按钮容器（统一命名 footerActions，与「用户页面权限管理」一致；
+   actual Drawer 仍用 drawerActions）。 */
+.footerActions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex-shrink: 0;
+}
+
+/* ─── 编辑组弹窗（JoinGroupModal）：全部走 CSS Module，复用 .btnGhost/.btnPrimary ─── */
+.joinGroupWrap {
+  padding: 0 4px;
+}
+
+.joinGroupHint {
+  margin: 0 0 var(--s-3);
+  color: var(--sub);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+}
+
+.joinGroupEmpty {
+  padding: var(--s-4);
+  color: var(--sub);
+  text-align: center;
+}
+
+.joinGroupList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.joinGroupItem {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface-1);
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease);
+}
+
+.joinGroupItem input {
+  cursor: pointer;
+}
+
+.joinGroupItemActive {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+}
+
+.joinGroupName {
+  flex: 1;
+  min-width: 0;
+}
+
+.joinGroupNameMain {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.joinGroupBadge {
+  margin-left: var(--s-2);
+  padding: 2px 6px;
+  border-radius: var(--r-xs);
+  background: var(--surface-2);
+  color: var(--sub);
+  font-size: var(--fs-xs);
+}
+
+.joinGroupMeta {
+  margin-top: 2px;
+  color: var(--sub);
+  font-size: var(--fs-xs);
+}
+
+.joinGroupFooter {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--s-4);
+}
+
+.layerTagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.errList {
+  margin-top: var(--s-2);
+  font-family: Menlo, Consolas, monospace;
+  font-size: var(--fs-xs);
+  line-height: 1.6;
+}
+
+.previewBox {
+  max-height: 280px;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  padding: var(--s-3);
+  background: var(--surface-1);
+  font-size: var(--fs-sm);
+}
+
+.previewGroup {
+  margin-bottom: var(--s-3);
+}
+.previewGroup:last-child { margin-bottom: 0; }
+
+.previewLeaves {
+  padding-left: var(--s-3);
+  color: var(--sub);
+  margin-top: 4px;
+}
+
+/* ─── drawer tab bar ─── */
+.tabBar {
+  display: flex;
+  border-bottom: 1px solid var(--line);
+  margin: calc(-1 * var(--s-5)) calc(-1 * var(--s-5)) var(--s-4);
+  padding: 0 var(--s-5);
+}
+
+.tab {
+  padding: var(--s-3) 0;
+  margin-right: var(--s-6);
+  color: var(--sub);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition:
+    color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease);
+}
+
+.tab:hover:not(.tabActive) { color: var(--primary); }
+
+.tab:focus-visible {
+  outline: none;
+  border-radius: var(--r-xs);
+}
+
+.tabActive {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+  font-weight: 700;
+}
+
+/* ─── product checkbox tree ─── */
+.productTree {
+  max-height: 460px;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  padding: var(--s-2);
+  background: var(--card);
+}
+
+.productRow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 5px 6px;
+  border-radius: var(--r-xs);
+}
+
+.productRow:hover {
+  background: var(--hover-soft);
+}
+
+.productToggle {
+  width: 14px;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: var(--fs-xs);
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+}
+
+.productToggle:focus-visible {
+  outline: none;
+}
+
+.productName {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--fs-md);
+  color: var(--text);
+}
+
+.productNameMatch {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.productId {
+  color: var(--muted);
+  font-family: Menlo, Consolas, monospace;
+  font-size: var(--fs-xs);
+  margin-left: 4px;
+}
+
+/* ─── skill table group ─── */
+.skillGroup {
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  margin-bottom: var(--s-2);
+  overflow: hidden;
+  background: var(--card);
+}
+
+.skillGroupHead {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-3);
+  background: var(--surface-1);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  color: var(--sub);
+  border-bottom: 1px solid var(--line);
+}
+
+.skillGroupTitle {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.skillTableRow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-2) var(--s-3);
+  border-top: 1px solid var(--line);
+}
+
+.skillTableRow:first-child { border-top: none; }
+
+.skillTableRow:hover { background: var(--hover-soft); }
+
+.skillTableRowInvalid {
+  background: var(--danger-soft);
+}
+.skillTableRowInvalid:hover { background: var(--danger-soft); }
+
+.skillTableInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.skillTableName {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+  font-size: var(--fs-sm);
+  color: var(--text);
+}
+
+.skillTableName code {
+  font-family: Menlo, Consolas, monospace;
+  font-weight: 600;
+}
+
+.skillTableDesc {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  margin-top: 2px;
+}
+
+/* ─── row scope config ─── */
+/*
+ * 左右两栏 grid，align-items 默认 stretch → 左右始终等高；
+ * 用 max-height 收口整体高度，避免右侧字段卡片越多越拔高、左侧表列表也跟着无限延展无法滚动。
+ * 触顶后：左侧 .rowScopeTableList（flex:1 + overflow:auto）与右侧 .rowScopeColumns（max-height:520px + overflow:auto）各自滚动。
+ */
+.rowScopeLayout {
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  gap: var(--s-4);
+  min-height: 520px;
+  max-height: calc(100vh - 280px);
+}
+
+.rowScopeAside,
+.rowScopeMain {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  padding: var(--s-3);
+}
+
+.rowScopeAside {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  /* 允许 flex 子项（.rowScopeTableList）按需收缩并触发自身滚动，
+     消除 grid stretch 后下方的白色空白条带。 */
+  min-height: 0;
+}
+
+.rowScopeTableList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  overflow: auto;
+  /*
+   * 双重约束：
+   * 1) flex: 1 + min-height: 0 —— 当父链 .rowScopeAside / .rowScopeLayout 已经有有限高度
+   *    （例如「行权限大抽屉」场景，.rowScopeLayout 自身 max-height: calc(100vh - 280px) 起效），
+   *    撑满 filter 输入框之下的剩余空间。
+   * 2) max-height: 520px —— 当父链是"自然高度"（例如行权限被嵌入 PermissionTree 的 .rootBlock 里，
+   *    父链全是 content-driven 高度，flex:1 拿不到可分配空间），用硬上限确保仍有独立滚动条。
+   *    上限值与右侧 .rowScopeColumns 的 max-height 保持一致，左右视觉等高。
+   */
+  flex: 1;
+  min-height: 0;
+  max-height: 520px;
+}
+
+.rowScopeTableItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface-1);
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  min-width: 0;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+}
+
+.rowScopeTableItem > span,
+.rowScopeTableItem > small {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+}
+
+.rowScopeTableItem code {
+  font-family: Menlo, Consolas, "Courier New", monospace;
+  font-size: var(--fs-md);
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--text);
+}
+
+/* 不再缩字号，长名直接折行 */
+.rowScopeTableItem code.codeSm,
+.rowScopeTableItem code.codeXs {
+  font-size: var(--fs-md);
+  font-weight: 400;
+}
+
+.rowScopeTableItem:hover,
+.rowScopeTableItemActive {
+  border-color: rgba(var(--primary-rgb), 0.34);
+  background: var(--primary-soft);
+}
+
+.rowScopeTableItem small,
+.rowScopeValueLine small,
+.rowScopeCheckLine small {
+  color: var(--muted);
+}
+
+.rowScopeDot {
+  margin-left: var(--s-2);
+  color: var(--accent);
+  font-size: var(--fs-xs);
+}
+
+.rowScopeMain {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+/* 行权限抽屉的表头：左侧表名（可能很长，需省略号截断），右侧操作按钮（不允许压缩文字） */
+.rowScopeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+}
+
+.rowScopeHeader > div:first-child {
+  /* 让长表名能正确触发省略号 */
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.rowScopeHeader > div:first-child > b {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* tooltip 由 title 提供，此处仅做视觉收纳 */
+}
+
+.rowScopeHeader .drawerActions {
+  /* 关键：操作按钮不被 flex 压缩，文字保持单行 */
+  flex: none;
+  white-space: nowrap;
+}
+
+.rowScopeHeader .drawerActions button {
+  white-space: nowrap;
+}
+
+/*
+ * 字段筛选输入框：与左侧 aside 顶部搜索框（.input 36px）视觉重量对齐——同高、限宽避免通栏压视觉。
+ * 用独立类名（不复用 .searchInput）以绕开文件下方 .searchInput（toolbar 用）的 border:0 / background:transparent 覆写。
+ */
+.rowScopeColumnFilter {
+  align-self: flex-start;
+  width: 100%;
+  max-width: 320px;
+  margin-bottom: var(--s-1);
+}
+
+.rowScopeColumns {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  overflow: auto;
+  max-height: 520px;
+}
+
+.rowScopeColumnCard {
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface-1);
+  padding: var(--s-3);
+}
+
+.rowScopeCheckLine,
+.rowScopeValueLine {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  color: var(--text);
+  font-size: var(--fs-sm);
+}
+
+.rowScopeEnumBox {
+  margin-top: var(--s-3);
+  padding: var(--s-3);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  border: 1px solid var(--line);
+  max-height: 260px;
+  overflow: auto;
+}
+
+.rowScopeValueLine {
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 1px dashed var(--line);
+}
+
+.rowScopeValueLine:last-child { border-bottom: none; }
+
+.rowScopeValueLine span { flex: 1; min-width: 0; word-break: break-all; }
+
+.rowScopePartitionHint,
+.rowScopeEnumError {
+  margin-bottom: var(--s-2);
+  padding: 6px 8px;
+  border-radius: var(--r-xs);
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+}
+
+.rowScopePartitionHint {
+  border: 1px solid rgba(var(--primary-rgb), 0.18);
+  background: var(--primary-softer);
+  color: var(--primary);
+}
+
+.rowScopeEnumError {
+  border: 1px solid var(--danger-line);
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.partitionPopoverMask {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: var(--s-5);
+  background: rgba(13, 29, 61, 0.22);
+  backdrop-filter: blur(4px);
+}
+
+.partitionPopover {
+  width: min(720px, 100%);
+  max-height: min(680px, calc(100vh - 80px));
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: var(--s-5);
+  border: 1px solid rgba(var(--primary-rgb), 0.14);
+  border-radius: var(--r-lg);
+  background: linear-gradient(180deg, var(--card), var(--primary-softer));
+  box-shadow: 0 24px 72px rgba(37, 53, 84, 0.22);
+  overflow: auto;
+}
+
+.partitionPopoverHead,
+.partitionPopoverActions,
+.partitionStepBox,
+.partitionLatestBox {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.partitionPopoverHead,
+.partitionPopoverActions {
+  justify-content: space-between;
+}
+
+.partitionStepBox,
+.partitionLatestBox {
+  align-items: flex-start;
+  padding: var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card);
+}
+
+.partitionStepBox p,
+.partitionLatestBox p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: var(--fs-xs);
+}
+
+.partitionStep {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--r-full);
+  background: var(--primary);
+  color: #FFFFFF;
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.partitionFieldList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-2);
+}
+
+.partitionFieldItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+  min-width: 0;
+  padding: var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.partitionFieldItem:hover:not(:disabled),
+.partitionFieldItemActive {
+  transform: translateY(-1px);
+  border-color: rgba(var(--primary-rgb), 0.36);
+  background: var(--primary-soft);
+}
+
+.partitionFieldItem:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+.partitionFieldItem span {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.partitionFieldItem code {
+  color: var(--primary);
+  font-family: Menlo, Consolas, monospace;
+  font-size: var(--fs-xs);
+  font-weight: 800;
+}
+
+.partitionFieldItem small {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+}
+
+.partitionFieldItem b {
+  flex-shrink: 0;
+  padding: 2px 6px;
+  border-radius: var(--r-full);
+  background: var(--primary);
+  color: #FFFFFF;
+  font-size: var(--fs-xs);
+}
+
+.partitionError {
+  color: var(--danger) !important;
+}
+
+/* ─── responsive ─── */
+@media (max-width: 1024px) {
+  .splitRow { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 900px) {
+  .rowScopeLayout { grid-template-columns: 1fr; }
+  .statsRow,
+  .permissionDetailGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .userRow {
+    flex-wrap: wrap;
+  }
+  .userCounts {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .bindingModal {
+    min-height: auto;
+  }
+  .bindingModalFooter {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .bindingModalFooter .footerActions {
+    justify-content: flex-end;
+  }
+  .treeActions { opacity: 1; }
+}
+
+@media (max-width: 640px) {
+  .permissionDetailGrid { grid-template-columns: 1fr; }
+  .bindingModalFooter .footerActions {
+    flex-direction: column-reverse;
+  }
+  .bindingModalFooter .footerActions > button {
+    width: 100%;
+  }
+  .tabBar {
+    overflow-x: auto;
+  }
+  .tab {
+    flex: 0 0 auto;
+  }
+}
+
+/* ============================================================
+   ─── 用户绑定 Tab 重排版：ViewHeader / Canvas / Table / Pagination
+   ─── 全部基于 tokens.css 变量，DESIGN.md 风格，零硬编码颜色
+   ─── 注：二级菜单已挪至全局 sidebar，不再在页面内渲染
+   ============================================================ */
+
+/* ── View Header 已移除：标题/描述改由共享 SectionCard 承载（与「用户页面权限管理」一致）。 ── */
+
+/* ── Content：toolbar / table / pagination 三段，统一作为共享 SectionCard 的 children 渲染
+   （骨架与「用户页面权限管理」一致；不再使用页面私有的描边 canvas 容器与 viewHeader）。 ── */
+
+.canvasToolbar {
+  display: flex;
+  align-items: center;
+  /* 搜索框和筛选 chip 紧挨左侧，整体左对齐；不再 space-between 让 chip 飘到最右 */
+  justify-content: flex-start;
+  gap: var(--s-2);
+  /* 水平内边距对齐到 SectionCard 标题左边缘（card padding 为 0）；表格列文本仍由 th/td 的 s-4 缩进 */
+  padding: 0 0 var(--s-3);
+  margin-bottom: var(--s-3);
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  flex-wrap: wrap;
+}
+
+/* 把边框/聚焦色全部下沉到 .searchField 容器，icon 与 input 共享同一个框，
+   彻底解决 icon 与输入文本不对齐、以及"额外多一圈框"的视觉问题。
+   背景用 var(--card) 与外层 canvas 一致，避免出现"淡蓝色块/halo"的视错觉。 */
+.searchField {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  flex: 0 1 320px;
+  min-width: 220px;
+  max-width: 360px;
+  height: 36px;
+  padding: 0 12px;
+  gap: 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  transition:
+    border-color var(--t-fast) var(--ease),
+    background var(--t-fast) var(--ease);
+}
+
+.searchField:hover { border-color: var(--primary); }
+
+/* 聚焦只用 border-color 表达，去掉 4px halo（蓝/橙环） */
+.searchField:focus-within {
+  border-color: var(--primary);
+  background: var(--card);
+  box-shadow: none;
+}
+
+/* icon 容器：SVG 已用 16×16 viewBox 围绕 (8,8) 严格居中，flex 容器
+   align-items: center 即可与 input 文字 x-height 中线对齐——无需任何 transform。 */
+.searchIcon {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  transform: translateY(-8px);
+  color: var(--muted);
+  pointer-events: none;
+  line-height: 0;
+}
+
+.searchIcon svg { display: block; width: 16px; height: 16px; }
+
+/* input 不再 height: 100% / line-height: 1（这两条与浏览器默认 baseline 一起会
+   把文字基线压到容器中线偏下），而是让 flex 容器 align-items: center 配合
+   input 的自然 line-height（normal）做垂直居中——文字 x-height 中线即与 icon
+   圆心同高。 */
+.searchInput {
+  flex: 1 1 auto;
+  min-width: 0;
+  transform: translateY(3.5px);
+  padding: 0;
+  border: 0;          /* 边框由 .searchField 统一承担 */
+  background: transparent;
+  color: var(--sub);
+  font: inherit;
+  font-size: var(--fs-md);
+  line-height: normal;
+  outline: none;
+  box-shadow: none;
+}
+
+.searchInput::placeholder { color: var(--sub); }
+.searchInput:focus { outline: none; box-shadow: none; }
+
+.toolbarRight {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+}
+
+/* ── 工具栏紧凑筛选（按权限组）：与搜索框同行，自动响应式 ── */
+.toolbarFilters {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex: 0 1 auto;
+  flex-wrap: wrap;
+}
+
+.filterChip {
+  width: 220px;
+  min-width: 180px;
+  max-width: 100%;
+  height: var(--control-h);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--sub);
+  font: inherit;
+  font-size: var(--fs-md);
+  cursor: pointer;
+  outline: none;
+}
+
+.filterChip:hover { color: var(--sub); }
+
+.filterChip:focus-visible {
+  outline: none;
+}
+
+.filterChipActive {
+  color: var(--sub);
+}
+
+.filterChip :global(.t-input),
+.filterChip :global(.t-input:hover),
+.filterChip :global(.t-input--focused),
+.filterChip :global(.t-input.t-input--focused) {
+  height: var(--control-h);
+  min-height: var(--control-h);
+  background: var(--card) !important;
+  border: 1px solid var(--line-strong) !important;
+  box-shadow: none !important;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+}
+
+.filterChip:hover :global(.t-input),
+.filterChip :global(.t-input:hover),
+.filterChip :global(.t-input--focused),
+.filterChip :global(.t-input.t-input--focused) {
+  border-color: var(--primary) !important;
+}
+
+.filterChipActive :global(.t-input) {
+  border-color: var(--primary) !important;
+  background: var(--card) !important;
+}
+
+.filterChip :global(.t-input),
+.filterChip :global(.t-input__inner) {
+  color: var(--sub) !important;
+}
+
+.filterChip :global(.t-input__inner) {
+  font: inherit;
+  cursor: pointer;
+  background: transparent !important;
+}
+
+.filterChip :global(.t-input__inner)::placeholder {
+  color: var(--sub) !important;
+  opacity: 1;
+}
+
+.filterClear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--control-h);
+  width: var(--control-h);
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: var(--fs-md);
+  line-height: 1;
+  transition: color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+}
+
+.filterClear:hover { color: var(--danger, #DC2626); border-color: var(--danger, #DC2626); }
+
+.canvasBody {
+  /* 表格容器 */
+  min-height: 240px;
+}
+
+/* ── Members Table ── */
+.tableWrap {
+  overflow-x: auto;
+}
+
+.userTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-md);
+}
+
+.userTable thead tr {
+  background: transparent;
+  border-bottom: 1px solid var(--line);
+}
+
+.userTable thead th {
+  padding: var(--s-3) var(--s-4);
+  color: var(--sub);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  /* 与「用户页面权限管理」表头口径一致：字色 --sub、字距 0.04em、不做大写转换。 */
+  /* 这里只放公共样式，对齐方式交给具体列（colUser/colRole/...），
+     因为 thead th 和 tbody td 共用同一个列类名（如 .colRole 同时作用于 th 和 td），
+     在列类里设 text-align 才能保证「标题 + 内容」同列同对齐，不再错位。 */
+  text-align: left;
+  white-space: nowrap;
+}
+
+.userTable .colCheck { width: 44px; }
+.userTable .colUser { min-width: 240px; }
+/* 所属权限组 / 校验状态：标题 + 内容统一居中（用户要求，对齐口径一致）。
+   注意 colRole / colStatus 既作用于 thead th 也作用于 tbody td，
+   在列类里设 text-align 保证两者同对齐。 */
+.userTable .colRole {
+  min-width: 200px;
+  /* 「所属权限组」：标题 + 内容统一靠左，但相对默认 padding-left 再略微往左收一点
+     （用户反馈：略略微微往左移）。把内容左缩进比表格默认 var(--s-4) 小一档（s-3）。 */
+  text-align: left;
+  padding-left: var(--s-3);
+}
+.userTable thead .colRole,
+.userTable tbody .colRole {
+  /* 同时作用于 th 和 td，确保标题与内容左对齐口径完全一致 */
+  text-align: left;
+  padding-left: var(--s-3);
+}
+.userTable .colStatus {
+  width: 132px;
+  text-align: center;
+}
+/* 「权限配置」列：标题 + 内容统一居中。
+   - 标题文字 thead th 默认靠左，这里覆盖为 center；
+   - 内容里的 PermissionSummaryGroup（max-width: 240px + margin: auto）本来就居中，
+     现在与标题同口径，不再错位。 */
+.userTable .colCounts {
+  width: 380px;
+  text-align: center;
+}
+/* 操作列：两个按钮（编辑绑定 / 加入组）同行排列，宽度自适应不挤换行。
+   标题 + 内容统一居中：表头文字「操作」居中，内容里的 .opsRow 用 inline-flex
+   会跟随 td 的 text-align 居中放置（inline-level box）。 */
+.userTable .colActions {
+  width: 1%;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.userTable .colActions .opsRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.userTable tbody td {
+  padding: var(--s-3) var(--s-4);
+  border-top: 1px solid var(--line);
+  color: var(--text);
+  vertical-align: middle;
+}
+
+.userTable tbody tr {
+  background: transparent;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.userTable tbody tr.userTrSelected {
+  background: var(--primary-softer);
+}
+
+/* 行 hover 高亮，与「用户页面权限管理」表格一致 */
+.userTable tbody tr:hover {
+  background: var(--primary-softer);
+}
+
+.userTable tbody tr.userTrSelected:hover {
+  background: var(--primary-softer);
+}
+
+.userTable tbody tr.userTrBypass td {
+  color: var(--sub);
+}
+
+/* 用户单元格：统一为纯文本 loginName（与「用户页面权限管理」一致，不再使用头像）。
+   文本样式复用上方 .userName。 */
+
+/* 角色单元格 */
+.roleCell {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  flex-wrap: wrap;
+}
+
+/* 状态 pill：圆点 + 文本 */
+.statusPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px var(--s-2);
+  border-radius: var(--r-full);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: 0 0 auto;
+}
+
+.statusPillEnforce {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.statusPillBypass {
+  background: var(--surface-2);
+  color: var(--muted);
+}
+
+/* 配置摘要单元格已改用 PermissionSummaryGroup（CSS Grid 三等分布局）
+   实现跨行严格列对齐，详见 ./PermissionSummaryButton.module.css。 */
+
+/* ── Pagination Footer ── */
+.canvasFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: var(--s-3) 0 0;
+  margin-top: var(--s-3);
+  border-top: 1px solid var(--line);
+  background: transparent;
+  color: var(--sub);
+  flex-wrap: wrap;
+}
+
+.paginationInfo {
+  font-size: var(--fs-sm);
+  color: var(--sub);
+}
+
+.paginationCtl {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.pageBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-h);
+  height: var(--control-h);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--sub);
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease);
+}
+
+.pageBtn:hover:not(:disabled) {
+  background: var(--hover-soft);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.pageBtn:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+.pageBtn:focus-visible {
+  outline: none;
+}
+
+.pageLabel {
+  font-size: var(--fs-sm);
+  color: var(--sub);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 用户绑定 Modal 顶部 4 维度统计 chip 行 ── */
+.bindingStatRow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--s-3);
+}
+
+.bindingStatChip {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--s-3) var(--s-4);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface-1);
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+}
+
+.bindingStatChip:hover {
+  background: var(--card);
+  border-color: var(--primary);
+}
+
+.bindingStatChip:focus-visible {
+  outline: none;
+}
+
+.bindingStatChipActive,
+.bindingStatChipActive:hover {
+  background: var(--primary-soft);
+  border-color: var(--primary);
+  box-shadow: var(--shadow-xs);
+}
+
+.bindingStatLabel {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.bindingStatChipActive .bindingStatLabel {
+  color: var(--primary);
+}
+
+.bindingStatNum {
+  color: var(--text);
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+
+.bindingStatChipActive .bindingStatNum {
+  color: var(--primary);
+}
+
+.bindingStatHint {
+  color: var(--sub);
+  font-size: var(--fs-sm);
+}
+
+/* ── 响应式：subShell 在窄屏退化为单列（菜单变横向 chip 行） ── */
+
+
+@media (max-width: 900px) {
+  /* width: auto + min-width 兜底：窄屏让列宽随内容自适应，但确保至少能容下
+     3 颗 PermissionSummaryButton（每颗最小约 56px + 2×6px gap = ~180px），
+     避免出现「产品/Skill/行」三按钮被压到不齐 / 第三颗换行错位（截图症状）。
+     ≤ 420px 时 PermissionSummaryGroup 自身会切到 auto-fit 流式换行。 */
+  .userTable .colCounts { width: auto; min-width: 200px; }
+  .canvasToolbar { flex-direction: column; align-items: stretch; }
+  .searchField { max-width: none; }
+  .toolbarRight { justify-content: flex-end; }
+  .bindingStatRow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+  .userTable .colRole,
+  .userTable .colStatus { display: none; }
+  .userTable thead .colRole,
+  .userTable thead .colStatus { display: none; }
+}

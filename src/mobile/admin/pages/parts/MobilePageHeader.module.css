@@ -1,0 +1,117 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-fab);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  height: var(--topbar-h);
+  padding: 0 var(--s-4);
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.titleGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-width: 0;
+}
+
+.iconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--r-sm);
+  background: var(--primary-soft);
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.actions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex-shrink: 0;
+}
+
+.btnGhost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--sub);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+
+.btnGhost:hover {
+  background: var(--hover-soft);
+  border-color: rgba(var(--primary-rgb), 0.24);
+  color: var(--primary);
+}
+
+.btnGhost:focus-visible,
+.btnAdd:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.btnAdd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: var(--r-full);
+  background: var(--primary);
+  color: #FFFFFF;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.btnAdd:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.btnAdd:active:not(:disabled) {
+  transform: scale(var(--press-scale));
+}
+
+.btnAdd:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btnGhost,
+  .btnAdd {
+    transition-duration: 0.01ms;
+  }
+}

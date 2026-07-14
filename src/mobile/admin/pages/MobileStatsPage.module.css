@@ -1,0 +1,435 @@
+/* MobileStatsPage — 整体容器 / 子板块布局
+ * 视觉借鉴 /Users/martinwang/Downloads/数据统计-dashboard 的卡片化结构（2x2 概览 / 圆角 / 留白 /
+ * 表格行密度），但所有色值、间距、阴影、字号都映射到项目 design tokens（tokens.css）。
+ */
+
+.main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+  padding: var(--s-4) var(--s-4) calc(56px + env(safe-area-inset-bottom, 0px) + var(--s-5));
+}
+
+/* ────────── 通用 section / card ────────── */
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-xs);
+  overflow: hidden;
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: var(--s-3);
+  border-bottom: 1px solid var(--line);
+  background: var(--card);
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.01em;
+}
+
+.cardMeta {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.cardBody {
+  padding: var(--s-3);
+}
+
+.skeletonWrap {
+  padding: var(--s-3) var(--s-1);
+}
+
+/* Filter Bar 已抽取至 parts/MobileStatsToolbar.module.css（紧凑两行常驻、不折叠） */
+
+/* ────────── 概览 4 卡片（2x2 grid） ────────── */
+
+.metricGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-3);
+}
+
+.metricCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  padding: 14px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-xs);
+}
+
+.metricHead {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.metricIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--primary);
+}
+
+.metricIconWarn { color: var(--warn); }
+.metricIconDanger { color: var(--danger); }
+.metricIconAccent { color: var(--accent); }
+.metricIconSub { color: var(--sub); }
+
+.metricNum {
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.metricNumPrimary { color: var(--primary); }
+.metricNumWarn { color: var(--warn); }
+.metricNumDanger { color: var(--danger); }
+.metricNumAccent { color: var(--accent); }
+
+.metricHint {
+  font-size: 11px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+
+.metricUnit {
+  font-size: 11px;
+  color: var(--muted);
+  margin-left: 4px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* ────────── Trend chart wrapper ────────── */
+
+.chartHost {
+  width: 100%;
+  height: 240px;
+}
+
+.chartLegendRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2);
+  justify-content: flex-end;
+}
+
+.legendChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--sub);
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: var(--r-xs);
+  transition:
+    background var(--t-fast) var(--ease),
+    opacity var(--t-fast) var(--ease);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.legendChip:active {
+  background: var(--hover-soft);
+}
+
+.legendChipHidden {
+  opacity: 0.4;
+  text-decoration: line-through;
+}
+
+.legendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ────────── 极值（latency） 卡片 ────────── */
+
+.extremeRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-3);
+}
+
+.extremeCard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--s-3);
+  border-radius: var(--r-md);
+  border: 1px solid var(--line);
+  background: var(--card);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.extremeCard:hover:not(:disabled) {
+  background: var(--hover-soft);
+}
+
+.extremeCard:active:not(:disabled) {
+  transform: scale(var(--press-scale));
+}
+
+.extremeCard:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+.extremeCardMax {
+  background: var(--danger-soft);
+  border-color: var(--danger-line);
+}
+
+.extremeCardMax:hover:not(:disabled) {
+  background: var(--danger-soft);
+  border-color: var(--danger);
+}
+
+.extremeCardMin {
+  background: var(--primary-soft);
+  border-color: rgba(var(--primary-rgb), 0.24);
+}
+
+.extremeCardMin:hover:not(:disabled) {
+  background: var(--primary-soft);
+  border-color: var(--primary);
+}
+
+.extremeHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.extremeHeadMax { color: var(--danger); }
+.extremeHeadMin { color: var(--primary); }
+
+.extremeNum {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.extremeNumMax { color: var(--danger); }
+.extremeNumMin { color: var(--primary); }
+
+.extremeMeta {
+  font-size: 11px;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  color: var(--sub);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.extremeMetaMax { color: rgba(0, 0, 0, 0); /* placeholder, override below */ }
+.extremeMetaMin { color: rgba(0, 0, 0, 0); }
+
+.extremeCardMax .extremeMeta { color: var(--danger); opacity: 0.85; }
+.extremeCardMin .extremeMeta { color: var(--primary); opacity: 0.85; }
+
+/* ────────── 表格 ────────── */
+
+.tableWrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.table thead tr {
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--line);
+}
+
+.table th {
+  padding: var(--s-2) var(--s-3);
+  text-align: left;
+  white-space: nowrap;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.table th.num {
+  text-align: right;
+}
+
+/* 单独居中的表头（用于「最高耗时 Top 10」表）；优先级高于 .num 的 right 对齐 */
+.table th.thCenter,
+.table th.num.thCenter {
+  text-align: center;
+}
+
+.table tbody tr {
+  border-bottom: 1px solid var(--line);
+  transition: background var(--t-fast) var(--ease);
+}
+
+.table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.table tbody tr:hover {
+  background: var(--hover-soft);
+}
+
+.table td {
+  padding: var(--s-2) var(--s-3);
+  color: var(--text);
+  vertical-align: middle;
+}
+
+.table td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.cellKey {
+  max-width: 96px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.cellMono {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  max-width: 92px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cellMuted {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.cellTotal {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.cellPrompt {
+  color: var(--accent);
+}
+
+.cellCompletion {
+  color: var(--warn);
+}
+
+.cellLatencyHigh {
+  color: var(--danger);
+  font-weight: 700;
+}
+
+.rowLink {
+  display: inline;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--primary);
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 11px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.rowLink:hover {
+  text-decoration: underline;
+}
+
+.rowLink:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+  border-radius: 3px;
+}
+
+/* status badge */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: var(--r-xs);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.badgeOk {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.badgeFail {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.empty {
+  padding: var(--s-6) var(--s-4);
+  text-align: center;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+}

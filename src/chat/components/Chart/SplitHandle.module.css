@@ -1,0 +1,31 @@
+.handle {
+  width: 4px;
+  flex: 0 0 4px;
+  align-self: stretch;
+  cursor: col-resize;
+  background: var(--line);
+  position: relative;
+  transition: background var(--t-fast);
+}
+
+.handle::before {
+  content: '';
+  position: absolute;
+  inset: 0 -4px;
+}
+
+.handle:hover,
+.handle:focus-visible {
+  background: rgba(var(--primary-rgb), 0.28);
+  outline: none;
+}
+
+.handle:focus-visible::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: -2px;
+  right: -2px;
+  border-radius: var(--r-full);
+}

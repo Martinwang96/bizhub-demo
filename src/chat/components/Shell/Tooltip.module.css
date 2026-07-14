@@ -1,0 +1,65 @@
+/* ────────────────────────────────────────────
+   Sidebar Rail Tooltip（自定义浮层组件）
+   - 通过 React Portal 渲染到 body，不受任何祖先 overflow 影响。
+   - 颜色按需求：背景 #DFE8F4（浅蓝灰），文字 var(--text) = #1D2129（黑色），
+     对比度 ≈ 12:1，满足 AAA。
+   - 600ms 冷启动延迟由 JS 控制；warmup 状态下后续 hover 立即弹出。
+   - 出现/消失走 opacity + transform 微动效，曲线 expo（与 sidebar 同 easing）。
+   ─────────────────────────────────────────── */
+
+.tooltip {
+  position: fixed;
+  /* 颜色：tooltip 主色 = #DFE8F4（浅蓝灰），文字 = #1D2129（黑） */
+  background: #DFE8F4;
+  color: var(--text);
+  font-size: var(--fs-md);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+  padding: 10px 14px;
+  border-radius: var(--r-full);          /* 胶囊圆角 */
+  white-space: nowrap;
+  box-shadow: var(--shadow-md);
+  pointer-events: none;
+  z-index: var(--z-overlay);             /* 高于 sidebar、高于 topbar */
+
+  /* 出场态：opacity 0 + 轻微左移；可见态由 .visible 切换 */
+  opacity: 0;
+  transform: translate(-4px, -50%);
+  transition:
+    opacity 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.tooltip.visible {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+/* 左侧尖角（旋转方块），与胶囊背景同色 */
+.arrow {
+  position: absolute;
+  /* 胶囊左侧偏外 3px，做出 ◀ 视觉 */
+  left: -3px;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  background: #DFE8F4;
+  transform: translateY(-50%) rotate(45deg);
+  /* 阴影只让胶囊主体出，箭头不重复阴影避免叠色 */
+}
+
+/* 触屏 / 无 hover 设备：不渲染 hover tooltip（JS 也会拦截，CSS 双保险） */
+@media (hover: none) {
+  .tooltip {
+    display: none;
+  }
+}
+
+/* prefers-reduced-motion：去掉过渡动效，直接切显隐 */
+@media (prefers-reduced-motion: reduce) {
+  .tooltip {
+    transition-duration: 0.01ms !important;
+  }
+}

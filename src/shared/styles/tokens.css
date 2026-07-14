@@ -1,0 +1,208 @@
+@import 'tdesign-react/es/style/index.css';
+
+:root {
+  /* ═ Primary — 深蓝权威主色（#0052D9）═
+     所有交互主色：按钮 / 链接 / 聚焦态 / 激活态 */
+  --primary:        #0052D9;
+  --primary-hover:  #0045B5;   /* 对齐 v2 hover */
+  --primary-press:  #003399;
+  --primary-soft:   #E8F3FF;   /* 次级分区底色，对齐 v2 */
+  --primary-softer: #F9FBFF;   /* 对话区画布底色 */
+  --primary-ring:   rgba(0, 82, 217, 0.22);
+  --primary-rgb:    0, 82, 217; /* 供 rgba() 引用：rgba(var(--primary-rgb), 0.x) */
+
+  /* ═ AI Accent — 紫色点睛（#7F76FF）═
+     仅用于 AI 语义：思考中、流式光标、model dot、AI 装饰 */
+  --ai-accent:      #7F76FF;
+  --ai-accent-soft: #D9DCFF;
+  --ai-accent-ring: rgba(127, 118, 255, 0.24);
+
+  /* ═ Accent 2 — 成功态（保留语义色；视觉微调接近 done 蓝绿）═ */
+  --accent:       oklch(62% 0.18 155);
+  --accent-soft:  oklch(94% 0.06 155);
+  --accent-ring:  oklch(62% 0.18 155 / 0.28);
+
+  /* ═ Accent 3 — 橘黄（warn/异常）═ */
+  --warn:       oklch(72% 0.17 55);
+  --warn-soft:  oklch(96% 0.06 55);
+
+  /* ═ Danger — 红（错误/删除）═ */
+  --danger:       oklch(58% 0.22 25);
+  --danger-soft:  oklch(96% 0.05 25);
+  --danger-line:  oklch(82% 0.12 25);
+
+  /* ═ Light surface chain ═
+     bg  → 对话区画布 (#F9FBFF)
+     card → Sidebar / 卡片（纯白）
+     line → 实体浅灰，对齐 v2 */
+  --bg:          #EEF2F7;
+  --card:        #FFFFFF;
+  --surface-1:   #FBFCFE;         /* overlay / fab / modal */
+  --surface-2:   #F2F3F9;         /* 次级灰紫 */
+  --line:        #E5E6EB;          /* 实体浅灰分割线，对齐 v2 */
+  --line-strong: #C9CDD4;          /* 输入框、可操作区域边界 */
+  --text:        #1D2129;          /* 对齐 v2 主文字 */
+  --sub:         #4E5969;          /* 对齐 v2 次级文字 */
+  --muted:       #86909C;          /* 对齐 v2 弱文字（注意比 sub 更浅） */
+
+  /* ═ Active / Focus / Hover 语义层 ═ */
+  --active-soft: #E8F3FF;   /* sidebar 激活项软底（蓝调，与主色 #0052D9 对齐） */
+  --focus-ring:  #AECDFF;   /* 聚焦环 */
+  --hover-soft:  #E8F3FF;   /* hover 态软底 */
+
+  /* ═ Dark shell chain（保留给 code block / 终端等深色表面）═ */
+  --shell-bg:         #1D2129;
+  --shell-bg-elev:    #2F4166;
+  --shell-bg-deep:    #0F172A;
+  --shell-line:       rgba(255, 255, 255, 0.08);
+  --shell-text:       #F9FBFF;
+  --shell-sub:        #AECDFF;
+  --shell-muted:      #7C8AAA;
+
+  /* ═ Thinking panel ═ */
+  --think-bg:   #FAFBFC;
+  --think-text: #4E5969;
+
+  /* ═ Radius ═ */
+  --r-xs:   4px;    --r-sm:   8px;
+  --r-md:  12px;    --r-lg:  16px;
+  --r-xl:  22px;    --r-2xl: 30px;
+  --r-2xl-input: 30px;   /* chat input / home search box 专用圆角 */
+  --r-full: 999px;
+
+  /* ═ Shadows ═ */
+  --shadow-xs:     0 1px 2px rgba(29, 33, 41, 0.05);
+  --shadow-sm:     0 2px 8px rgba(29, 33, 41, 0.06);
+  --shadow-md:     0 6px 20px rgba(29, 33, 41, 0.08);
+  --shadow-lg:     0 18px 48px rgba(29, 33, 41, 0.12);
+  --shadow-focus:  0 0 0 4px var(--primary-ring);
+  --shadow-focus-ai: 0 0 0 4px var(--ai-accent-ring);
+  --shadow-focus-danger: 0 0 0 4px oklch(58% 0.22 25 / 0.22);
+  --shadow-shell:  2px 0 24px rgba(15, 23, 42, 0.25);
+  --shadow-float:  0 4px 16px rgba(29, 33, 41, 0.1);
+
+  /* ═ Interaction ═ */
+  --disabled-opacity: 0.5;
+  --press-scale:      0.97;
+  --control-h:        36px; /* 标准按钮 / 输入框 / chip 控件高度 */
+
+  /* ═ TDesign bridge ═
+     tdesign 组件只作为 shared 薄壳底层，视觉变量统一映射到 Biz-Hub tokens。 */
+  --td-brand-color: var(--primary);
+  --td-brand-color-hover: var(--primary-hover);
+  --td-brand-color-active: var(--primary-press);
+  --td-brand-color-focus: transparent;
+  --td-brand-color-light: var(--primary-soft);
+  --td-brand-color-light-hover: var(--primary-soft);
+  --td-text-color-primary: var(--text);
+  --td-text-color-secondary: var(--sub);
+  --td-text-color-placeholder: var(--muted);
+  --td-text-color-disabled: var(--muted);
+  --td-text-color-anti: #fff;
+  --td-text-color-brand: var(--primary);
+  --td-text-color-link: var(--primary);
+  --td-bg-color-container: var(--card);
+  --td-bg-color-container-hover: var(--primary-softer);
+  --td-bg-color-container-active: var(--primary-soft);
+  --td-bg-color-container-select: var(--card);
+  --td-bg-color-component-disabled: var(--bg-soft);
+  --td-bg-color-specialcomponent: var(--card);
+  --td-border-level-1-color: var(--line);
+  --td-border-level-2-color: var(--line-strong);
+  --td-component-stroke: var(--line);
+  --td-component-border: var(--line-strong);
+  --td-radius-default: var(--r-sm);
+  --td-font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei, Helvetica Neue, Arial, sans-serif);
+  --td-font-size-body-medium: var(--fs-md);
+  --td-line-height-body-medium: 22px;
+  --td-font-body-medium: var(--td-font-size-body-medium) / var(--td-line-height-body-medium) var(--td-font-family);
+  --td-comp-size-xs: 24px;
+  --td-comp-size-m: var(--control-h);
+  --td-comp-size-l: 36px;
+  --td-comp-size-xl: 40px;
+  --td-comp-size-xxl: 48px;
+  --td-comp-size-xxxl: 56px;
+  --td-comp-margin-xs: 4px;
+  --td-comp-margin-s: 8px;
+  --td-comp-margin-m: 12px;
+  --td-comp-margin-xxl: 24px;
+  --td-comp-margin-xxxl: 32px;
+  --td-pop-padding-xl: 12px;
+  --td-pop-padding-xxl: 16px;
+  --td-shadow-1: none;
+  --td-shadow-2: none;
+  --td-shadow-3: none;
+
+  /* ═ Spacing（4px 基线）═ */
+  --s-1:  4px;   --s-2:  8px;   --s-3: 12px;  --s-4: 16px;
+  --s-5: 20px;   --s-6: 24px;   --s-7: 28px;  --s-8: 32px;
+  --s-10: 40px;  --s-12: 48px;  --s-16: 64px; --s-20: 80px;
+
+  /* ═ Typography ═ */
+  --fs-xs:  12px;   --fs-sm:  13px;  --fs-md:   14px;
+  --fs-base: 15px;  --fs-lg:  17px;  --fs-xl:   21px;
+  --fs-2xl: 27px;   --fs-display: clamp(32px, 4.2vw, 52px);
+
+  /* ═ Layout ═ */
+  --sidebar-w:      240px;
+  --sidebar-rail-w:  52px;
+  --sidebar-bg:     oklch(92.8% 0.018 255);  /* sidebar 背景，冷灰蓝（展开+收起共用） */
+  --msg-max:    820px;
+  --home-max:   768px;
+  --topbar-h:    56px;
+
+  /* ═ Motion ═ */
+  --t-fast: 140ms;   --t-mid: 200ms;  --t-slow: 320ms;
+  --t-sidebar: 280ms;                                  /* sidebar 宽度过渡 */
+  --ease:       cubic-bezier(.2, .8, .2, 1);
+  --ease-snap:  cubic-bezier(.4, 0, .2, 1);
+  --ease-expo:  cubic-bezier(0.16, 1, 0.3, 1);         /* sidebar / popover expo */
+
+  /* ═ Z-index ═ */
+  --z-base:    1;    --z-fab:     10;
+  --z-toggle: 100;   --z-sidebar: 200;   --z-overlay: 1000;
+  --z-modal:  1100;
+}
+
+/* 紧凑档：笔记本（901–1280px） */
+@media (min-width: 901px) and (max-width: 1280px) {
+  :root { --msg-max: 720px; --home-max: 720px; }
+}
+
+/* 宽屏档（≥1681px） */
+@media (min-width: 1681px) {
+  :root {
+    --msg-max: 900px; --home-max: 820px;
+    --fs-base: 15px;  --fs-lg: 17px;
+    --s-6: 28px;      --s-8: 36px;
+  }
+}
+
+/* 移动端（≤900px） */
+@media (max-width: 900px) {
+  :root {
+    --sidebar-w: 280px;
+    --s-6: 20px;
+    --s-8: 28px;
+    --topbar-h: 52px;
+    --msg-max: 100%;
+    --home-max: 100%;
+    /* 移动端去除蓝色 focus 光晕：tap 后浏览器会保留 :focus-visible，
+       触屏环境无键盘可达性需求，统一关闭 ring 视觉。 */
+    --shadow-focus: none;
+    --shadow-focus-ai: none;
+    --shadow-focus-danger: none;
+  }
+}
+
+/* 极窄屏（≤640px） */
+@media (max-width: 640px) {
+  :root {
+    --fs-display: clamp(28px, 7vw, 36px);
+    --topbar-h: 48px;
+    --s-6: 16px;
+    --s-8: 22px;
+    --s-10: 28px;
+    --s-12: 36px;
+  }
+}

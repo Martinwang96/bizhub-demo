@@ -1,0 +1,100 @@
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--s-2);
+  /* 容器最大宽度，容纳首行 3 个 chip 的自然排列 */
+  width: min(720px, 100%);
+  margin: 0 auto;
+}
+
+/* 强制换行占位元素：让其后的 chip 折到下一行 */
+.rowBreak {
+  flex-basis: 100%;
+  width: 100%;
+  height: 0;
+}
+
+.chip {
+  height: auto;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--card);
+  /* 默认透明边框，避免显示灰黑色描边；保留 1px 占位防止 hover 时跳动 */
+  border: 1px solid transparent;
+  color: var(--sub);
+  font-size: var(--fs-md);
+  cursor: pointer;
+  transition:
+    border-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease),
+    background var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+  line-height: 1.2;
+  text-align: center;
+  /* chip 内文本不换行，宽度按内容自适应 */
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chip:hover {
+  border-color: var(--focus-ring);
+  color: var(--primary);
+  background: var(--hover-soft);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 82, 217, 0.08);
+}
+
+.chip:active {
+  background: var(--active-soft);
+  transform: translateY(0);
+}
+
+.chip:focus-visible {
+  outline: none;
+  border-color: var(--primary);
+}
+
+/* 移动端（≤900px）：保持 wrap 折行 + 居中（rowBreak 已保证每行最多 3 个）。
+   chip 自身宽度按内容自适应，不被压缩；如果 3 个超过容器宽度也允许 chip 内文本被自然换行控制：
+   这里仍维持 white-space: nowrap，因为我们的文案最长「国内CDN近三个月的回源率趋势」在 320px 视口下单 chip 仍能放下。 */
+@media (max-width: 900px) {
+  .grid {
+    gap: 6px;
+    /* 移动端容器贴边内边距，避免长 chip 触边 */
+    padding: 0 var(--s-3);
+    width: 100%;
+    /* 显式覆盖之前可能的覆盖：保持 wrap 折行布局 */
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .chip {
+    flex: 0 0 auto;
+    padding: 6px 12px;
+    font-size: var(--fs-sm);
+    /* 移动端长 chip 在窄屏下允许收缩并截断，保证不超出行宽：
+       因为单行最多 3 个 chip 的总宽度在 320~390px 视口仍可能溢出。
+       这里允许 max-width 收紧 + ellipsis，配合 nowrap 不会换两行。 */
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* 极窄屏（≤640px）：进一步压缩 */
+@media (max-width: 640px) {
+  .grid {
+    gap: 6px;
+    padding: 0 var(--s-2);
+  }
+
+  .chip {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}

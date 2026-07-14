@@ -1,0 +1,126 @@
+.main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+  padding: var(--s-4) var(--s-4) calc(56px + env(safe-area-inset-bottom, 0px) + var(--s-5));
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+.sectionMeta {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+
+.cardList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.skeletonWrap {
+  padding: var(--s-3) var(--s-1);
+}
+
+.empty {
+  padding: var(--s-6) var(--s-4);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--r-md);
+  background: var(--card);
+  color: var(--sub);
+  font-size: var(--fs-sm);
+  text-align: center;
+}
+
+.empty strong {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.listEnd {
+  padding-top: var(--s-2);
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  text-align: center;
+}
+
+/* ─── sheet footer 按钮（与 PC 版 btnPrimary/btnGhost 同语义，改为 44px 高） ─── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 var(--s-5);
+  border-radius: var(--r-sm);
+  font: inherit;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.btnGhost {
+  background: transparent;
+  color: var(--sub);
+  border-color: var(--line-strong);
+}
+
+.btnGhost:hover:not(:disabled) {
+  background: var(--hover-soft);
+  border-color: rgba(var(--primary-rgb), 0.24);
+  color: var(--primary);
+}
+
+.btnPrimary {
+  background: var(--primary);
+  color: #FFFFFF;
+}
+
+.btnPrimary:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.btnPrimary:active:not(:disabled) {
+  transform: scale(var(--press-scale));
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.btn:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition-duration: 0.01ms;
+  }
+}

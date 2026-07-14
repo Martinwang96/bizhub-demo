@@ -1,0 +1,500 @@
+/* BusinessKnowledgePage 样式 — 完整使用 CSS 变量，对齐 DESIGN.md Management Surface
+ * 禁止硬编码颜色/灰度/圆角/字号；所有 token 来自 design tokens（见 web-react/src/shared/styles）
+ */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-6);
+}
+
+/* ─── tabs ─── */
+.tabs {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  padding: 4px;
+  margin-bottom: var(--s-4);
+}
+
+.tab {
+  background: transparent;
+  border: none;
+  font: inherit;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--sub);
+  padding: var(--s-2) var(--s-4);
+  cursor: pointer;
+  border-radius: var(--r-xs);
+  transition:
+    background var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+
+.tab:hover:not(.tabActive) {
+  background: var(--hover-soft);
+  color: var(--text);
+}
+
+.tab:focus-visible {
+  outline: none;
+}
+
+.tabActive {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+/* ─── editor ─── */
+.editorWrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.formatBar {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+  font-size: var(--fs-sm);
+  color: var(--sub);
+}
+
+.formatLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: var(--fs-sm);
+  color: var(--sub);
+}
+
+.formatSelect {
+  min-height: var(--control-h);
+  padding: 0 var(--s-3);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-sm);
+  outline: none;
+  transition:
+    border-color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+}
+
+.formatSelect:focus-visible {
+  border-color: var(--primary);
+}
+
+.formatHint {
+  color: var(--sub);
+  font-size: var(--fs-sm);
+}
+
+.formatHint strong {
+  color: var(--primary);
+}
+
+.textarea {
+  width: 100%;
+  min-height: 240px;
+  max-height: 540px;
+  padding: var(--s-4);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--text);
+  resize: vertical;
+  outline: none;
+  transition:
+    border-color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+  line-height: 1.6;
+}
+
+.textarea:focus-visible {
+  border-color: var(--primary);
+}
+
+.textarea::placeholder {
+  color: var(--muted);
+  white-space: pre-line;
+}
+
+.textarea:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+.textareaSans {
+  font-family: var(--ff-sans);
+  font-size: var(--fs-base);
+}
+
+.textareaMono {
+  font-family: var(--ff-mono, 'Menlo', 'Consolas', monospace);
+  font-size: var(--fs-sm);
+}
+
+.editorFooter {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding-top: var(--s-2);
+}
+
+.statsHint {
+  color: var(--sub);
+  font-size: var(--fs-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.flexSpacer {
+  flex: 1 1 auto;
+}
+
+/* ─── buttons ─── */
+.btnPrimary,
+.btnGhost,
+.btnDanger,
+.btnDangerActive {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 var(--s-4);
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
+  font-family: inherit;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.btnPrimary {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.btnPrimary:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.btnPrimary:active:not(:disabled) {
+  transform: scale(var(--press-scale));
+}
+
+.btnPrimary:focus-visible,
+.btnGhost:focus-visible,
+.btnDanger:focus-visible,
+.btnDangerActive:focus-visible {
+  outline: none;
+}
+
+.btnPrimary:disabled,
+.btnGhost:disabled,
+.btnDanger:disabled,
+.btnDangerActive:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+.btnGhost {
+  background: transparent;
+  color: var(--primary);
+  border-color: var(--line-strong);
+  min-height: var(--control-h);
+  padding: 0 var(--s-3);
+  font-size: var(--fs-sm);
+}
+
+.btnGhost:hover:not(:disabled) {
+  background: var(--hover-soft);
+  border-color: rgba(var(--primary-rgb), 0.24);
+}
+
+.btnDanger {
+  background: transparent;
+  color: var(--danger);
+  border-color: var(--danger-line);
+  min-height: var(--control-h);
+  padding: 0 var(--s-3);
+  font-size: var(--fs-sm);
+}
+
+.btnDanger:hover:not(:disabled) {
+  background: var(--danger-soft);
+}
+
+.btnDangerActive {
+  background: var(--danger-soft);
+  color: var(--danger);
+  border-color: var(--danger-line);
+  min-height: var(--control-h);
+  padding: 0 var(--s-3);
+  font-size: var(--fs-sm);
+}
+
+/* ─── preview tables ─── */
+.previewStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+}
+
+.previewGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.previewTitle {
+  margin: 0;
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--text);
+}
+
+.codeMono {
+  font-family: var(--ff-mono, 'Menlo', 'Consolas', monospace);
+  font-size: var(--fs-sm);
+  background: var(--surface-2);
+  color: var(--sub);
+  padding: 1px 6px;
+  border-radius: var(--r-xs);
+  margin-left: var(--s-2);
+}
+
+.tableWrap {
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+}
+
+.previewTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+}
+
+.previewTable th,
+.previewTable td {
+  padding: var(--s-2) var(--s-4);
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.previewTable th {
+  background: var(--surface-1);
+  color: var(--sub);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.previewTable tr:last-child td {
+  border-bottom: none;
+}
+
+.previewTable tr:hover td {
+  background: var(--hover-soft);
+}
+
+.colMono {
+  font-family: var(--ff-mono, 'Menlo', 'Consolas', monospace);
+  font-size: var(--fs-xs);
+  color: var(--sub);
+  text-align: left;
+}
+
+.colMonoHead {
+  font-family: var(--ff-mono, 'Menlo', 'Consolas', monospace);
+  text-align: right;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* 错误行三重视觉：底色 + 边框 + 行末警告图标 */
+.errorRow td {
+  background: var(--danger-soft);
+  border-bottom: 1px solid var(--danger-line);
+}
+
+.errorIcon {
+  display: inline-block;
+  margin-left: var(--s-2);
+  color: var(--danger);
+  font-weight: 700;
+}
+
+.errorPanel {
+  margin-top: var(--s-3);
+  padding: var(--s-3) var(--s-4);
+  border: 1px solid var(--danger-line);
+  border-radius: var(--r-sm);
+  background: var(--danger-soft);
+  font-size: var(--fs-sm);
+  color: var(--text);
+}
+
+.errorPanel summary {
+  cursor: pointer;
+  outline: none;
+}
+
+.errorPanel summary:focus-visible {
+  border-radius: var(--r-xs);
+}
+
+.errorList {
+  margin: var(--s-2) 0 0;
+  padding-left: var(--s-5);
+  color: var(--text);
+  list-style: disc;
+}
+
+.errorList li {
+  padding: 2px 0;
+  line-height: 1.6;
+}
+
+.errorReason {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+/* ─── snapshot block ─── */
+.snapshotStack {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--s-4);
+}
+
+.snapshotBlock {
+  /* 可点击按钮态：重置 button 默认样式，沿用卡片视觉 */
+  appearance: none;
+  -webkit-appearance: none;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  padding: var(--s-3) var(--s-4);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface-1);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  cursor: pointer;
+  outline: none;
+  transition:
+    border-color var(--t-fast) var(--ease),
+    background var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.snapshotBlock:hover {
+  border-color: var(--primary);
+  background: var(--hover-soft);
+}
+
+.snapshotBlock:focus-visible {
+  border-color: var(--primary);
+}
+
+.snapshotBlock:active {
+  transform: scale(var(--press-scale));
+}
+
+.snapshotMeta {
+  color: var(--sub);
+  font-size: var(--fs-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.overviewText {
+  color: var(--text);
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ─── history list ─── */
+.historyList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.historyItem {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-3) var(--s-4);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card);
+}
+
+.historyMain {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.historyVersion {
+  font-family: var(--ff-mono, 'Menlo', 'Consolas', monospace);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--text);
+}
+
+.historyMeta {
+  color: var(--sub);
+  font-size: var(--fs-xs);
+}
+
+/* ─── 响应式 ─── */
+@media (max-width: 900px) {
+  .snapshotStack {
+    grid-template-columns: 1fr;
+  }
+  .formatBar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* 减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  .tab,
+  .btnPrimary,
+  .btnGhost,
+  .btnDanger,
+  .btnDangerActive,
+  .textarea,
+  .formatSelect,
+  .snapshotBlock {
+    transition: none;
+  }
+  .btnPrimary:active:not(:disabled) {
+    transform: none;
+  }
+  .snapshotBlock:active {
+    transform: none;
+  }
+}

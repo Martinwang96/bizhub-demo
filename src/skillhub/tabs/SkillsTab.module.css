@@ -1,0 +1,115 @@
+/*
+ * SkillsTab 局部样式：让 10 列大表在中等分辨率下不再要求外层水平滚动。
+ *
+ * 背景：共享 .table { min-width: 720px } + 列内文本不限宽 ⇒ 描述/Tables/下游
+ * 几列把 row 撑爆，导致 SectionCard 内 .tableWrap 出现横向滚动条。用户在 PC
+ * 缩窗后必须在页面内左右滑动才能看到"操作"列，体验差。
+ *
+ * 策略：
+ *   1. 把"描述 / Tables / 下游"三列限定 max-width + ellipsis，溢出用 title 显示完整内容；
+ *   2. 关键列（Skill ID、状态、操作）保持 nowrap，避免被压成两行后行高跳动；
+ *   3. 仅在该 Tab 生效，绝不动全局 .table。
+ */
+
+/*
+ * 收紧工具栏与表格之间的空白：全局 .toolbar 的 margin-bottom(--s-6) 在本 Tab
+ * 偏大，导致工具栏与表头之间出现一条多余空白带。仅本 Tab 收紧，不动全局。
+ * 同时去掉 toolbar 自身的下边框，避免与 .tableWrap 的 border-top 叠成双线。
+ */
+.toolbarTight {
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+/*
+ * 标题与内容整体居中：仅作用于本 Tab 表格（.centered），不动全局 .table。
+ * vertical-align 同步改 middle，避免短列与多行描述列顶对齐时高低不齐。
+ */
+.centered th,
+.centered td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/*
+ * 操作列例外：保持左对齐，给 Dropdown 向右(right-top)弹出留出空间，
+ * 否则按钮居中后右侧空间被压缩，菜单会翻到左侧。
+ * 特异性需高于 `.centered td`，故用 `.centered td.cellActionsCol`。
+ */
+.centered th.cellActionsCol,
+.centered td.cellActionsCol {
+  text-align: left;
+}
+
+/* 描述列：文字左对齐（列位置不变），长文本左对齐更易读 */
+.centered td.cellDesc {
+  text-align: left;
+}
+
+/* 描述：适度列宽，内容自适应行高，完整展示 */
+.cellDesc {
+  min-width: 180px;
+  max-width: 320px;
+  word-break: break-word;
+  white-space: normal;
+}
+
+/* Tables / 下游：允许换行展示完整内容 */
+.cellList {
+  min-width: 70px;
+  max-width: 150px;
+  word-break: break-word;
+  white-space: normal;
+}
+
+/* Skill ID 列：允许换行展示完整内容 */
+.cellId {
+  min-width: 70px;
+  max-width: 140px;
+  word-break: break-all;
+  white-space: normal;
+}
+
+/* 状态、版本、发布时间、来源、操作列：允许换行 */
+.cellNoWrap {
+  min-width: 70px;
+  max-width: 140px;
+  word-break: break-word;
+  white-space: normal;
+}
+
+/*
+ * 操作列：固定预留右侧空间，让 Dropdown 始终向右展开且不贴边/不翻到左侧。
+ */
+.cellActionsCol {
+  width: 168px;
+  min-width: 168px;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.cellActions {
+  display: inline-flex;
+  gap: var(--s-2);
+  white-space: nowrap;
+  flex-wrap: wrap;
+}
+
+/*
+ * 「公共」徽标：系统自带公共 skill（如 dashboard-report）在 Skill ID 旁显示。
+ * 蓝色调与「已下线」橙色区分，暗示"无需授权、默认全员可用"。
+ */
+.publicBadge {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 6px;
+  padding: 1px 6px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #1d6bff;
+  background: rgba(29, 107, 255, 0.08);
+  border: 1px solid rgba(29, 107, 255, 0.24);
+  border-radius: 9999px;
+  white-space: nowrap;
+}

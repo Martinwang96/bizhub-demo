@@ -1,0 +1,242 @@
+.picker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: var(--s-4);
+  border: 1px dashed var(--line);
+  border-radius: var(--r-md);
+  background: var(--bg-soft, #F6F8FB);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+}
+
+.title {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.sourceSwitch {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  background: var(--card);
+}
+
+.sourceBtn {
+  padding: 6px 14px;
+  font-size: var(--fs-sm);
+  background: transparent;
+  border: 0;
+  color: var(--sub);
+  cursor: pointer;
+  font-weight: 600;
+  transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+
+.sourceBtn:not(.sourceBtnActive):hover {
+  color: var(--primary);
+  background: rgba(31, 107, 255, 0.06);
+}
+
+.sourceBtnActive {
+  background: var(--primary);
+  color: #fff;
+}
+
+.row {
+  display: flex;
+  gap: var(--s-2);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.input {
+  flex: 1 1 220px;
+  min-width: 200px;
+  height: var(--control-h);
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--text);
+  font-size: var(--fs-sm);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.btnGhost,
+.btnText,
+.btnPrimary {
+  height: var(--control-h);
+  padding: 0 14px;
+  border-radius: var(--r-sm);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+}
+
+.btnGhost {
+  background: var(--card);
+  border-color: var(--line);
+  color: var(--text);
+}
+
+.btnGhost:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.btnGhost:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btnText {
+  background: transparent;
+  border-color: transparent;
+  color: var(--sub);
+}
+
+.btnText:hover {
+  color: var(--primary);
+}
+
+.btnPrimary {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.btnPrimary:hover {
+  background: var(--primary-strong, #0F3FA8);
+}
+
+.btnPrimary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.preview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: var(--s-3);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+}
+
+.previewHead {
+  font-size: var(--fs-sm);
+  color: var(--text);
+}
+
+.previewTitle code,
+.previewTitle strong {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.metricsRow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--s-2);
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 4px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-xs);
+  background: var(--bg-soft, #F6F8FB);
+}
+
+.metricNum {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--primary);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.metricLabel {
+  font-size: 11px;
+  color: var(--sub);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.details {
+  font-size: var(--fs-sm);
+}
+
+.details > summary {
+  cursor: pointer;
+  color: var(--primary);
+  font-weight: 600;
+  user-select: none;
+}
+
+.detailsBody {
+  margin-top: var(--s-2);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.detailLine {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.detailLabel {
+  font-weight: 600;
+  color: var(--sub);
+  min-width: 64px;
+  flex-shrink: 0;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  background: rgba(31, 107, 255, 0.08);
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 999px;
+}
+
+.muted {
+  color: var(--sub);
+  font-size: 12px;
+}
+
+.confirmRow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin-top: 4px;
+}
+
+.confirmHint {
+  font-size: 12px;
+  color: var(--sub);
+}

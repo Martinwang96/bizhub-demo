@@ -1,0 +1,47 @@
+/* 申请页主容器：底部 Sticky 76px + Tab Bar 56px + safe-area。
+   预留底部内边距，避免内容被双层 fixed 遮挡。 */
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+  padding:
+    var(--s-4)
+    var(--s-4)
+    calc(56px + 76px + env(safe-area-inset-bottom, 0px) + var(--s-4));
+  background: var(--bg);
+  min-height: 100dvh;
+}
+
+/* —— Toast：浮于所有内容上层（含 Sticky 与 TabBar），居中下方 —— */
+.toastRoot {
+  position: fixed;
+  inset: auto 0 calc(56px + 76px + env(safe-area-inset-bottom, 0px) + var(--s-3)) 0;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  z-index: var(--z-modal);
+}
+
+.toast {
+  pointer-events: auto;
+  min-width: 200px;
+  max-width: calc(100% - 32px);
+  padding: var(--s-3) var(--s-4);
+  border-radius: var(--r-md);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  box-shadow: var(--shadow-md);
+  color: #fff;
+  text-align: center;
+}
+
+.toastSuccess { background: var(--accent); }
+.toastError { background: var(--danger); }
+.toastWarn { background: var(--warn); color: var(--text); }
+.toastInfo { background: var(--text); }
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    transition-duration: 0.01ms;
+  }
+}

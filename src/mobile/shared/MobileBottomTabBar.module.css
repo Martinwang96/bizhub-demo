@@ -1,0 +1,96 @@
+.bar {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: var(--z-fab);
+  display: flex;
+  align-items: stretch;
+  height: calc(56px + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: var(--card);
+  border-top: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+
+.item {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  height: 56px;
+  padding: 0 var(--s-1);
+  background: transparent;
+  border: none;
+  font: inherit;
+  color: var(--muted);
+  cursor: pointer;
+  text-decoration: none; /* 兼容 <a>（Link）渲染时不出现下划线 */
+  transition: color var(--t-fast) var(--ease);
+}
+
+.item:visited,
+.item:link {
+  color: var(--muted); /* 覆盖 <a> 默认蓝色 */
+}
+
+.itemActive,
+.itemActive:visited,
+.itemActive:link {
+  color: var(--primary);
+}
+
+.item:hover:not(:disabled) {
+  color: var(--sub);
+}
+
+.item:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+  border-radius: var(--r-sm);
+}
+
+.iconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 24px;
+  border-radius: var(--r-full);
+  transition:
+    background var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+
+.iconWrap svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.label {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+
+.itemActive .iconWrap {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.itemDisabled {
+  color: var(--muted);
+  cursor: not-allowed;
+  opacity: var(--disabled-opacity);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item,
+  .iconWrap {
+    transition-duration: 0.01ms;
+  }
+}

@@ -1,0 +1,70 @@
+/* MobileBackToChatButton —— 移动端两端共享的「返回对话」按钮。
+   ghost 风格图标按钮，hover 主色描边；尺寸与 admin header 的 ghost btn 对齐。 */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-1);
+  height: 32px;
+  padding: 0 var(--s-2);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--sub);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.btn:hover {
+  background: var(--hover-soft);
+  border-color: rgba(var(--primary-rgb), 0.24);
+  color: var(--primary);
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.btn:active {
+  transform: scale(var(--press-scale));
+}
+
+.btn svg {
+  flex-shrink: 0;
+}
+
+/* 仅图标紧凑模式：宽 32px，与 admin header 的 ghost btn 等高 */
+.compact {
+  width: 32px;
+  padding: 0;
+  gap: 0;
+}
+
+.compact .label {
+  display: none;
+}
+
+/* 尺寸变体：sm（默认 32×32）/ md（36×36，与 BizKnowledge headerIconBtn 对齐） */
+.md {
+  height: 36px;
+}
+
+.md.compact {
+  width: 36px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition-duration: 0.01ms;
+  }
+}

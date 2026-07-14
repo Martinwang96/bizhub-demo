@@ -1,0 +1,740 @@
+/* ===== Skill Hub 移动端 · 历史页样式 ===== */
+
+/* 主容器：底部 76 + 56 TabBar + safe-area。
+   与 apply / review / skills 页保持一致的 padding 算法。 */
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding:
+    var(--s-2)
+    var(--s-4)
+    calc(56px + 76px + env(safe-area-inset-bottom, 0px) + var(--s-4));
+  background: var(--bg);
+  min-height: 100dvh;
+}
+
+/* 顶部分段控件已抽取至 mobile/shared/MobileSegmentTabs */
+
+/* ───────────────────────── 通用 ───────────────────────── */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.errorNotice {
+  padding: var(--s-3) var(--s-4);
+  background: var(--danger-soft, #ffece8);
+  color: var(--danger);
+  border-radius: var(--r-md);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s-8) var(--s-4);
+  background: var(--card);
+  border: 1px dashed var(--line);
+  border-radius: var(--r-lg);
+  text-align: center;
+}
+
+.emptyTitle {
+  margin: 0 0 var(--s-2);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.emptyDesc {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  max-width: 240px;
+  line-height: 1.6;
+}
+
+.skeletonStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.skeletonCard {
+  height: 96px;
+  border-radius: var(--r-lg);
+  background: linear-gradient(
+    90deg,
+    var(--surface-2, #f2f3f9) 0%,
+    var(--card) 50%,
+    var(--surface-2, #f2f3f9) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShine 1.4s linear infinite;
+}
+
+@keyframes skeletonShine {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+/* ───────────────────────── Versions 段：技能列表 ───────────────────────── */
+.searchWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: var(--s-3);
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  height: 44px;
+  padding: 0 var(--s-3) 0 calc(var(--s-3) + 22px);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--card);
+  color: var(--text);
+  font-size: var(--fs-sm);
+  outline: none;
+  transition:
+    border-color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.searchInput:focus {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-focus, 0 0 0 3px rgba(0, 82, 217, 0.15));
+}
+
+.searchInput::placeholder {
+  color: var(--muted);
+}
+
+.skillList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.skillRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  width: 100%;
+  padding: var(--s-4);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-xs);
+  cursor: pointer;
+  text-align: left;
+  transition:
+    border-color var(--t-fast) var(--ease),
+    background var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.skillRow:hover {
+  background: var(--hover-soft, var(--surface-2));
+  border-color: var(--primary);
+}
+
+.skillRow:active {
+  transform: scale(0.99);
+}
+
+.skillRowMain {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  min-width: 0;
+}
+
+.skillRowId {
+  font-family: 'SF Mono', 'Roboto Mono', Menlo, Monaco, Consolas, monospace;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.skillRowMeta {
+  font-size: var(--fs-xs, 12px);
+  color: var(--muted);
+}
+
+.skillRowChevron {
+  flex: none;
+  color: var(--muted);
+}
+
+/* ───────────────────────── Versions 段：详情 ───────────────────────── */
+.detailHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.backBtn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  background: var(--card);
+  color: var(--primary);
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.backBtn:hover {
+  background: var(--primary-soft, #e8f3ff);
+}
+
+.detailTitle {
+  margin: 0;
+  font-family: 'SF Mono', 'Roboto Mono', Menlo, Monaco, Consolas, monospace;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+}
+
+.versionList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.versionCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-4);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-xs);
+}
+
+.versionCardCurrent {
+  border-left: 4px solid var(--primary);
+}
+
+.versionHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-2);
+}
+
+.versionLabel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  min-width: 0;
+}
+
+.versionNumber {
+  margin: 0;
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--text);
+}
+
+.versionBadge {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 var(--s-2);
+  background: var(--primary-soft, #e8f3ff);
+  color: var(--primary);
+  border-radius: var(--r-full);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.versionTime {
+  flex: none;
+  text-align: right;
+  font-size: var(--fs-xs, 12px);
+  color: var(--muted);
+  line-height: 1.4;
+  white-space: pre-line;
+}
+
+.versionPublisher {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--sub, var(--muted));
+}
+
+.versionPublisherStrong {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.rollbackBtn {
+  margin-top: var(--s-2);
+  width: 100%;
+  height: 40px;
+  border: 1px solid var(--primary);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--primary);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.rollbackBtn:hover:not(:disabled) {
+  background: var(--primary-soft, #e8f3ff);
+}
+
+.rollbackBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ───────────────────────── Audit 段：工具栏 ───────────────────────── */
+.auditToolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+}
+
+.filterBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  height: 36px;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--text);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.filterBtn:hover {
+  background: var(--hover-soft, var(--surface-2));
+}
+
+.filterBtnIcon {
+  flex: none;
+}
+
+.filterCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: var(--r-full);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.viewToggle {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px;
+  background: var(--surface-2, #f2f3f9);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+}
+
+.viewToggleBtn {
+  height: 28px;
+  padding: 0 var(--s-3);
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: var(--fs-xs, 12px);
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+
+.viewToggleBtnActive {
+  background: var(--card);
+  color: var(--primary);
+  box-shadow: var(--shadow-xs);
+}
+
+/* ───────────────────────── Audit 段：列表卡 ───────────────────────── */
+.auditList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.auditCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-4);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-xs);
+}
+
+.auditCardHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-2);
+}
+
+.actionBadge {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 var(--s-2);
+  background: var(--surface-2, #f2f3f9);
+  color: var(--primary);
+  border-radius: var(--r-xs, 4px);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.actionBadgeWarn {
+  background: var(--warn-soft, #fff7e6);
+  color: var(--warn, #fa8c16);
+}
+
+.actionBadgeDanger {
+  background: var(--danger-soft, #ffece8);
+  color: var(--danger);
+}
+
+.auditTime {
+  font-size: var(--fs-xs, 12px);
+  color: var(--muted);
+}
+
+.auditSkill {
+  margin: 0;
+  font-family: 'SF Mono', 'Roboto Mono', Menlo, Monaco, Consolas, monospace;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.auditOperator {
+  font-size: var(--fs-xs, 12px);
+  color: var(--muted);
+}
+
+.auditDetail {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--sub, var(--muted));
+  font-style: italic;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ───────────────────────── Audit 段：时间线 ───────────────────────── */
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  margin: 0;
+  padding: var(--s-3) 0 var(--s-3) var(--s-5);
+  border-left: 2px solid var(--line);
+  list-style: none;
+}
+
+.timelineItem {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.timelineDot {
+  position: absolute;
+  left: calc(-1 * var(--s-5) - 1px);
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: var(--r-full);
+  background: var(--primary);
+  box-shadow: 0 0 0 4px var(--bg);
+}
+
+.timelineDotMuted {
+  background: var(--muted);
+}
+
+.timelineDotDanger {
+  background: var(--danger);
+}
+
+.timelineLine {
+  margin: 0;
+  font-size: var(--fs-md);
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.timelineSkill {
+  font-family: 'SF Mono', 'Roboto Mono', Menlo, Monaco, Consolas, monospace;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.timelineActionDanger {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.timelineMeta {
+  font-size: var(--fs-xs, 12px);
+  color: var(--muted);
+}
+
+/* ───────────────────────── Filter Sheet ───────────────────────── */
+.filterSheet {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  padding: var(--s-2) 0 var(--s-3);
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.filterLabel {
+  font-size: var(--fs-xs, 12px);
+  font-weight: 700;
+  color: var(--sub, var(--muted));
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.filterField {
+  width: 100%;
+  height: 44px;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--text);
+  font-size: var(--fs-sm);
+  outline: none;
+  transition:
+    border-color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.filterField:focus {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-focus, 0 0 0 3px rgba(0, 82, 217, 0.15));
+}
+
+.filterRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-3);
+}
+
+.filterFooter {
+  display: flex;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-4) var(--s-3);
+}
+
+.sheetCancelBtn {
+  flex: 1;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--text);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.sheetCancelBtn:hover:not(:disabled) {
+  background: var(--hover-soft, var(--surface-2));
+}
+
+.sheetConfirmBtn {
+  flex: 1;
+  height: 44px;
+  border: none;
+  border-radius: var(--r-sm);
+  background: var(--primary);
+  color: #fff;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.sheetConfirmBtn:hover:not(:disabled) {
+  background: var(--primary-strong, #003e9c);
+}
+
+.sheetConfirmBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ───────────────────────── Rollback Sheet ───────────────────────── */
+.rollbackSheet {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: var(--s-2) 0;
+  text-align: center;
+}
+
+.rollbackDesc {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--sub, var(--muted));
+  line-height: 1.6;
+}
+
+.rollbackTarget {
+  font-family: 'SF Mono', 'Roboto Mono', Menlo, Monaco, Consolas, monospace;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.rollbackFooter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-4) var(--s-3);
+}
+
+.rollbackConfirmBtn {
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: var(--r-md);
+  background: var(--danger);
+  color: #fff;
+  font-size: var(--fs-md);
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition:
+    background var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.rollbackConfirmBtn:hover:not(:disabled) {
+  background: var(--danger-strong, #c72e1f);
+}
+
+.rollbackConfirmBtn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.rollbackConfirmBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.rollbackCancelBtn {
+  width: 100%;
+  height: 44px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: var(--r-sm);
+  transition: background var(--t-fast) var(--ease);
+}
+
+.rollbackCancelBtn:hover:not(:disabled) {
+  background: var(--hover-soft, var(--surface-2));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skillRow,
+  .backBtn,
+  .filterBtn,
+  .filterField,
+  .searchInput,
+  .rollbackBtn,
+  .sheetCancelBtn,
+  .sheetConfirmBtn,
+  .rollbackConfirmBtn,
+  .rollbackCancelBtn,
+  .viewToggleBtn {
+    transition-duration: 0.01ms;
+  }
+  .skeletonCard {
+    animation: none;
+  }
+}

@@ -1,0 +1,281 @@
+/* MobileStatsToolbar — 按 DESIGN.md 4px Grid 排布
+   颜色 / 圆角 / 阴影 / 间距 / 过渡均走 tokens.css。常驻五行，不折叠。 */
+
+.bar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: var(--s-4);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-xs);
+}
+
+@media (max-width: 640px) {
+  .bar {
+    padding: var(--s-3);
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+
+/* 单字段独占整行（日期 / 快捷 / 检索 各分一行） */
+.rowFull {
+  display: flex;
+  width: 100%;
+}
+
+.fieldFull {
+  flex: 1 1 100%;
+  min-width: 0;
+}
+
+/* ─── segmented ─── */
+.segGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.segLabel {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--sub);
+  letter-spacing: 0.02em;
+}
+
+.segment {
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+  height: 32px;
+  padding: 3px;
+  gap: 0;
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.segmentThumb {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 3px;
+  width: calc((100% - 6px) / var(--seg-count, 3));
+  background: var(--card);
+  border-radius: 5px;
+  box-shadow: var(--shadow-xs);
+  transform: translateX(calc(var(--seg-index, 0) * 100%));
+  transition: transform var(--t-fast) var(--ease);
+  pointer-events: none;
+}
+
+.segmentBtn {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 0;
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--sub);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: color var(--t-fast) var(--ease);
+}
+
+.segmentBtn:hover:not(.segmentBtnActive) {
+  color: var(--text);
+}
+
+.segmentBtnActive {
+  color: var(--text);
+  cursor: default;
+}
+
+/* ─── 通用字段（label + 控件） ─── */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.fieldLabel {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--sub);
+  letter-spacing: 0.02em;
+}
+
+/* 通用 input（检索） */
+.input {
+  height: 36px;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-md);
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  transition:
+    border-color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+}
+
+.input:hover {
+  border-color: rgba(var(--primary-rgb), 0.4);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: var(--shadow-focus);
+}
+
+/* ─── 行 2：开始 — 至 — 结束 三段式 ─── */
+.dateDualField {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  width: 100%;
+}
+
+.dateHalf {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.dateSep {
+  flex-shrink: 0;
+  color: var(--sub);
+  font-size: var(--fs-sm);
+}
+
+/* 单 DatePicker / SelectInput 输入框样式（统一 36px、token 化） */
+.dateHalf :global(.t-input),
+.dateHalf :global(.t-input:hover),
+.dateHalf :global(.t-input--focused),
+.dateHalf :global(.t-input.t-input--focused),
+.quickField :global(.t-input),
+.quickField :global(.t-input:hover),
+.quickField :global(.t-input--focused),
+.quickField :global(.t-input.t-input--focused) {
+  height: 36px !important;
+  min-height: 36px !important;
+  background: var(--card) !important;
+  border-color: var(--line-strong) !important;
+  color: var(--text) !important;
+  border-radius: var(--r-sm) !important;
+  box-sizing: border-box;
+}
+
+.dateHalf :global(.t-input__inner),
+.dateHalf :global(.t-input__suffix),
+.quickField :global(.t-input__inner),
+.quickField :global(.t-input__suffix) {
+  color: var(--text) !important;
+  font-size: var(--fs-sm) !important;
+}
+
+.dateHalf :global(.t-input__inner::placeholder),
+.quickField :global(.t-input__inner::placeholder) {
+  color: var(--muted) !important;
+  opacity: 1;
+}
+
+/* SelectInput 容器（行 3 快捷下拉） */
+.quickField {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  width: 100%;
+}
+
+/* ─── 行 5：三按钮等宽 ─── */
+.actionsRowEqual {
+  display: flex;
+  gap: var(--s-2);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 var(--s-4);
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
+  font: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+
+.btn:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.btnEqual {
+  flex: 1 1 0;
+  min-width: 0;
+  padding-left: var(--s-2);
+  padding-right: var(--s-2);
+}
+
+.btnGhost {
+  border-color: var(--line-strong);
+  background: transparent;
+  color: var(--sub);
+}
+
+.btnGhost:hover:not(:disabled) {
+  background: var(--hover-soft);
+  border-color: rgba(var(--primary-rgb), 0.24);
+  color: var(--primary);
+}
+
+.btnPrimary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btnPrimary:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.btnPrimary:active:not(:disabled) {
+  background: var(--primary-press);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .segmentThumb,
+  .segmentBtn,
+  .input,
+  .btn {
+    transition-duration: 0.01ms;
+  }
+}

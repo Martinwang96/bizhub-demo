@@ -1,0 +1,209 @@
+/* shared 薄壳：去除业务侧装饰类带来的"双层套件"，
+   视觉只由内层 tdesign .t-input 一层呈现。
+
+   说明：
+   - .root  通用规则，用于 SelectInput / DatePicker / DateRangePicker。
+   - .rangeRoot  专属于 DateRangePicker 的额外覆盖（解决 RangeInput 双层、
+     "至" 分隔符、suffix 绝对定位等问题），不污染单输入控件。 */
+.root {
+  display: inline-block;
+  width: 100%;
+  min-width: 0;
+  /* 强制覆盖业务侧通过 className 传入的装饰，避免双层边框 */
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  font-family: inherit;
+}
+
+/* SelectInput 的中间层 wrap：tdesign 默认会带 padding/border/背景，
+   不 reset 就会和内部 .t-input 形成"双层套框"。 */
+.root :global(.t-select-input__wrap) {
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.root :global(.t-input) {
+  width: 100%;
+  height: var(--control-h);
+  padding: 0 var(--s-3) !important;
+  border-color: var(--line-strong);
+  border-radius: var(--r-sm);
+  background: transparent !important;
+  color: var(--text);
+  box-shadow: none !important;
+  font-family: inherit;
+}
+
+.root :global(.t-input:hover),
+.root :global(.t-input:focus),
+.root :global(.t-input--focused),
+.root :global(.t-input.t-input--focused) {
+  border-color: var(--primary);
+  box-shadow: none !important;
+}
+
+/* 单输入控件的 .t-input__inner：清掉所有"外加"装饰（包括上层 .formRow input 等
+   后代选择器误命中的 border / 圆角 / padding / 背景），外观完全由 .t-input 接管。 */
+.root :global(.t-input__inner) {
+  width: 100%;
+  min-height: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--text);
+  font-family: inherit;
+  font-size: var(--fs-md);
+  outline: none !important;
+}
+
+.root :global(.t-input__inner::placeholder) {
+  color: var(--sub);
+}
+
+.root :global(.t-input__suffix) {
+  color: var(--muted);
+}
+
+/* ────────────────────────────────────────────────────────────
+ * RangeInput 专属（仅 DateRangePicker 使用），与单输入控件完全隔离
+ * ──────────────────────────────────────────────────────────── */
+.rangeRoot :global(.t-range-input) {
+  width: 100%;
+  height: var(--control-h);
+  border-color: var(--line-strong);
+  border-radius: var(--r-sm);
+  background: transparent !important;
+  color: var(--text);
+  box-shadow: none !important;
+  font-family: inherit;
+}
+
+.rangeRoot :global(.t-range-input:hover),
+.rangeRoot :global(.t-range-input.t-is-focused) {
+  border-color: var(--primary);
+  box-shadow: none !important;
+}
+
+.rangeRoot :global(.t-range-input__suffix) {
+  color: var(--muted);
+}
+
+/* RangeInput 内部两个 t-input：去边框/背景/阴影，避免双层框；不动尺寸 */
+.rangeRoot :global(.t-range-input__inner .t-input),
+.rangeRoot :global(.t-range-input__inner .t-input:hover),
+.rangeRoot :global(.t-range-input__inner .t-input.t-is-focused),
+.rangeRoot :global(.t-range-input__inner .t-input--focused) {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* 中间 "至" 分隔符：只占文字宽度，不撑高 */
+.rangeRoot :global(.t-range-input__inner-separator) {
+  display: inline-flex;
+  align-items: center;
+  height: auto;
+  line-height: 1;
+  color: var(--muted);
+  margin: 0 8px;
+}
+
+/* 所有 suffix（下拉箭头、清除按钮、focus 装饰条等）一律绝对定位，
+   从主行盒里"剥离"，避免它们的出现/消失影响日期文字位置。 */
+.rangeRoot :global(.t-range-input__suffix),
+.rangeRoot :global(.t-range-input .t-input__suffix-clear),
+.rangeRoot :global(.t-range-input > .t-fake-arrow) {
+  position: absolute !important;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  margin: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 锁死边框宽度，避免 hover/focus 切换 1px↔2px 改变内容净高 */
+.rangeRoot :global(.t-range-input),
+.rangeRoot :global(.t-range-input:hover),
+.rangeRoot :global(.t-range-input.t-is-focused),
+.rangeRoot :global(.t-range-input.t-is-focused:hover) {
+  border-width: 1px !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+ * solid surface：在白底卡片中作为「明显的输入框」呈现
+ * ──────────────────────────────────────────────────────────── */
+.solid :global(.t-input),
+.solid :global(.t-input:hover),
+.solid :global(.t-input:focus),
+.solid :global(.t-input--focused),
+.solid :global(.t-input.t-input--focused) {
+  background: var(--card) !important;
+}
+
+.solid :global(.t-range-input),
+.solid :global(.t-range-input:hover),
+.solid :global(.t-range-input.t-is-focused),
+.solid :global(.t-range-input__inner .t-input),
+.solid :global(.t-range-input__inner .t-input:hover),
+.solid :global(.t-range-input__inner .t-input.t-is-focused) {
+  background: var(--card) !important;
+}
+
+/* ────────────────────────────────────────────────────────────
+ * SelectInput 自定义 panel
+ * ──────────────────────────────────────────────────────────── */
+.panel {
+  min-width: 180px;
+  max-height: 280px;
+  overflow: auto;
+  padding: var(--s-1);
+  border-radius: var(--r-sm);
+  background: var(--card);
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: var(--control-h);
+  padding: 0 var(--s-3);
+  border: none;
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-md);
+  text-align: left;
+  cursor: pointer;
+}
+
+.option:hover,
+.optionActive {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.option:focus-visible {
+  outline: none;
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.option:disabled {
+  color: var(--muted);
+  cursor: not-allowed;
+  opacity: var(--disabled-opacity);
+}

@@ -1,0 +1,23 @@
+/* BrandLogo 容器样式 — 严格遵循 DESIGN.md components.brandLogo */
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary);
+  color: #FFFFFF;
+  flex-shrink: 0;
+  /* 不使用渐变 / 不使用发光阴影；仅可由父容器额外补 shadow-xs */
+}
+
+.sm {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--r-sm);
+}
+
+.lg {
+  width: 96px;
+  height: 96px;
+  border-radius: var(--r-2xl);
+}

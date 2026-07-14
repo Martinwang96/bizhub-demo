@@ -1,0 +1,118 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-2);
+}
+
+@media (max-width: 380px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.skeletonWrap {
+  padding: var(--s-3) var(--s-1);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: 12px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-xs);
+}
+
+.cardToday {
+  background: var(--primary-soft);
+  border-color: rgba(var(--primary-rgb), 0.16);
+}
+
+.cardHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-2);
+}
+
+.cardTitle {
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+.cardHint {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.cardHintActive {
+  color: var(--primary);
+}
+
+.cells {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cell {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-2);
+  min-width: 0;
+  padding: 4px 0;
+  border-top: 1px dashed var(--line);
+}
+
+.cell:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.cellLabel {
+  flex: 0 0 auto;
+  font-size: var(--fs-xs);
+  color: var(--sub);
+  letter-spacing: 0.02em;
+}
+
+.cellNum {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: right;
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+}
+
+.cellNumLg {
+  font-size: clamp(var(--fs-lg), 5vw, var(--fs-xl));
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.cellPrimary {
+  padding-bottom: 2px;
+}
+
+.cellPrimary .cellLabel {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: var(--fs-xs);
+}
+
+.cardToday .cellPrimary .cellNum {
+  color: var(--primary);
+}

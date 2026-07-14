@@ -1,0 +1,1119 @@
+.tab {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+
+.chipsBar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--bg-soft, #F6F8FB);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+}
+
+.chipsLabel {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sub);
+}
+
+.chipsScroll {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  flex: 1;
+  min-width: 0;
+  padding-bottom: 2px;
+  scrollbar-width: thin;
+}
+
+.chipsScroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.chipsScroll::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 3px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--text);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+}
+
+.chip:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.chip:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.chipNew {
+  flex-shrink: 0;
+  margin-left: auto;
+  background: var(--card);
+  border-style: solid;
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.chipNew:hover:not(:disabled) {
+  background: rgba(0, 82, 217, 0.06);
+}
+
+.chipDelete {
+  flex-shrink: 0;
+  background: var(--card);
+  border-style: solid;
+  border-color: var(--danger, #DC2626);
+  color: var(--danger, #DC2626);
+}
+
+.chipDelete:hover:not(:disabled) {
+  background: rgba(220, 38, 38, 0.06);
+  border-color: var(--danger, #DC2626);
+  color: var(--danger, #DC2626);
+}
+
+.chipActive {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.chipActive:hover {
+  /* 激活态保持蓝底；hover 不再变浅，提示「点击 × 取消」 */
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.chipCheck {
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.chipClose {
+  margin-left: 4px;
+  padding-left: 6px;
+  border-left: 1px solid rgba(255, 255, 255, 0.35);
+  font-size: 14px;
+  line-height: 1;
+  opacity: 0.85;
+}
+
+.chipBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 18px;
+  padding: 0 6px;
+  background: rgba(0, 82, 217, 0.15);
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 9px;
+  font-variant-numeric: tabular-nums;
+}
+
+.chipActive .chipBadge {
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+
+.memberToolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  margin-bottom: var(--s-3);
+  background: var(--bg-soft, #F6F8FB);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+}
+
+.memberSearchWrap {
+  flex: 1 1 260px;
+  max-width: 360px;
+  display: flex;
+}
+
+.addMemberPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px dashed var(--line);
+  border-radius: var(--r-sm);
+  background: var(--bg-soft, #F6F8FB);
+  margin-bottom: var(--s-3);
+}
+
+.memberSelectBox {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.memberDropdown {
+  display: flex;
+  flex-direction: column;
+  max-height: 220px;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card);
+}
+
+.memberDropdownEmpty {
+  padding: 10px;
+  color: var(--sub);
+  font-size: var(--fs-sm);
+  text-align: center;
+}
+
+.memberOption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+}
+
+.memberOption:last-child {
+  border-bottom: 0;
+}
+
+.memberOption:hover {
+  background: rgba(31, 107, 255, 0.06);
+}
+
+.memberOption small {
+  color: var(--sub);
+}
+
+.selectedMembersBox {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 10px;
+  border: 1px solid rgba(0, 82, 217, 0.28);
+  border-radius: var(--r-sm);
+  background: rgba(0, 82, 217, 0.06);
+}
+
+.selectedMembersHeader {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.selectedMemberChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.selectedMemberChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border: 1px solid var(--primary);
+  border-radius: var(--r-sm);
+  background: var(--primary);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.selectedMemberChip:hover {
+  background: var(--primary-strong, #0F3FA8);
+}
+
+.addMemberActions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ── 成员表格（mockup 风格） ── */
+.memberTableWrap {
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  max-height: 320px;
+  overflow: auto;
+}
+
+.memberTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: var(--fs-sm);
+}
+
+.memberTable thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: transparent;
+  color: var(--sub);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.memberTable tbody td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+
+.memberTable tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.memberRow {
+  transition: background var(--t-fast) var(--ease);
+}
+
+.memberRow:hover {
+  background: rgba(0, 82, 217, 0.04);
+}
+
+.colAvatar {
+  width: 48px;
+}
+
+.colInherit {
+  width: 130px;
+}
+
+.colActions {
+  width: 90px;
+  text-align: right;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--r-sm);
+  background: rgba(0, 82, 217, 0.12);
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.memberMain {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  color: var(--text);
+}
+
+.memberMain:hover .memberLogin {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.memberLogin {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.memberInheritTag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  color: var(--primary);
+  background: rgba(0, 82, 217, 0.1);
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.empty {
+  padding: 16px;
+  text-align: center;
+  color: var(--sub);
+  font-size: var(--fs-sm);
+}
+
+.input {
+  width: 100%;
+  flex: none;
+  height: 36px;
+  box-sizing: border-box;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  font-size: var(--fs-sm);
+  color: var(--text);
+}
+
+/* 仅 border-color 表达聚焦，去掉 4px primary-ring halo（视觉上避免组名/描述/成员搜索框出现一圈蓝/橙边） */
+.input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: none;
+}
+
+.textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  font-size: var(--fs-sm);
+  resize: vertical;
+  background: var(--card);
+  color: var(--text);
+}
+
+.btnPrimary,
+.btnGhost,
+.btnText,
+.btnDanger {
+  height: var(--control-h);
+  padding: 0 14px;
+  border-radius: var(--r-sm);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+}
+
+.btnPrimary {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.btnPrimary:hover {
+  background: var(--primary-strong, #0F3FA8);
+}
+
+.btnPrimary:disabled,
+.btnGhost:disabled,
+.btnDanger:disabled,
+.btnText:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* 让 SectionCard 头部 actions 中的按钮与 title 行对齐（跳过 eyebrow 行高 + 间距） */
+.addMemberHeaderBtn {
+  margin-top: calc(var(--fs-xs) * 1.4 + var(--s-2));
+}
+
+.btnGhost {
+  background: var(--card);
+  border-color: var(--line);
+  color: var(--text);
+}
+
+.btnGhost:hover:not(:disabled) {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.btnText {
+  background: transparent;
+  border-color: transparent;
+  color: var(--sub);
+}
+
+.btnText:hover:not(:disabled) {
+  color: var(--danger, #DC2626);
+}
+
+.btnDanger {
+  background: transparent;
+  border-color: var(--danger, #DC2626);
+  color: var(--danger, #DC2626);
+}
+
+.btnDanger:hover:not(:disabled) {
+  background: var(--danger, #DC2626);
+  color: #fff;
+}
+
+/* ─── Dialog footer 按钮：与 DataAclPage 中「模拟 intent / 模拟 query」同款（透明底 + 主色描边/文字） ─── */
+.dialogBtnPrimary,
+.dialogBtnGhost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--control-h);
+  padding: 0 var(--s-3);
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+}
+
+.dialogBtnPrimary { background: var(--primary); color: #FFFFFF; border-color: var(--primary); }
+.dialogBtnPrimary:hover:not(:disabled) { background: var(--primary-hover, var(--primary-strong, #0F3FA8)); }
+.dialogBtnPrimary:active:not(:disabled) { transform: scale(var(--press-scale, 0.98)); }
+.dialogBtnPrimary:disabled,
+.dialogBtnGhost:disabled { opacity: var(--disabled-opacity, 0.55); cursor: not-allowed; }
+.dialogBtnPrimary:focus-visible,
+.dialogBtnGhost:focus-visible { outline: none; }
+
+.dialogBtnGhost {
+  background: transparent;
+  color: var(--primary);
+  border-color: var(--line-strong, var(--line));
+}
+.dialogBtnGhost:hover:not(:disabled) {
+  background: var(--hover-soft, rgba(15, 63, 168, 0.06));
+  border-color: rgba(var(--primary-rgb, 15, 63, 168), 0.24);
+}
+
+.muted {
+  color: var(--sub);
+  font-size: 12px;
+}
+
+.formHint {
+  color: var(--sub);
+  font-size: 12px;
+}
+
+.createForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.createActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.templateEditorStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+
+.rowScopeTemplateBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--line);
+}
+
+.rowScopeTemplateHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-3);
+}
+
+.rowScopeCount {
+  flex-shrink: 0;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(31, 107, 255, 0.1);
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.saveBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--s-3);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--line);
+}
+
+/* ============================================================
+   组列表表格（参考用户绑定 userTable 样式）
+   ============================================================ */
+.groupsListCanvas {
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.groupsTable {
+  width: 100%;
+  /* fixed 布局让每列 width: 20% 真实生效，5 列严格平均，
+     避免内容长短影响列宽（描述长、组名短也不会让两边失衡）。 */
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: var(--fs-md);
+}
+
+.groupsTable thead th {
+  padding: 10px 14px;
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  /* 列名居中（用户要求）；行内容仍保持各自语义对齐（组名/描述靠左、操作靠右）。 */
+  text-align: center;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--line);
+}
+
+.groupsTable tbody td {
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+  color: var(--text);
+  vertical-align: middle;
+}
+
+.groupsTable tbody tr {
+  background: transparent;
+}
+
+.groupRowActive .groupNameText {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* 列宽策略（用户要求）：5 列严格平均 = 各 20%。
+   table-layout: fixed 保证生效；列名居中（thead 已统一）；行内容默认靠左，
+   操作列保持右对齐。 */
+.gColName,
+.gColDesc,
+.gColMembers,
+.gColCounts,
+.gColActions {
+  width: 20%;
+}
+/* 组名 / 描述 / 操作：标题 + 内容统一居中（用户要求，列对齐口径一致）。
+   关键：这些类同时作用于 thead th 和 tbody td，在列类里设 text-align
+   才能让「标题文字」和「单元格内容」同列同对齐，避免出现
+   「标题居中、内容左/右对齐」的错位。 */
+.gColName {
+  text-align: center;
+}
+.gColDesc {
+  /* 描述允许在 20% 内撑满，超长则按 gDescText 截断 */
+  overflow: hidden;
+  text-align: center;
+}
+.gColActions {
+  /* 操作列：表头「操作」居中，内容里的 .opsRow 用 inline-flex 会跟随 td 的
+     text-align 居中放置（inline-level box）。 */
+  text-align: center;
+}
+
+/* 单按钮包裹（成员列）：宽度 = 共享权限列单个按钮宽度。
+   共享权限列宽 = 表格 20%；列内 padding 14×2 = 28px；3 等分 + 2 个 6px gap →
+   每个按钮宽度 ≈ (列内容宽 - 12) / 3。
+   由于成员列与共享权限列 width 相等（都是 20%），且成员列也保留默认 14×2
+   的 td padding，所以"成员单按钮"的 wrap 直接复用同一公式，并居中放置在
+   单元格里（视觉上和共享权限按钮组的第一颗对齐时不强求 —— 列名居中后
+   按钮也居中比较协调）。 */
+.singleSummaryWrap {
+  display: block;
+  /* 与共享权限列里单个按钮严格等宽：summaryGroup max-width: 240px，
+     gap: 6px × 2 = 12px；单按钮 = (240 - 12) / 3 = 76px。
+     之前用列宽百分比 calc((100% - 12px) / 3)，会随列宽变化漂移；
+     现在锁死 76px，与共享权限按钮组严丝合缝，且整体也跟着「缩短一点」。 */
+  width: 76px;
+  margin: 0 auto;
+}
+
+/* 操作列：与 userTable .colActions .opsRow 风格保持一致 */
+.opsRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.groupNameBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-md);
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+}
+
+.groupNameBtn:hover .groupNameText { color: var(--primary); }
+
+.groupNameText { display: inline; }
+
+/* 描述列文本：在固定 20% 列宽里撑满，超长截断 + 省略号；title 显示完整内容。
+   不再设置 max-width —— 由 td (table-layout: fixed) 控制宽度。 */
+.gDescText {
+  display: block;
+  color: var(--sub);
+  font-size: var(--fs-sm);
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.gMemberBadge {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 10px;
+  border-radius: 11px;
+  background: var(--surface-1);
+  color: var(--sub);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+
+/* "成员徽章"作为可点击展开触发器：保持原视觉 + 加 cursor / hover 强调 */
+.gExpandTrigger {
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--fs-xs);
+  font-weight: inherit;
+  transition: border-color var(--t-fast) var(--ease), background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+.gExpandTrigger:hover { border-color: var(--primary); color: var(--text); }
+.gMemberBadge.gExpandTrigger { border: 1px solid transparent; }
+.gMemberBadge.gExpandTrigger:hover { border-color: var(--primary); color: var(--text); }
+
+.gExpandCaret {
+  margin-left: 6px;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+/* 展开行：本身用柔和底（bg-soft），与下方 detailCell 一致，避免一个白条混在中间。 */
+.groupRowExpanded { background: var(--bg-soft, #F6F8FB); }
+.groupRowExpanded > td { border-bottom-color: transparent; }
+
+@media (max-width: 900px) {
+  .gColDesc { display: none; }
+  .groupsTable thead .gColDesc { display: none; }
+}
+
+@media (max-width: 700px) {
+  .gColCounts { display: none; }
+  .groupsTable thead .gColCounts { display: none; }
+}
+
+/* ============================================================
+   组列表行展开详情（GroupDetailInline）
+   ------------------------------------------------------------
+   背景策略：
+   - 展开行整体一个"柔和浅蓝灰底"（bg-soft），不要纯白也不要 surface-1
+     的中等灰；既与表格主体形成区分、又不显眼。
+   - 每个内部分区（成员 / 产品 / Skills / 行权限）不再用独立卡片白底
+     ——改为透明背景 + 顶部分隔线，避免出现"一个个白色色块"的拼贴感。
+   ============================================================ */
+.groupDetailRow > .groupDetailCell {
+  padding: 0;
+  background: var(--bg-soft, #F6F8FB);
+  border-bottom: 1px solid var(--line);
+}
+
+.groupDetailInline {
+  padding: var(--s-3) var(--s-4) var(--s-4);
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(280px, 1fr);
+  gap: var(--s-3) var(--s-4);
+}
+
+.detailSection {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: var(--s-2) 0 0;
+}
+
+/* 成员区、最终生效叶子区、行权限区跨满两列（信息密度高） */
+.detailSectionFull {
+  grid-column: 1 / -1;
+}
+
+.detailHeading {
+  margin: 0 0 var(--s-2);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detailCount {
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  padding: 0 8px;
+  border-radius: 9px;
+  background: var(--surface-1);
+  color: var(--sub);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+
+.detailEmpty {
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  padding: 4px 0;
+}
+
+/* 成员卡片网格：自适应 */
+.detailMemberGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 8px;
+}
+
+.detailMemberCard {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color var(--t-fast) var(--ease), background var(--t-fast) var(--ease);
+}
+.detailMemberCard:hover { border-color: var(--primary); background: var(--surface-1); }
+
+.detailMemberLogin {
+  font-size: var(--fs-sm);
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+/* 产品/Skill chips */
+.detailChipWrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.detailChip {
+  display: inline-flex;
+  align-items: center;
+  /* 放大 chip（用户要求）：高度 22 → 28，字号 xs → sm，
+     padding 横向 10 → 14，圆角 11 → 14（保持 height/2 的胶囊感），
+     最大宽度同步从 240 → 280 给中文长名（如「实时互动-工业能源版」）更舒展。 */
+  height: 28px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface-1);
+  color: var(--sub);
+  font-size: var(--fs-sm);
+  white-space: nowrap;
+  max-width: 280px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.detailChipSm {
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  padding: 0 8px;
+  border-radius: 9px;
+  background: var(--surface-1);
+  color: var(--sub);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+/* 行权限明细 */
+.detailRowScopeList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detailRowScopeItem {
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  padding: 8px 10px;
+  background: var(--card);
+}
+
+.detailRowScopeHead {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+.detailRowScopeTable {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text);
+  background: transparent;
+}
+
+.detailRowScopeMeta {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+
+.detailRowScopeEmpty {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+
+.detailRowScopeColumns {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.detailRowScopeColumns > li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.detailRowScopeColumns code {
+  font-size: var(--fs-xs);
+  color: var(--text);
+  background: var(--card);
+  padding: 1px 6px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+@media (max-width: 760px) {
+  .groupDetailInline { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   组编辑弹窗（GroupEditDialog）
+   ============================================================ */
+.dialogStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+
+.dialogSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-3) 0;
+  border-bottom: 1px dashed var(--line);
+}
+
+.dialogSection:last-of-type { border-bottom: 0; }
+
+.dialogSectionTitle {
+  margin: 0;
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--text);
+}
+
+.dialogFormRow {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--s-3);
+}
+
+@media (max-width: 720px) {
+  .dialogFormRow { grid-template-columns: 1fr; }
+}
+
+/*
+ * 共享权限外层壳：仅作为布局占位，去除 border / 背景 / padding，避免与内部各块（产品 / 层级 / Skill / 行权限）
+ * 自身的卡片边形成「框中框」视觉冗余；让 PermissionTree 直接铺在 .dialogBody 内，弹窗保持单一主滚动条。
+ */
+.dialogTreeBox {
+  /* 占位：保留为容器，但不绘制任何视觉样式。 */
+}
+
+.dialogChipList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.dialogChipSelected {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 24px;
+  padding: 0 10px;
+  border: 1px solid var(--primary);
+  border-radius: 12px;
+  background: var(--primary-softer, rgba(31, 107, 255, 0.08));
+  color: var(--primary);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.dialogChipSelected:disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* 批量搜索：input 与「批量加入 N 项」按钮在同一行；窄屏自动 wrap */
+.bulkSearchRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+
+.bulkSearchRow .input {
+  flex: 1 1 320px;
+  width: auto;
+  min-width: 0;
+}
+
+.bulkHint {
+  padding: 6px 10px;
+  margin-bottom: 8px;
+  border: 1px dashed var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface-1);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+}
+
+.bulkHint strong { color: var(--text); font-weight: 600; }
+
+.dialogMemberList {
+  max-height: 220px;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card);
+}
+
+.dialogMemberRow {
+  display: grid;
+  grid-template-columns: 28px 1fr 80px;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--fs-sm);
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.dialogMemberRow:last-child { border-bottom: 0; }
+
+.dialogMemberRow:hover { background: var(--surface-1); }
+
+.dialogMemberLogin { color: var(--text); font-weight: 500; }
+
+.dialogMemberRole {
+  color: var(--sub);
+  font-size: var(--fs-xs);
+  text-align: right;
+}
+
+.dialogEmpty {
+  padding: 16px;
+  text-align: center;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+}
+
+.dialogFooter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--s-3);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--line);
+}

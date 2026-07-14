@@ -1,0 +1,377 @@
+.panel {
+  height: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+  /* 作为 .sheetMask 的定位父级，限制底部 sheet 在抽屉内（不越过 viewport） */
+  position: relative;
+  overflow: hidden;
+}
+
+.header {
+  min-height: 60px;
+  padding: 0 var(--s-5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  border-bottom: 1px solid var(--line);
+}
+
+.titleBlock {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.title {
+  font-size: var(--fs-md);
+  font-weight: 800;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.badge,
+.chip {
+  border-radius: var(--r-full);
+  padding: 2px var(--s-2);
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+}
+
+.chartPos {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  margin-left: var(--s-1);
+  white-space: nowrap;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--s-1);
+}
+
+.navBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--r-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 图标默认黑色，与报表区顶栏图标（#1D2129）保持一致 */
+  color: var(--text);
+  background: transparent;
+  cursor: pointer;
+  transition: background var(--t-fast), color var(--t-fast);
+}
+
+.navBtn:hover {
+  background: var(--hover-soft);
+  color: var(--primary);
+}
+
+.navBtn:focus-visible {
+  outline: none;
+}
+
+.closeBtn {
+  width: var(--control-h);
+  height: var(--control-h);
+  border-radius: var(--r-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 图标默认黑色，与报表区顶栏图标（#1D2129）保持一致 */
+  color: var(--text);
+  background: transparent;
+  cursor: pointer;
+  transition: background var(--t-fast), color var(--t-fast);
+}
+
+.closeBtn:hover {
+  background: var(--hover-soft);
+  color: var(--primary);
+}
+
+.closeBtn:focus-visible {
+  outline: none;
+}
+
+/* 图表主体：在图表区居中，并给上下留白 */
+.body {
+  flex: 1;
+  min-width: 0;
+  min-height: 500px;
+  padding: var(--s-10) var(--s-8) var(--s-8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 控制区：透明、居中、三行对齐 */
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-3) var(--s-6) var(--s-5);
+  border-top: 1px solid var(--line);
+  background: transparent;
+}
+
+.legendRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--s-2) var(--s-4);
+  min-height: var(--control-h);
+  max-width: min(760px, 100%);
+}
+
+.legendItem {
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 0 var(--s-2);
+  border-radius: var(--r-full);
+  color: var(--sub);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  background: transparent;
+  cursor: pointer;
+  transition: color var(--t-fast), opacity var(--t-fast), background var(--t-fast);
+}
+
+.legendItem:hover {
+  color: var(--primary);
+  background: var(--hover-soft);
+}
+
+.legendItem:focus-visible {
+  outline: none;
+}
+
+.legendItemMuted {
+  opacity: 0.38;
+}
+
+.legendItemMuted .legendDot {
+  filter: grayscale(1);
+}
+
+.legendDot {
+  width: 14px;
+  height: 9px;
+  border-radius: 3px;
+  flex: 0 0 auto;
+}
+
+.legendLabel {
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.editHint {
+  width: 100%;
+  padding: 0 var(--s-1);
+  text-align: right;
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  line-height: 1.4;
+}
+
+.footer {
+  min-height: 44px;
+  padding: var(--s-3) var(--s-5) var(--s-4);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  border-top: 1px solid var(--line);
+}
+
+/* 移动端（≤900px）：在 mobileChartDrawer 内显示，需收紧内边距、给 body 一个稳定的高度区间 */
+@media (max-width: 900px) {
+  .header {
+    min-height: 48px;
+    padding: 0 var(--s-3);
+    gap: var(--s-2);
+  }
+  .titleBlock {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .title {
+    font-size: var(--fs-sm);
+  }
+  .badge {
+    flex: 0 0 auto;
+  }
+  .headerActions {
+    flex: 0 0 auto;
+  }
+  /* body 用 flex:1 + 明确 min-height，让 ECharts 在抽屉内有真实高度 */
+  .body {
+    min-height: 280px;
+    padding: var(--s-3) var(--s-3) var(--s-2);
+    /* 移动端：让 EChartsRenderer 撑满宽度并对齐顶部，但不无限拉伸高度——
+       否则在小屏上 body 可能 600+px，echarts 画布被拉成"窄而高"，绘图区会被挤成中间一条。
+       高度由子项 .chart 自己的 max-height 控制（见 EChartsRenderer.module.css）。 */
+    align-items: flex-start;
+    justify-content: stretch;
+  }
+  .body > * {
+    flex: 0 1 auto;
+    width: 100%;
+  }
+  .controls {
+    padding: var(--s-2) var(--s-3) var(--s-3);
+    gap: var(--s-2);
+  }
+  .footer {
+    min-height: 36px;
+    padding: var(--s-2) var(--s-3) var(--s-3);
+    gap: var(--s-2);
+  }
+  .legendRow {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: var(--s-2);
+    max-width: 100%;
+    min-height: 28px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .legendRow::-webkit-scrollbar {
+    display: none;
+  }
+  .legendItem {
+    flex: 0 0 auto;
+    padding: 0 var(--s-1);
+    font-size: 11px;
+  }
+}
+
+/* 极窄屏（≤640px） */
+@media (max-width: 640px) {
+  .header {
+    min-height: 44px;
+    padding: 0 var(--s-3);
+  }
+  .chartPos {
+    display: none;
+  }
+  .navBtn {
+    width: 26px;
+    height: 26px;
+  }
+  .closeBtn {
+    width: var(--control-h);
+    height: var(--control-h);
+  }
+  .body {
+    min-height: 240px;
+    padding: var(--s-2) var(--s-1) var(--s-1);
+  }
+  /* legend 进一步收紧，并保持横向滑动，不挤占图表高度 */
+  .legendRow {
+    gap: var(--s-2);
+    min-height: 24px;
+  }
+  .legendItem {
+    min-height: 22px;
+    padding: 0 4px;
+    gap: 4px;
+    font-size: 11px;
+  }
+  .legendDot {
+    width: 10px;
+    height: 8px;
+  }
+}
+
+/* ============== 移动端"更多"按钮 + 底部工具栏 sheet ============== */
+
+.moreBtn {
+  /* header 上的"更多"按钮，复用 navBtn 视觉，仅在 isMobile=true 时渲染 */
+  margin-left: 2px;
+}
+
+.sheetMask {
+  /* 不覆盖 header，让 header 上的标题/badge/翻页/关闭按钮始终可见、可操作；
+     用户切换图表样式时也能直接看到下方的"折柱混合"等 chip 实时刷新 */
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 48px; /* 与 ≤900 .header min-height 对齐 */
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.32);
+  display: flex;
+  align-items: flex-end;
+  z-index: 20;
+  animation: sheetMaskFadeIn 160ms var(--ease, ease-out);
+}
+
+@media (max-width: 640px) {
+  .sheetMask {
+    top: 44px; /* 与 ≤640 .header min-height 对齐 */
+  }
+}
+
+.sheet {
+  width: 100%;
+  max-height: min(78%, calc(100dvh - 72px));
+  background: var(--bg);
+  border-top-left-radius: var(--r-lg, 14px);
+  border-top-right-radius: var(--r-lg, 14px);
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.16);
+  display: flex;
+  flex-direction: column;
+  animation: sheetSlideUp 220ms var(--ease, cubic-bezier(0.2, 0.7, 0.2, 1));
+}
+
+.sheetHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--s-3) var(--s-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.sheetTitle {
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--text);
+}
+
+.sheetBody {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: var(--s-4) var(--s-3) calc(var(--s-5) + env(safe-area-inset-bottom, 0px));
+}
+
+@keyframes sheetMaskFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes sheetSlideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}

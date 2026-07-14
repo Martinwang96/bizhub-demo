@@ -1,0 +1,59 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-3);
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s-1);
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--card);
+  box-shadow: var(--shadow-xs);
+  text-align: left;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--primary);
+}
+
+.card-primary::before { background: var(--primary); }
+.card-accent::before  { background: var(--accent); }
+.card-warn::before    { background: var(--warn); }
+.card-danger::before  { background: var(--danger); }
+
+.label {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.value {
+  color: var(--text);
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  margin-top: 2px;
+}
+
+.value-accent { color: var(--accent); }
+.value-warn   { color: var(--warn); }
+.value-danger { color: var(--danger); }
+
+.hint {
+  color: var(--sub);
+  font-size: var(--fs-xs);
+}

@@ -1,0 +1,99 @@
+.pagination {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-3) 0 0;
+}
+
+/* compact: 单行嵌入式（用于卡片右上角等空间受限位置） */
+.compact {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 0;
+}
+
+.info {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.ctl {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    border-color var(--t-fast) var(--ease),
+    background-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.btn:hover:not(:disabled) {
+  border-color: var(--line-strong);
+  background: var(--surface-2);
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(var(--press-scale));
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.btn:disabled {
+  color: var(--muted);
+  background: var(--card);
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.label {
+  min-width: 96px;
+  text-align: center;
+  color: var(--text);
+  font-size: var(--fs-sm);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.labelSm {
+  min-width: 36px;
+  font-size: var(--fs-xs);
+}
+
+.btnSm {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--r-xs);
+}
+
+.label strong {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition-duration: 0.01ms;
+  }
+}

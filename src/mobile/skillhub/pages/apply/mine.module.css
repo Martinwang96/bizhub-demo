@@ -1,0 +1,434 @@
+/* ===== 我的申请段样式 ===== */
+
+.mineSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+/* —— 工具栏：筛选 chip 横向滚动 + 刷新按钮 —— */
+.mineToolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.chipsScroller {
+  flex: 1;
+  display: flex;
+  gap: var(--s-2);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: var(--s-1) 0;
+  scrollbar-width: none;
+}
+
+.chipsScroller::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  flex: none;
+  height: 30px;
+  padding: 0 var(--s-3);
+  border: 1px solid transparent;
+  border-radius: var(--r-full);
+  background: var(--surface-2, #f2f3f9);
+  color: var(--sub, var(--muted));
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+
+.chipActive {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+.refreshBtn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  background: var(--card);
+  color: var(--primary);
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.refreshBtn:hover:not(:disabled) {
+  background: var(--primary-soft, #e8f3ff);
+}
+
+.refreshBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* —— 错误提示 —— */
+.errorNotice {
+  padding: var(--s-3) var(--s-4);
+  background: var(--danger-soft, #ffece8);
+  color: var(--danger);
+  border-radius: var(--r-md);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+}
+
+/* —— 列表 —— */
+.cardList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+/* —— 单张卡片 —— */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-4);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-xs);
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+}
+
+.skillId {
+  flex: 1;
+  min-width: 0;
+  font-family: 'SF Mono', 'Roboto Mono', Menlo, Monaco, Consolas, monospace;
+  font-size: var(--fs-sm);
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.modeBadge {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 22px;
+  padding: 0 var(--s-2);
+  border-radius: var(--r-xs, 4px);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.modeBadgeUpdate {
+  background: var(--primary-soft, #e8f3ff);
+  color: var(--primary);
+}
+
+.modeBadgeCreate {
+  background: var(--accent-soft, #e8f8e8);
+  color: var(--accent, #52c41a);
+}
+
+.modeBadgeMuted {
+  background: var(--surface-2, #f2f3f9);
+  color: var(--muted);
+}
+
+.submittedAt {
+  flex: none;
+  font-size: var(--fs-xs, 12px);
+  color: var(--muted);
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  height: 24px;
+  padding: 0 var(--s-3);
+  border-radius: var(--r-full);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.statusBadgePublished {
+  background: var(--accent-soft, #e8f8e8);
+  color: var(--accent, #52c41a);
+}
+
+.statusBadgePending {
+  background: var(--warn-soft, #fff7e6);
+  color: var(--warn, #fa8c16);
+}
+
+.statusBadgeFailed {
+  background: var(--danger-soft, #ffece8);
+  color: var(--danger, #f53f3f);
+}
+
+.statusBadgeWithdrawn {
+  background: var(--surface-2, #f2f3f9);
+  color: var(--muted);
+}
+
+.statusBadgeMuted {
+  background: var(--surface-2, #f2f3f9);
+  color: var(--sub, var(--muted));
+}
+
+.pulseDot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--r-full);
+  background: var(--warn, #fa8c16);
+  animation: pulseDot 1.5s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.7); }
+}
+
+.submitter {
+  font-size: var(--fs-xs, 12px);
+  color: var(--muted);
+}
+
+.cardActions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.withdrawBtn {
+  height: 32px;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--danger);
+  border-radius: var(--r-full);
+  background: transparent;
+  color: var(--danger);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.withdrawBtn:hover:not(:disabled) {
+  background: var(--danger-soft, rgba(245, 63, 63, 0.08));
+}
+
+.withdrawBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* —— 空 / 骨架 —— */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s-8) var(--s-4);
+  background: var(--card);
+  border: 1px dashed var(--line);
+  border-radius: var(--r-lg);
+  text-align: center;
+}
+
+.emptyTitle {
+  margin: 0 0 var(--s-2);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.emptyDesc {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  max-width: 240px;
+  line-height: 1.6;
+}
+
+.skeletonStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.skeletonCard {
+  height: 96px;
+  border-radius: var(--r-lg);
+  background: linear-gradient(
+    90deg,
+    var(--surface-2, #f2f3f9) 0%,
+    var(--card) 50%,
+    var(--surface-2, #f2f3f9) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShine 1.4s linear infinite;
+}
+
+@keyframes skeletonShine {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+/* —— Withdraw Sheet 内容 —— */
+.reasonList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-2) 0;
+}
+
+.reasonItem {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-3) var(--s-4);
+  background: var(--surface-2, #f2f3f9);
+  border: 1px solid transparent;
+  border-radius: var(--r-md);
+  font-size: var(--fs-md);
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease);
+}
+
+.reasonItem:hover {
+  background: var(--hover-soft, var(--primary-soft, #e8f3ff));
+}
+
+.reasonItemActive {
+  background: var(--primary-soft, #e8f3ff);
+  border-color: var(--primary);
+}
+
+.reasonRadio {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.reasonLabel {
+  font-weight: 500;
+}
+
+.reasonTextarea {
+  width: 100%;
+  margin-top: var(--s-2);
+  padding: var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--text);
+  font-size: var(--fs-md);
+  font-family: inherit;
+  line-height: 1.5;
+  outline: none;
+  resize: vertical;
+  min-height: 84px;
+  transition:
+    border-color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+}
+
+.reasonTextarea:focus {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-focus, 0 0 0 3px rgba(0, 82, 217, 0.15));
+}
+
+/* —— Sheet 底部操作 —— */
+.sheetFooter {
+  display: flex;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-4) var(--s-3);
+}
+
+.sheetCancelBtn {
+  flex: 1;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--text);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.sheetCancelBtn:hover:not(:disabled) {
+  background: var(--hover-soft, var(--surface-2));
+}
+
+.sheetCancelBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sheetConfirmBtn {
+  flex: 1;
+  height: 44px;
+  border: none;
+  border-radius: var(--r-sm);
+  background: var(--danger);
+  color: #fff;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.sheetConfirmBtn:hover:not(:disabled) {
+  background: var(--danger-strong, #cf1322);
+}
+
+.sheetConfirmBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip,
+  .refreshBtn,
+  .withdrawBtn,
+  .reasonItem,
+  .reasonTextarea,
+  .sheetCancelBtn,
+  .sheetConfirmBtn {
+    transition-duration: 0.01ms;
+  }
+  .pulseDot,
+  .skeletonCard {
+    animation: none;
+  }
+}

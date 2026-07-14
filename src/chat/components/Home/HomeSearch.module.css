@@ -1,0 +1,362 @@
+.wrap {
+  position: relative;
+  width: 100%;
+  min-height: 132px;
+  border-radius: var(--r-2xl-input);
+  background: var(--card);
+  transition: box-shadow var(--t-fast);
+  box-shadow: var(--shadow-md);
+}
+
+.wrap:focus-within {
+  box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.14), 0 8px 28px rgba(var(--primary-rgb), 0.09);
+}
+
+.input {
+  width: 100%;
+  padding: var(--s-7) 72px 72px var(--s-8);
+  font-size: var(--fs-base);
+  line-height: 1.6;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  border-radius: var(--r-2xl-input);
+}
+
+.input::placeholder {
+  color: var(--muted);
+}
+
+.sendBtn {
+  position: absolute;
+  right: var(--s-5);
+  bottom: var(--s-5);
+  width: 38px;
+  height: 38px;
+  border-radius: var(--r-full);
+  background: var(--primary);
+  color: var(--shell-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast);
+  flex-shrink: 0;
+  box-shadow: 0 2px 10px rgba(var(--primary-rgb), 0.25);
+}
+
+.sendBtn:hover:not(:disabled) {
+  background: var(--primary-hover);
+  transform: scale(1.06);
+  box-shadow: 0 4px 16px rgba(var(--primary-rgb), 0.35);
+}
+
+.sendBtn:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+.toolbar {
+  position: absolute;
+  left: var(--s-8);
+  right: 72px;
+  bottom: var(--s-5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+}
+
+/* ───────────────── Tools 工具栏 ───────────────── */
+
+.toolsCluster {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-width: 0;
+}
+
+.toolsWrap {
+  position: relative;
+}
+
+.toolsBtn {
+  height: var(--control-h);
+  padding: 0 8px;
+  border-radius: var(--r-md);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--sub);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--t-fast), border-color var(--t-fast),
+    color var(--t-fast), box-shadow var(--t-fast);
+}
+
+.toolsBtn:hover:not(:disabled) {
+  background: var(--surface-2);
+  border-color: rgba(37, 53, 84, 0.10);
+  color: var(--text);
+  box-shadow: 0 4px 12px -4px rgba(37, 53, 84, 0.18),
+    0 1px 2px rgba(37, 53, 84, 0.06);
+}
+
+.toolsBtnOpen,
+.toolsBtnOpen:hover:not(:disabled) {
+  background: var(--surface-2);
+  border-color: rgba(37, 53, 84, 0.14);
+  color: var(--text);
+  box-shadow: 0 4px 12px -4px rgba(37, 53, 84, 0.18),
+    0 1px 2px rgba(37, 53, 84, 0.06);
+}
+
+.toolsBtn:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+.toolsBtn:focus-visible {
+  outline: none;
+}
+
+.toolsBtnIcon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.toolsBtnLabel {
+  letter-spacing: 0.01em;
+}
+
+.toolsBtnChevron {
+  font-size: 14px;
+  line-height: 1;
+  opacity: 0.7;
+  transform: rotate(180deg);
+  transition: transform var(--t-fast) var(--ease);
+}
+
+.toolsBtnChevronOpen {
+  transform: rotate(0deg);
+}
+
+.toolsMenu {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  min-width: 240px;
+  padding: var(--s-2);
+  background: var(--card);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-lg);
+  z-index: var(--z-overlay);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  animation: homeToolsMenuIn 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: bottom left;
+}
+
+@keyframes homeToolsMenuIn {
+  from { opacity: 0; transform: translateY(6px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.toolsMenuTitle {
+  padding: 6px var(--s-2) 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.toolsMenuItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px var(--s-2);
+  border-radius: var(--r-sm);
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: var(--fs-md);
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--t-fast);
+}
+
+.toolsMenuItem:hover {
+  background: var(--hover-soft);
+}
+
+.toolsMenuItemActive {
+  color: var(--primary);
+}
+
+.toolsMenuItemActive:hover {
+  background: var(--primary-soft);
+}
+
+.toolsMenuItemIcon {
+  font-size: 18px;
+  line-height: 1;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.toolsMenuItemLabel {
+  flex: 1;
+  min-width: 0;
+}
+
+.toolsMenuItemBadge {
+  padding: 2px 8px;
+  border-radius: var(--r-full);
+  background: var(--surface-2);
+  color: var(--sub);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.toolsMenuItemCheck {
+  font-size: 14px;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+/* 选中态（裸文字，hover 显形） */
+.toolChip {
+  height: var(--control-h);
+  padding: 0 8px;
+  border-radius: var(--r-md);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--t-fast), border-color var(--t-fast),
+    box-shadow var(--t-fast);
+  animation: homeChipIn 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes homeChipIn {
+  from { opacity: 0; transform: translateX(-4px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.toolChip:hover:not(:disabled) {
+  background: var(--primary-soft);
+  border-color: rgba(var(--primary-rgb), 0.18);
+  box-shadow: 0 4px 12px -4px rgba(var(--primary-rgb), 0.28),
+    0 1px 2px rgba(var(--primary-rgb), 0.08);
+}
+
+.toolChip:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+.toolChip:focus-visible {
+  outline: none;
+}
+
+.toolChipIcon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.toolChipLabel {
+  letter-spacing: 0.01em;
+}
+
+.toolChipClose {
+  font-size: 14px;
+  margin-left: 2px;
+  padding: 2px;
+  border-radius: var(--r-full);
+  opacity: 0.6;
+  transition: opacity var(--t-fast), background var(--t-fast);
+}
+
+.toolChip:hover .toolChipClose {
+  opacity: 1;
+  background: rgba(var(--primary-rgb), 0.14);
+}
+
+.hint {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+
+/* 移动端（≤900px） */
+@media (max-width: 900px) {
+  .wrap {
+    min-height: 120px;
+    border-radius: 26px;
+  }
+  .input {
+    border-radius: 26px;
+    padding: var(--s-5) 64px 64px var(--s-5);
+    /* 防 iOS Safari 聚焦 input 字号 < 16px 触发整页自动放大 */
+    font-size: 16px;
+  }
+  .toolbar {
+    left: var(--s-5);
+    right: 64px;
+    bottom: var(--s-4);
+  }
+  .sendBtn {
+    right: var(--s-4);
+    bottom: var(--s-4);
+  }
+}
+
+/* 极窄屏（≤640px）：隐藏 hint */
+@media (max-width: 640px) {
+  .wrap {
+    min-height: 104px;
+    border-radius: 22px;
+  }
+  .input {
+    border-radius: 22px;
+    padding: var(--s-4) 56px 50px var(--s-4);
+    /* 极窄屏同样保持 16px，避免 iOS 聚焦放大 */
+    font-size: 16px;
+  }
+  .toolbar {
+    left: var(--s-4);
+    right: 56px;
+    bottom: var(--s-3);
+    gap: var(--s-2);
+  }
+  .hint {
+    display: none;
+  }
+  .toolsBtn,
+  .toolChip {
+    height: var(--control-h);
+    font-size: 11px;
+  }
+  .toolsMenu {
+    min-width: 220px;
+  }
+  .sendBtn {
+    right: var(--s-3);
+    bottom: var(--s-3);
+    width: 34px;
+    height: 34px;
+  }
+}

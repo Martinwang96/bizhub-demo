@@ -1,0 +1,482 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-6);
+}
+
+/* ─── stats ─── */
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--s-4);
+}
+
+.statCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--s-4) var(--s-5);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--card);
+  box-shadow: var(--shadow-xs);
+  overflow: hidden;
+}
+
+.statCard::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--primary);
+  border-top-left-radius: var(--r-md);
+  border-bottom-left-radius: var(--r-md);
+}
+
+.statCardWarn::before { background: var(--warn); }
+
+.statLabel {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.statNum {
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.statHint {
+  color: var(--sub);
+  font-size: var(--fs-sm);
+}
+
+/* ─── three columns 角色说明 ─── */
+.threeRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-4);
+}
+
+.infoCard {
+  padding: var(--s-4) var(--s-5);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--card);
+  box-shadow: var(--shadow-xs);
+}
+
+.infoCard h3 {
+  margin: 0 0 var(--s-2);
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--text);
+}
+
+.infoCard p {
+  margin: 0;
+  color: var(--sub);
+  font-size: var(--fs-sm);
+  line-height: 1.65;
+}
+
+/* ─── toolbar 操作区 ─── */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--s-5);
+  padding-bottom: var(--s-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.toolbar .btnPrimary,
+.toolbar .btnGhost {
+  padding: 0 var(--s-3);
+}
+
+.toolbarSpacer {
+  flex: 1 1 auto;
+  min-width: 12px;
+}
+
+.selectionSummary {
+  color: var(--sub);
+  font-size: var(--fs-sm);
+}
+
+.input {
+  min-height: 36px;
+  padding: var(--s-2) var(--s-3);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-md);
+  outline: none;
+  transition:
+    border-color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+}
+
+.input:focus-visible {
+  border-color: var(--primary);
+}
+
+.input::placeholder {
+  color: var(--muted);
+}
+
+.input:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+.checkLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  color: var(--sub);
+  font-size: var(--fs-sm);
+  user-select: none;
+  cursor: pointer;
+}
+
+.checkLabel input[type="checkbox"] {
+  cursor: pointer;
+}
+
+/* ─── buttons ─── */
+.btnPrimary,
+.btnGhost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--control-h);
+  padding: 0 var(--s-4);
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.btnPrimary {
+  background: var(--primary);
+  color: #FFFFFF;
+}
+
+.btnPrimary:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.btnPrimary:active:not(:disabled) {
+  transform: scale(var(--press-scale));
+}
+
+.btnPrimary:focus-visible,
+.btnGhost:focus-visible {
+  outline: none;
+}
+
+.btnPrimary:disabled,
+.btnGhost:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+.btnGhost {
+  background: transparent;
+  color: var(--primary);
+  border-color: var(--line-strong);
+  min-height: var(--control-h);
+  padding: 0 var(--s-3);
+  font-size: var(--fs-sm);
+}
+
+.btnGhost:hover:not(:disabled) {
+  background: var(--hover-soft);
+  border-color: rgba(var(--primary-rgb), 0.24);
+}
+
+/* 行内 text 按钮 */
+.btnTextPrimary,
+.btnTextDanger,
+.btnTextDangerActive {
+  background: none;
+  border: none;
+  font: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--r-xs);
+  margin-right: var(--s-2);
+  transition:
+    background var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+
+.btnTextPrimary { color: var(--primary); }
+.btnTextPrimary:hover:not(:disabled) { background: var(--hover-soft); }
+
+.btnTextDanger { color: var(--danger); }
+.btnTextDanger:hover:not(:disabled) { background: var(--danger-soft); }
+
+.btnTextDangerActive {
+  color: var(--danger);
+  background: var(--danger-soft);
+  border: 1px solid var(--danger-line);
+  padding: 3px 7px;
+}
+
+.btnTextPrimary:disabled,
+.btnTextDanger:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+.btnTextPrimary:focus-visible,
+.btnTextDanger:focus-visible,
+.btnTextDangerActive:focus-visible {
+  outline: none;
+}
+
+/* ─── table ─── */
+.tableWrap {
+  overflow: auto;
+  border-top: 1px solid var(--line);
+}
+
+.table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  font-size: var(--fs-md);
+}
+
+.table th,
+.table td {
+  padding: var(--s-3) var(--s-4);
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.table th {
+  background: transparent;
+  color: var(--sub);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table tr:hover td {
+  background: var(--primary-softer);
+}
+
+.tableMeta {
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.colActions {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.colSelect {
+  width: 44px;
+  text-align: center !important;
+}
+
+.colSelect input[type="checkbox"] {
+  cursor: pointer;
+}
+
+.colSelect input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+}
+
+.rowSelected td {
+  background: var(--primary-softer);
+}
+
+/* ─── modal form ─── */
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-4);
+}
+
+.formRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.formLabel {
+  color: var(--sub);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.formHint {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  line-height: 1.55;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 112px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.userPreview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  padding: var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface-2);
+}
+
+.resultBox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  max-height: 160px;
+  overflow: auto;
+  padding: var(--s-3);
+  border: 1px solid var(--danger-line);
+  border-radius: var(--r-sm);
+  background: var(--danger-soft);
+}
+
+.resultLine {
+  display: flex;
+  gap: var(--s-3);
+  align-items: baseline;
+  color: var(--danger);
+  font-size: var(--fs-sm);
+}
+
+/* 弹窗底部操作栏：吸底悬浮（与「用户数据权限管理」绑定弹窗一致）。
+   负 margin 抵消 Modal body 的 var(--s-5) padding，使底栏贴住弹窗可视区底部。 */
+.modalFooter {
+  position: sticky;
+  bottom: calc(-1 * var(--s-5));
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  margin: var(--s-5) calc(-1 * var(--s-5)) calc(-1 * var(--s-5));
+  padding: var(--s-3) var(--s-5);
+  border-top: 1px solid var(--line);
+  background: var(--card);
+  box-shadow: 0 -8px 20px rgba(37, 53, 84, 0.06);
+}
+
+.footerActions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  flex-shrink: 0;
+}
+
+/* ─── tag ─── */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  margin-right: var(--s-1);
+  margin-bottom: 2px;
+  padding: 0 var(--s-2);
+  min-height: 22px;
+  border-radius: var(--r-full);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.tagPrimary { background: var(--primary-soft); color: var(--primary); }
+.tagSuccess { background: var(--accent-soft); color: var(--accent); }
+.tagWarn { background: var(--warn-soft); color: var(--warn); }
+.tagMuted { background: var(--surface-2); color: var(--muted); }
+
+.muted { color: var(--muted); }
+
+/* ─── status pill（与「用户数据权限管理」校验状态一致：圆点 + 文本） ─── */
+.statusPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px var(--s-2);
+  border-radius: var(--r-full);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: 0 0 auto;
+}
+
+.statusPillEnforce {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.statusPillBypass {
+  background: var(--surface-2);
+  color: var(--muted);
+}
+
+/* topbar action ghost button (复用) */
+@media (max-width: 900px) {
+  .statsRow,
+  .threeRow,
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+  .modalFooter {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .footerActions {
+    justify-content: flex-end;
+  }
+}

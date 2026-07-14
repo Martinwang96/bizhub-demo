@@ -1,0 +1,27 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.item {
+  padding: var(--s-4);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--card);
+}
+
+.title {
+  margin: 0 0 var(--s-2);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.desc {
+  margin: 0;
+  color: var(--sub);
+  font-size: var(--fs-sm);
+  line-height: 1.75;
+}

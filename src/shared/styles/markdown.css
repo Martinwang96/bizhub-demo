@@ -1,0 +1,153 @@
+/* 非模块化全局类，作用于 dangerouslySetInnerHTML 渲染的动态 DOM */
+
+.md-content h1 { font-size: var(--fs-xl); font-weight: 700; margin: 16px 0 8px; color: var(--text); }
+.md-content h2 { font-size: var(--fs-lg); font-weight: 700; margin: 16px 0 8px; color: var(--text); }
+.md-content h3 { font-size: var(--fs-md); font-weight: 700; margin: 12px 0 6px; color: var(--text); }
+.md-content p { margin: 6px 0; line-height: 1.75; color: var(--sub); }
+.md-content strong { color: var(--text); font-weight: 600; }
+.md-content em { font-style: italic; }
+.md-content ul, .md-content ol { padding-left: 20px; margin: 6px 0; }
+.md-content li { margin: 4px 0; line-height: 1.7; color: var(--sub); }
+.md-content a { color: var(--primary); text-decoration: underline; }
+.md-content a:hover { color: var(--primary-hover); }
+
+.md-content table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: var(--fs-md); }
+.md-content th { background: var(--surface-1); font-weight: 600; text-align: left; padding: 8px 12px; border: 1px solid var(--line); }
+.md-content td { padding: 8px 12px; border: 1px solid var(--line); color: var(--sub); background: var(--card); }
+.md-content tr:nth-child(even) td { background: var(--surface-1); }
+
+.md-content code {
+  background: var(--bg);
+  padding: 2px 6px;
+  border-radius: var(--r-xs);
+  font-size: var(--fs-md);
+  font-family: Menlo, Consolas, "Courier New", monospace;
+  color: var(--text);
+}
+
+.md-content pre {
+  background: var(--shell-bg-deep);
+  color: oklch(90% 0.01 252);
+  padding: var(--s-4);
+  border-radius: var(--r-sm);
+  overflow-x: auto;
+  margin: 10px 0;
+  position: relative;
+  line-height: 1.6;
+}
+
+.md-content pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-size: var(--fs-sm);
+}
+
+.md-content blockquote {
+  border-left: 2px solid var(--line-strong);
+  background: var(--primary-softer);
+  padding: 10px 16px;
+  margin: 10px 0;
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+}
+
+.md-content blockquote p { color: var(--sub); }
+
+.md-content hr {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 14px 0;
+}
+
+/* 代码块复制按钮 */
+.copy-code-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 8px;
+  border-radius: var(--r-xs);
+  font-size: var(--fs-xs);
+  color: var(--shell-sub);
+  background: oklch(100% 0 0 / 0.1);
+  border: 1px solid oklch(100% 0 0 / 0.15);
+  cursor: pointer;
+  transition: all var(--t-fast);
+  font-family: inherit;
+}
+
+.copy-code-btn:hover {
+  background: oklch(100% 0 0 / 0.2);
+  color: var(--shell-text);
+}
+
+/* ───────────────── 表格独立横向滚动容器 ─────────────────
+   由 Markdown.tsx 的 useEffect 在每个 <table> 外注入。
+   - touch-action: pan-x pan-y：同时允许两个轴的手势。
+       表格自身 overflow-y: hidden 不可竖滚，浏览器会把竖向手势自动冒泡给外层
+       消息流容器接管整页滚动；横向手势仍由本容器消费横滚表格。
+       之前写成 pan-x（仅横向）会让浏览器吞掉竖向手势，导致用户手指落在表格上
+       上下滑无法滚动整页。
+   - overscroll-behavior-x: contain 防止滚动越界传导到外层导致整页左右晃。
+   - -webkit-overflow-scrolling: touch 让 iOS Safari 拥有原生惯性滚动（Android 默认即有，属性会被忽略，无副作用）
+   - 内部 table 用 max-content + min-width:100% 保证：未溢出时占满容器宽，溢出时保留原始宽度可横滑
+*/
+.md-table-scroll {
+  width: 100%;
+  max-width: 100%;
+  margin: 10px 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y;
+  overscroll-behavior-x: contain;
+}
+
+.md-content .md-table-scroll > table {
+  width: max-content;
+  min-width: 100%;
+  margin: 0;
+}
+
+/* ───────────────── 移动端：正文内容防横向溢出兜底 ───────────────── */
+@media (max-width: 900px) {
+  .md-content {
+    /* 不让 .md-content 自身产生横滚，溢出由内部 .md-table-scroll 接管 */
+    max-width: 100%;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+  /* 长 URL/英文长串折行；段落与标题不溢出 */
+  .md-content p,
+  .md-content li,
+  .md-content h1,
+  .md-content h2,
+  .md-content h3,
+  .md-content blockquote,
+  .md-content blockquote p {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+  .md-content a {
+    overflow-wrap: anywhere;
+    word-break: break-all;
+  }
+  /* 图片不撑破容器 */
+  .md-content img {
+    max-width: 100%;
+    height: auto;
+  }
+  /* 行内 code 折行；代码块自身的 overflow-x:auto 保留（已声明在桌面端规则里） */
+  .md-content code {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+  .md-content pre {
+    max-width: 100%;
+  }
+  .md-content pre code {
+    /* 代码块内 code 不强制折行，靠 pre 横滚（避免破坏代码格式） */
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+}

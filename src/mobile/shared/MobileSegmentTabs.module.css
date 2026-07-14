@@ -1,0 +1,51 @@
+/* MobileSegmentTabs — 与历史 apply/skills/history 三处 .segTabs 字节级等价 */
+.segTabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 默认 2 段；多/少段时由内联 style.gridTemplateColumns 覆盖 */
+  gap: var(--s-1);
+  padding: var(--s-1);
+  background: var(--surface-2, #f2f3f9);
+  border-radius: var(--r-full);
+}
+
+.segTab {
+  position: relative;
+  height: 36px;
+  border: none;
+  background: transparent;
+  border-radius: var(--r-full);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-1);
+  transition:
+    background var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+}
+
+.segTabActive {
+  background: var(--card);
+  color: var(--text);
+  box-shadow: var(--shadow-xs);
+}
+
+.segDot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--r-full);
+  background: var(--danger);
+  position: absolute;
+  top: 6px;
+  right: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .segTab {
+    transition: none;
+  }
+}

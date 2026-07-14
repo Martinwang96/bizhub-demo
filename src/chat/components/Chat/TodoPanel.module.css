@@ -1,0 +1,110 @@
+.panel {
+  padding: var(--s-3) var(--s-4);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-xs);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--s-2);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.progress {
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--muted);
+  padding: 2px var(--s-2);
+  background: var(--bg);
+  border-radius: var(--r-full);
+}
+
+.progressDone {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-3);
+  border-radius: var(--r-sm);
+  font-size: var(--fs-md);
+  line-height: 1.5;
+  transition: background var(--t-fast);
+}
+
+.itemDoing {
+  background: var(--primary-soft);
+}
+
+.itemDone {
+  color: var(--muted);
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--r-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconPending {
+  border: 2px solid var(--line);
+  background: var(--card);
+}
+
+.iconDoing {
+  background: var(--primary-soft);
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+
+.iconDone {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinSvg {
+  animation: spin 0.8s linear infinite;
+}
+
+.body {
+  flex: 1;
+  min-width: 0;
+}
+
+.content {
+  color: var(--text);
+}
+
+.contentDone {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.result {
+  font-size: var(--fs-sm);
+  color: var(--accent);
+  margin-top: 2px;
+}

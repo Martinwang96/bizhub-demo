@@ -1,0 +1,66 @@
+.viewer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  background: #fff;
+}
+
+/* 顶栏与图表区 header 共用同一套定位：min-height 60 + var(--s-5) 内边距，
+   保证「报表区 / 图表区」两个顶 bar 的高度与图标垂直位置完全一致。 */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 60px;
+  padding: 0 var(--s-5);
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+/* 与 ChartPanel .header 的响应式断点保持一致 */
+@media (max-width: 900px) {
+  .toolbar {
+    min-height: 48px;
+    padding: 0 var(--s-3);
+  }
+}
+
+@media (max-width: 640px) {
+  .toolbar {
+    min-height: 44px;
+    padding: 0 var(--s-3);
+  }
+}
+
+.title {
+  flex: 1;
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.actions { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+
+.iconBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: none;
+  border-radius: 6px;
+  color: #1f2329;
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1;
+}
+.iconBtn svg { display: block; }
+.iconBtn:hover { color: #3b82f6; }
+
+.body { flex: 1; min-height: 0; overflow: hidden; display: flex; }
+
+.frame { flex: 1; width: 100%; border: none; }

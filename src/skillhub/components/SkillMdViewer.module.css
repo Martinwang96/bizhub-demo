@@ -1,0 +1,366 @@
+/**
+ * SkillMdViewer 样式
+ * 严格遵循 DESIGN.md：所有颜色 / 圆角 / 阴影 / 间距走 tokens.css 变量。
+ * 禁用：渐变、backdrop-filter blur、装饰强色、深色 shell 背景。
+ */
+
+.body {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  min-height: 520px;
+  max-height: 70vh;
+  background: var(--card);
+}
+
+/* ═════════════ 左侧文件列表 ═════════════ */
+.files {
+  min-height: 0;
+  padding: var(--s-2);
+  overflow: auto;
+  background: var(--card);
+  border-right: 1px solid var(--line);
+}
+
+.group {
+  margin: var(--s-2) var(--s-2) var(--s-1);
+  padding: 0 var(--s-2);
+  color: var(--sub);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  width: 100%;
+  padding: var(--s-2) var(--s-3);
+  border: 0;
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--text);
+  font-family: Menlo, Consolas, "Courier New", monospace;
+  font-size: var(--fs-sm);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+}
+
+.item + .item {
+  margin-top: 2px;
+}
+
+.item:hover {
+  background: var(--hover-soft);
+  color: var(--primary);
+}
+
+.item:focus-visible {
+  outline: none;
+}
+
+.itemActive {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+/* 颜色不作为唯一信息载体：active 项加左侧主色竖条 */
+.itemActive::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--primary);
+}
+
+.itemPath {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.size {
+  flex-shrink: 0;
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.filesError {
+  padding: var(--s-3) var(--s-3) var(--s-4);
+}
+
+/* ═════════════ 右侧 ═════════════ */
+.right {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 0;
+  background: var(--card);
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: 44px;
+  padding: var(--s-2) var(--s-4);
+  border-bottom: 1px solid var(--line);
+  background: var(--card);
+}
+
+.path {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--sub);
+  font-family: Menlo, Consolas, "Courier New", monospace;
+  font-size: var(--fs-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.modeSwitch {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 2px;
+  border-radius: var(--r-sm);
+  background: var(--surface-2);
+}
+
+.modeBtn {
+  min-height: 26px;
+  padding: 0 var(--s-3);
+  border: 0;
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--sub);
+  font: inherit;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+
+.modeBtn:hover {
+  color: var(--primary);
+}
+
+.modeBtn:focus-visible {
+  outline: none;
+}
+
+.modeBtnActive {
+  background: var(--primary);
+  color: #FFFFFF;
+}
+
+.modeBtnActive:hover {
+  background: var(--primary-hover);
+  color: #FFFFFF;
+}
+
+/* ═════════════ 内容区 ═════════════ */
+.content {
+  min-height: 0;
+  overflow: auto;
+  padding: var(--s-4) var(--s-5);
+  background: var(--card);
+}
+
+.contentSkeleton {
+  padding: var(--s-4) var(--s-5);
+}
+
+.raw {
+  margin: 0;
+  padding: var(--s-3) var(--s-4);
+  border-radius: var(--r-sm);
+  background: var(--surface-2);
+  color: var(--text);
+  font-family: Menlo, Consolas, "Courier New", monospace;
+  font-size: var(--fs-sm);
+  line-height: 1.65;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Markdown 排版（Skill Discovery Surface） */
+.md {
+  color: var(--text);
+  font-size: var(--fs-md);
+  line-height: 1.75;
+  word-wrap: break-word;
+}
+
+.md h1,
+.md h2,
+.md h3,
+.md h4,
+.md h5,
+.md h6 {
+  margin: var(--s-5) 0 var(--s-2);
+  color: var(--text);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.md h1:first-child,
+.md h2:first-child,
+.md h3:first-child {
+  margin-top: 0;
+}
+
+.md h1 {
+  padding-bottom: var(--s-2);
+  border-bottom: 1px solid var(--line);
+  font-size: var(--fs-lg);
+}
+
+.md h2 { font-size: var(--fs-md); }
+.md h3 { font-size: var(--fs-md); font-weight: 600; }
+.md h4 { font-size: var(--fs-sm); font-weight: 600; }
+
+.md p {
+  margin: var(--s-2) 0;
+}
+
+.md ul,
+.md ol {
+  margin: var(--s-2) 0 var(--s-3);
+  padding-left: var(--s-5);
+}
+
+.md li + li {
+  margin-top: 4px;
+}
+
+.md a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.md a:hover {
+  text-decoration: underline;
+}
+
+.md code {
+  padding: 0 var(--s-1);
+  border-radius: var(--r-xs);
+  background: var(--surface-2);
+  color: var(--text);
+  font-family: Menlo, Consolas, "Courier New", monospace;
+  font-size: 0.92em;
+}
+
+.md pre {
+  margin: var(--s-3) 0;
+  padding: var(--s-3) var(--s-4);
+  border-radius: var(--r-sm);
+  background: var(--surface-2);
+  overflow-x: auto;
+}
+
+.md pre code {
+  padding: 0;
+  background: transparent;
+  font-size: var(--fs-sm);
+  line-height: 1.65;
+}
+
+.md blockquote {
+  margin: var(--s-3) 0;
+  padding: var(--s-2) var(--s-4);
+  border-left: 3px solid var(--primary-soft);
+  background: var(--primary-softer);
+  color: var(--sub);
+}
+
+.md blockquote p {
+  margin: 0;
+}
+
+.md table {
+  width: 100%;
+  margin: var(--s-3) 0;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+}
+
+.md th,
+.md td {
+  padding: var(--s-2) var(--s-3);
+  border: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.md th {
+  background: var(--bg);
+  color: var(--sub);
+  font-weight: 700;
+}
+
+.md hr {
+  margin: var(--s-4) 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+/* ═════════════ 复制按钮 ═════════════ */
+.copyBtn {
+  flex-shrink: 0;
+}
+
+/* ═════════════ 局部 toast（与 UploadTab 同款样式） ═════════════ */
+.toastSlot {
+  position: fixed;
+  top: var(--s-6);
+  right: var(--s-6);
+  z-index: 1200;
+  pointer-events: none;
+}
+
+/* ═════════════ 移动端：单列折叠（DESIGN ≤900px 断点） ═════════════ */
+@media (max-width: 900px) {
+  .body {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    max-height: none;
+    min-height: 0;
+  }
+
+  .files {
+    max-height: 160px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .content,
+  .contentSkeleton {
+    padding: var(--s-3) var(--s-4);
+  }
+
+  .toolbar {
+    padding: var(--s-2) var(--s-3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item,
+  .modeBtn {
+    transition-duration: 0.01ms;
+  }
+}

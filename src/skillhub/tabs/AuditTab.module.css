@@ -1,0 +1,256 @@
+/**
+ * AuditTab 样式 — 视觉对齐 admin/SessionsPage（会话筛选模块）
+ *
+ * 与 admin/pages/SessionsPage.module.css 中
+ *   .page / .card / .cardHead / .filterBar / .filterRow / .filterField / .filterLabel
+ *   .input / .btnPrimary / .btnGhost / .tableWrap / .table / .tag / .empty
+ * 保持一致，确保两边在视觉上一致。
+ *
+ * 额外（AuditTab 特有）：
+ *   .chipButton / .chipButtonActive — 视图切换（列表/时间线）
+ *   .tagPrimary                     — action 标签（primary 实色 chip）
+ *   .tableSub / .code / .timeline   — 行内文本与时间线视图样式
+ */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-6);
+}
+
+/* ─── card ─── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-xs);
+  padding: var(--s-5) var(--s-6);
+}
+
+/* ─── filter bar（两行结构） ─── */
+.filterBar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  margin-bottom: var(--s-5);
+  padding-bottom: var(--s-4);
+  border-bottom: 1px solid var(--line);
+}
+
+/* 第一行：3 列等宽（关键词组） */
+.filterRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-3) var(--s-4);
+  align-items: end;
+}
+
+/* 第二行：日期×2 + 操作组（视图切换） */
+.filterRow:last-child {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) auto;
+}
+
+.filterField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.filterLabel {
+  color: var(--sub);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.filterActions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  align-self: end;
+}
+
+/* ─── input / select / date 通用容器 ─── */
+.input {
+  min-height: 36px;
+  padding: var(--s-2) var(--s-3);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-md);
+  outline: none;
+  transition:
+    border-color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+}
+
+.input:focus-visible { border-color: var(--primary); }
+.input::placeholder { color: var(--sub); }
+.input:disabled { opacity: var(--disabled-opacity); cursor: not-allowed; }
+
+/* ─── buttons ─── */
+.btnPrimary,
+.btnGhost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--control-h);
+  padding: 0 var(--s-3);
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.btnPrimary { background: var(--primary); color: #FFFFFF; }
+.btnPrimary:hover:not(:disabled) { background: var(--primary-hover); }
+.btnPrimary:active:not(:disabled) { transform: scale(var(--press-scale)); }
+.btnPrimary:disabled,
+.btnGhost:disabled { opacity: var(--disabled-opacity); cursor: not-allowed; }
+.btnPrimary:focus-visible,
+.btnGhost:focus-visible { outline: none; }
+
+.btnGhost { background: transparent; color: var(--primary); border-color: var(--line-strong); }
+.btnGhost:hover:not(:disabled) {
+  background: var(--hover-soft);
+  border-color: rgba(var(--primary-rgb), 0.24);
+}
+
+/* 视图切换（列表/时间线）—— 同样视觉语言：未激活 ghost / 激活 primary 实色 */
+.chipButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--control-h);
+  padding: 0 var(--s-3);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--sub);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+.chipButton:hover:not(:disabled) {
+  background: var(--hover-soft);
+  border-color: rgba(var(--primary-rgb), 0.24);
+  color: var(--primary);
+}
+.chipButtonActive,
+.chipButtonActive:hover:not(:disabled) {
+  background: var(--primary);
+  color: #FFFFFF;
+  border-color: var(--primary);
+}
+
+/* ─── table ─── */
+.tableWrap {
+  overflow: auto;
+  border-top: 1px solid var(--line);
+}
+
+.table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+}
+
+.table th,
+.table td {
+  padding: var(--s-3) var(--s-4);
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.table th {
+  background: transparent;
+  color: var(--sub);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.table tr:last-child td { border-bottom: none; }
+.table tr:hover td { background: var(--primary-softer); }
+
+.tableSub { color: var(--sub); }
+.tableMeta {
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.code {
+  font-family: Menlo, Consolas, monospace;
+  font-size: var(--fs-xs);
+  color: var(--text);
+  background: var(--surface-2);
+  padding: 2px 6px;
+  border-radius: var(--r-xs);
+  word-break: break-all;
+}
+
+/* ─── tag（action 标签） ─── */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  margin-right: var(--s-1);
+  margin-bottom: 2px;
+  padding: 0 var(--s-2);
+  min-height: 22px;
+  border-radius: var(--r-full);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.tagPrimary { background: var(--primary-soft); color: var(--primary); }
+
+/* ─── empty ─── */
+.empty {
+  padding: var(--s-8);
+  text-align: center;
+  color: var(--muted);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--r-md);
+}
+
+/* ─── 时间线视图：复用 card 内的代码块节奏 ─── */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-4);
+  background: var(--surface-2);
+  border-radius: var(--r-md);
+  font-family: Menlo, Consolas, monospace;
+  font-size: var(--fs-xs);
+  color: var(--text);
+  line-height: 1.7;
+  max-height: 480px;
+  overflow: auto;
+}
+.timeline p { margin: 0; }
+
+/* ─── responsive ─── */
+@media (max-width: 900px) {
+  .filterRow,
+  .filterRow:last-child { grid-template-columns: 1fr; }
+  .filterActions { justify-content: flex-start; flex-wrap: wrap; }
+  .input { width: 100%; }
+}

@@ -1,0 +1,165 @@
+.skeletonWrap {
+  padding: var(--s-3) var(--s-2);
+}
+
+.empty {
+  padding: var(--s-6) var(--s-4);
+  text-align: center;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  background: var(--card);
+  border: 1px dashed var(--line);
+  border-radius: var(--r-md);
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.row {
+  display: flex;
+  width: 100%;
+}
+
+.rowUser {
+  justify-content: flex-end;
+}
+
+.rowOther {
+  justify-content: flex-start;
+}
+
+.bubble {
+  max-width: min(86%, 520px);
+  padding: var(--s-3);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.bubbleMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px var(--s-2);
+  font-size: var(--fs-xs);
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  /* 防止 meta 子项（如超长 tool id）撑破 flex 容器宽度 */
+  min-width: 0;
+  max-width: 100%;
+}
+
+.metaItem {
+  /* 短字段（如 #6 / status: ok / 123ms）保持单行；
+     超长的 tool id/chatcmpl-tool-... 允许在任意位置断行，避免撑出气泡。 */
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-all;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.roleBadge {
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: var(--r-xs);
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+}
+
+.bubbleContent {
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  color: var(--text);
+  white-space: pre-wrap;
+}
+
+/* assistant Markdown：复用 @shared/styles/markdown.css 的 .md-content 全局样式，
+   仅在此覆盖字号 / 颜色与 .bubbleContent 对齐，并兜底所有可能横向溢出的元素。 */
+.bubbleMarkdown {
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  color: var(--text);
+  /* 让 .md-content 不自己横滚（与全局 @media 一致），并保证不撑破 86% 气泡宽度 */
+  max-width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.bubbleMarkdown :global(p:first-child) { margin-top: 0; }
+.bubbleMarkdown :global(p:last-child) { margin-bottom: 0; }
+
+/* user：右对齐 + primary 实色 + 白字 */
+.bubbleUser {
+  background: var(--primary);
+  border: 1px solid var(--primary);
+  border-top-right-radius: var(--r-xs);
+}
+
+.bubbleUser .bubbleContent {
+  color: #fff;
+}
+
+.bubbleUser .bubbleMeta {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.bubbleUser .roleBadge {
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+}
+
+/* assistant：左对齐 + 白底 + primary 左竖条 */
+.bubbleAssistant {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--primary);
+  border-top-left-radius: var(--r-xs);
+}
+
+/* tool：左对齐 + mono 字体 + warn 左竖条 */
+.bubbleTool {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--warn);
+  border-top-left-radius: var(--r-xs);
+}
+
+.bubbleTool .bubbleContent {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: var(--fs-xs);
+  color: var(--sub);
+  letter-spacing: 0.02em;
+}
+
+.bubbleTool .roleBadge {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+/* other：左对齐 + 普通 1px line */
+.bubbleOther {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-top-left-radius: var(--r-xs);
+}
+
+.bubbleOther .roleBadge {
+  background: var(--surface-2);
+  color: var(--sub);
+}

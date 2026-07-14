@@ -1,0 +1,280 @@
+.main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+  padding: var(--s-4) var(--s-4) calc(56px + env(safe-area-inset-bottom, 0px) + var(--s-5));
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+.sectionMeta {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.skeletonWrap {
+  padding: var(--s-3) var(--s-1);
+}
+
+.empty {
+  padding: var(--s-5) var(--s-4);
+  text-align: center;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+}
+
+/* ── 列表卡片（Top 10 同款，承载表格） ───────────────────────────────────── */
+
+.listCard {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-xs);
+  overflow: hidden;
+}
+
+.listCardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: 10px var(--s-3);
+  border-bottom: 1px solid var(--line);
+  background: var(--card);
+}
+
+.listCardHeadLeft {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--s-2);
+  min-width: 0;
+}
+
+.listCardTitle {
+  margin: 0;
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.01em;
+}
+
+.listCardMeta {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.listCardHeadAction {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+/* ── 表格 ────────────────────────────────────────────────────────────── */
+
+.tableWrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.table thead tr {
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--line);
+}
+
+.table th {
+  padding: var(--s-2) var(--s-3);
+  text-align: center;
+  white-space: nowrap;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.table th.num {
+  text-align: right;
+}
+
+/* 显式居中（避免被其他规则覆盖） */
+.thCenter {
+  text-align: center;
+}
+
+.table tbody tr {
+  border-bottom: 1px solid var(--line);
+  transition: background var(--t-fast) var(--ease);
+  cursor: pointer;
+}
+
+.table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.table tbody tr:hover,
+.table tbody tr:focus-visible {
+  background: var(--hover-soft);
+  outline: none;
+}
+
+.table td {
+  padding: var(--s-2) var(--s-3);
+  color: var(--text);
+  vertical-align: middle;
+}
+
+.table td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.cellTitle {
+  max-width: 9em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* 风险列：徽标居中 */
+.cellRisk {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.cellUser {
+  max-width: 96px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--sub);
+}
+
+.cellMono {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  max-width: 96px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--primary);
+}
+
+.cellMuted {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.cellNum {
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.tableBadge {
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: var(--r-xs);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.tableBadgeNormal {
+  background: var(--surface-2);
+  color: var(--sub);
+}
+
+.tableBadgeAttention {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.tableBadgeCritical {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+/* Drawer 顶部 meta 行 */
+.metaItem {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--fs-xs);
+  color: var(--sub);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.metaCode {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: var(--sub);
+  background: var(--surface-2);
+  padding: 2px 6px;
+  border-radius: var(--r-xs);
+  max-width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.metaBadge {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 var(--s-2);
+  border-radius: var(--r-full);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.badgeNormal {
+  background: var(--surface-2);
+  color: var(--sub);
+}
+
+.badgeAttention {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.badgeCritical {
+  background: var(--danger-soft);
+  color: var(--danger);
+}

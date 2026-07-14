@@ -1,0 +1,10 @@
+.shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  width: 100%;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}

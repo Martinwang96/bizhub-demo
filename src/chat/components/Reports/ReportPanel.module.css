@@ -1,0 +1,422 @@
+.panel {
+  height: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ============== 生成中骨架屏 ============== */
+
+.generating {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.generatingTop {
+  min-height: 60px;
+  padding: 0 var(--s-5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+
+.generatingBadge {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* 头部右侧操作组：切换到图表按钮 + 关闭按钮并排 */
+.headActions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.closeBtn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 15px;
+  color: var(--muted);
+  width: var(--control-h);
+  height: var(--control-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-sm);
+  transition: background var(--t-fast), color var(--t-fast);
+}
+.closeBtn:hover { background: var(--hover-soft); color: var(--primary); }
+
+.generatingBody {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-5);
+  padding: var(--s-8);
+  text-align: center;
+}
+
+.generatingTitle {
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--text);
+}
+
+.skeletonRow {
+  display: flex;
+  gap: var(--s-4);
+}
+
+.skeletonCard {
+  width: 150px;
+  height: 150px;
+  border-radius: var(--r-md, 12px);
+  background: var(--card-bg, #fff);
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-shadow: 0 4px 16px rgba(37, 53, 84, 0.06);
+}
+
+.skeletonCardAccent {
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--s-4);
+  gap: var(--s-2);
+  background: linear-gradient(160deg, rgba(99, 102, 241, 0.08), rgba(236, 72, 153, 0.06));
+  border-color: rgba(99, 102, 241, 0.25);
+}
+
+.sparkle {
+  color: #8b5cf6;
+  font-size: 15px;
+  animation: sparklePulse 1.6s ease-in-out infinite;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary, #3b82f6);
+  animation: dotBounce 1.1s ease-in-out infinite;
+}
+.dot:nth-child(1) { animation-delay: 0ms; background: #3b82f6; }
+.dot:nth-child(2) { animation-delay: 150ms; background: #10b981; }
+.dot:nth-child(3) { animation-delay: 300ms; background: #f59e0b; }
+
+.skeletonBar {
+  width: 80%;
+  height: 6px;
+  border-radius: 4px;
+  background: rgba(99, 102, 241, 0.35);
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+.skeletonLine {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(31, 35, 41, 0.08);
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+.skeletonLineShort { width: 62%; }
+
+.hint {
+  max-width: 280px;
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+@keyframes dotBounce {
+  0%, 80%, 100% { transform: scale(0.7); opacity: 0.5; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+@keyframes sparklePulse {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+/* ============== 发布看板：header 内联 actions ============== */
+
+.tag, .doneTag {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.doneTag { color: #10b981; background: rgba(16, 185, 129, 0.1); }
+
+.linkBtn {
+  font-size: 13px;
+  border: none;
+  background: none;
+  color: #3b82f6;
+  cursor: pointer;
+  padding: 0;
+}
+
+.publishBtn {
+  font-size: 13px;
+  padding: 5px 14px;
+  border-radius: 6px;
+  border: 1px solid #3b82f6;
+  background: #3b82f6;
+  color: #fff;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.publishBtn:hover { background: #2f6fe0; }
+
+/* 头部「更多操作」下拉按钮 */
+.menuBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: none;
+  border-radius: 6px;
+  color: #1f2329;
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1;
+  transition: background var(--t-fast), color var(--t-fast);
+}
+.menuBtn svg { display: block; }
+.menuBtn:hover { background: var(--hover-soft); color: #3b82f6; }
+
+/* ============== 发布弹窗 ============== */
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.publishModal {
+  width: min(92%, 380px);
+  background: #fff;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+.publishHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid #eef0f2;
+  font-weight: 600;
+}
+
+.publishBody { padding: 16px; }
+.label { display: block; font-size: 13px; color: #8a9099; margin-bottom: 6px; }
+.input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #e5e8ec;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+.errorTip { margin-top: 8px; color: #ef4444; font-size: 12px; }
+
+.publishFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid #eef0f2;
+}
+
+.btn {
+  font-size: 13px;
+  padding: 4px 12px;
+  border-radius: 6px;
+  border: 1px solid #e5e8ec;
+  background: #fff;
+  color: #1f2329;
+  cursor: pointer;
+}
+.btn:hover { background: #f3f4f6; }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.btnPrimary { border-color: #3b82f6; background: #3b82f6; color: #fff; }
+.btnPrimary:hover { background: #2f6fe0; }
+
+.btnSuccess { border-color: #10b981; background: #10b981; color: #fff; }
+.btnSuccess:hover { background: #059669; }
+
+@media (max-width: 900px) {
+  .generatingTop { min-height: 48px; padding: 0 var(--s-3); }
+  .skeletonRow { gap: var(--s-3); }
+  .skeletonCard { width: 120px; height: 120px; }
+}
+
+/* ============== 下载列表面板 ============== */
+
+.downloadPanel {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.downloadHeader {
+  min-height: 48px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line, #eef0f2);
+}
+
+.downloadTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text, #1f2329);
+}
+
+.downloadBody {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 12px 16px;
+}
+
+.downloadList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.downloadItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid #e5e8ec;
+  border-radius: 8px;
+  background: #fff;
+  transition: border-color var(--t-fast, 0.15s), box-shadow var(--t-fast, 0.15s);
+}
+.downloadItem:hover {
+  border-color: #c7cbd1;
+  box-shadow: 0 2px 8px rgba(37, 53, 84, 0.06);
+}
+
+.fileIcon { font-size: 20px; flex-shrink: 0; }
+
+.fileName {
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
+  color: #1f2329;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.downloadLink {
+  flex-shrink: 0;
+  font-size: 13px;
+  padding: 5px 14px;
+  border-radius: 6px;
+  border: 1px solid #3b82f6;
+  background: #3b82f6;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--t-fast, 0.15s);
+}
+.downloadLink:hover { background: #2f6fe0; }
+
+/* ============== HTML 预览 + 其他产物下载条共存布局 ============== */
+
+.reportWrap {
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.viewerHost {
+  flex: 1;
+  min-height: 0;
+}
+
+.downloadBar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-top: 1px solid var(--line, #eef0f2);
+  background: var(--bg, #fff);
+  overflow-x: auto;
+}
+
+.downloadBarLabel {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--muted, #8a9099);
+  white-space: nowrap;
+}
+
+.downloadBarList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 8px;
+}
+
+.downloadChip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 240px;
+  padding: 4px 8px;
+  border: 1px solid #e5e8ec;
+  border-radius: 6px;
+  background: #fff;
+}
+.downloadChip .fileName { font-size: 12px; }
+.downloadChip .fileIcon { font-size: 16px; }
+.downloadChip .downloadLink { padding: 3px 10px; font-size: 12px; }

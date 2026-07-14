@@ -1,0 +1,99 @@
+.card {
+  position: fixed;
+  z-index: var(--z-overlay);
+  width: 220px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-md);
+  padding: var(--s-3) var(--s-4) var(--s-3);
+  font-family: inherit;
+  animation: popIn 180ms var(--ease);
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.arrow {
+  position: absolute;
+  top: -5px;
+  width: 10px;
+  height: 10px;
+  background: var(--card);
+  border-left: 1px solid var(--line);
+  border-top: 1px solid var(--line);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.title {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.desc {
+  margin-top: var(--s-1);
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  color: var(--sub);
+  line-height: 1.5;
+}
+
+.actions {
+  margin-top: var(--s-3);
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--s-2);
+}
+
+.btnSecondary,
+.btnPrimary {
+  height: 28px;
+  padding: 0 var(--s-3);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  border-radius: var(--r-sm);
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color var(--t-fast) var(--ease);
+}
+
+.btnSecondary {
+  background: transparent;
+  color: var(--sub);
+}
+
+.btnSecondary:hover:not(:disabled) {
+  background: var(--hover-soft);
+  color: var(--primary);
+}
+
+.btnPrimary {
+  background: var(--primary);
+  color: #FFFFFF;
+}
+
+.btnPrimary:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.btnSecondary:disabled,
+.btnPrimary:disabled {
+  cursor: not-allowed;
+  opacity: var(--disabled-opacity);
+}
+
+.btnSecondary:focus-visible,
+.btnPrimary:focus-visible {
+  outline: none;
+}

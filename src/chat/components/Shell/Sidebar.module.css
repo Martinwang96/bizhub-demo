@@ -1,0 +1,693 @@
+/* ────────────────────────────────────────────
+   外层容器：单 DOM，width 过渡承载布局变化
+   easing: expo = cubic-bezier(0.16,1,0.3,1)
+           quart = cubic-bezier(0.25,1,0.5,1)
+   ─────────────────────────────────────────── */
+.sidebar {
+  width: var(--sidebar-w);
+  min-width: 0;
+  flex-shrink: 0;
+  background: var(--sidebar-bg);
+  position: relative;
+  overflow: hidden;
+  z-index: var(--z-sidebar);
+
+  transition: width 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: width;
+}
+
+/* 收起态：width → rail 宽度 */
+.sidebar[data-open="false"] {
+  width: var(--sidebar-rail-w);
+}
+
+/* 移动端：fixed 抽屉，不用 width 过渡，改回 transform */
+@media (max-width: 900px) {
+  .sidebar {
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    width: var(--sidebar-w) !important;   /* 移动端始终 240px */
+    transform: translateX(-100%);
+    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: var(--shadow-lg);
+    will-change: transform;
+  }
+
+  .sidebar[data-open="true"] {
+    transform: translateX(0);
+  }
+}
+
+/* ────────────────────────────────────────────
+   展开态内容层（expandedPane）
+   收起时：淡出 + 向左轻移
+   ─────────────────────────────────────────── */
+.expandedPane {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  width: var(--sidebar-w);              /* 保持自身宽度不因容器收缩变形 */
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+  transition:
+    opacity 180ms cubic-bezier(0.25, 1, 0.5, 1),
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.sidebar[data-open="false"] .expandedPane {
+  opacity: 0;
+  transform: translateX(-10px);
+  pointer-events: none;
+}
+
+/* 移动端：展开态层始终可见，不做动效（由外层 sidebar transform 控制） */
+@media (max-width: 900px) {
+  .sidebar[data-open="false"] .expandedPane {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+}
+
+/* ────────────────────────────────────────────
+   Rail 内容层（railPane）
+   展开时：隐藏；收起时：淡入，延迟等 expandedPane 淡完
+   ─────────────────────────────────────────── */
+.railPane {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0 var(--s-4);
+  opacity: 0;
+  transform: translateX(-4px);
+  pointer-events: none;
+  transition:
+    opacity 160ms cubic-bezier(0.25, 1, 0.5, 1) 80ms,   /* 延迟 80ms，等 expanded 淡出 */
+    transform 200ms cubic-bezier(0.16, 1, 0.3, 1) 80ms;
+  will-change: opacity, transform;
+}
+
+.sidebar[data-open="false"] .railPane {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* 移动端：rail 永远隐藏 */
+@media (max-width: 900px) {
+  .railPane {
+    display: none;
+  }
+}
+
+/* ────────────────────────────────────────────
+   Header（展开态）
+   ─────────────────────────────────────────── */
+.header {
+  height: var(--topbar-h);
+  padding: 0 var(--s-2) 0 0;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.brandRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.brandLink {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px var(--s-2) 4px 0;
+  border-radius: var(--r-sm);
+  min-width: 0;
+  flex: 1;
+  transition: background var(--t-fast);
+}
+
+.brandLink:hover {
+  background: var(--hover-soft);
+}
+
+/* logoSlot：固定 52px 宽居中，与 rail(52px) 中心完全对齐；
+   内部 BrandLogo 自带 34px 尺寸 + r-sm 圆角 + --primary 实色背景。 */
+.logoSlot {
+  width: var(--sidebar-rail-w);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  gap: 2px;
+  line-height: 1.15;
+}
+
+.brandTitle {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  color: var(--sub);
+  font-size: var(--fs-md);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.brandSub {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* toggleBtn：展开时箭头向左，收起时旋转 180° 变向右 */
+.toggleBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--r-sm);
+  color: var(--muted);
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition:
+    background var(--t-fast),
+    color var(--t-fast),
+    transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toggleBtn:hover {
+  background: var(--hover-soft);
+  color: var(--primary);
+}
+
+.toggleBtn:focus-visible {
+  outline: none;
+}
+
+/* 收起态：箭头旋转 180° 变成向右（提示可以展开）*/
+.toggleBtnFlipped {
+  transform: rotate(180deg);
+}
+
+/* ────────────────────────────────────────────
+   Body（展开态）
+   ─────────────────────────────────────────── */
+.body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--s-5) var(--s-3) var(--s-2);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* 一级导航行 */
+.navRow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  width: 100%;
+  padding: var(--s-2) var(--s-3);
+  height: 36px;
+  background: none;
+  border: none;
+  border-radius: var(--r-sm);
+  font-size: var(--fs-sm);
+  color: var(--sub);
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--t-fast), color var(--t-fast);
+}
+
+.navRow:hover {
+  background: var(--hover-soft);
+  color: var(--text);
+}
+
+.navRow:active {
+  transform: scale(0.98);
+}
+
+.navRow:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--primary-ring);
+}
+
+.navRowActive {
+  background: var(--hover-soft);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.navIcon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--muted);
+}
+
+.navLabel {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* chevron：展开/收起旋转 */
+.chevron {
+  display: flex;
+  align-items: center;
+  color: var(--muted);
+  transition: transform 220ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.chevronOpen {
+  transform: rotate(0deg);
+}
+
+.chevron:not(.chevronOpen) {
+  transform: rotate(-90deg);
+}
+
+/* ────────────────────────────────────────────
+   historyDrawer：grid-template-rows 0fr→1fr
+   这是唯一安全的"高度动效"方案，不触发 layout reflow
+   ─────────────────────────────────────────── */
+.historyDrawer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 260ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.historyDrawerOpen {
+  grid-template-rows: 1fr;
+}
+
+.historyDrawerInner {
+  overflow: hidden;
+}
+
+/* 二级缩进区 */
+.historyIndent {
+  padding-left: var(--s-5);
+  display: flex;
+  flex-direction: column;
+}
+
+.historyGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.groupLabel {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--muted);
+  padding: var(--s-3) var(--s-2) var(--s-1);
+  letter-spacing: 0.4px;
+}
+
+/* history item（button 重置 + 交互样式） */
+.historyItem {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 var(--s-2);
+  height: 34px;
+  border-radius: var(--r-sm);
+  border: none;
+  background: none;
+  font-size: var(--fs-sm);
+  color: var(--sub);
+  cursor: pointer;
+  transition: background var(--t-fast), color var(--t-fast);
+  gap: var(--s-2);
+  text-align: left;
+}
+
+/* hover 仅在指针设备启用，避免触屏 sticky hover 吞掉首次 tap 的 click */
+@media (hover: hover) {
+  .historyItem:hover {
+    background: var(--hover-soft);
+    color: var(--text);
+  }
+}
+
+.historyItem:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--primary-ring);
+}
+
+.historyItemActive {
+  background: var(--active-soft);
+  color: var(--text);
+  font-weight: 500;
+}
+
+@media (hover: hover) {
+  .historyItemActive:hover {
+    background: var(--active-soft);
+    color: var(--text);
+  }
+}
+
+.itemIcon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--muted);
+  opacity: 0.6;
+}
+
+.itemTitle {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--fs-sm);
+  text-align: left;
+}
+
+.deleteBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--r-xs);
+  border: none;
+  background: none;
+  color: var(--muted);
+  flex-shrink: 0;
+  font-size: var(--fs-base);
+  cursor: pointer;
+  /* opacity 过渡代替 display:none，避免 CLS */
+  opacity: 0;
+  transition: opacity var(--t-fast), background var(--t-fast), color var(--t-fast);
+}
+
+/*
+  仅在真正支持 hover 的设备（PC 鼠标）启用 hover 显隐 × 的行为。
+  在触屏设备上，:hover 会"sticky"——首次 tap 触发 :hover，让 .deleteBtn 从透明变可见，
+  浏览器把这次 tap 视为"hover 切换"而不向上 fire click，导致用户必须二次 tap
+  才能进入历史会话。把 hover 规则用 @media (hover: hover) 圈起来即可消除该问题。
+*/
+@media (hover: hover) {
+  .historyItem:hover .deleteBtn,
+  .historyItem:focus-within .deleteBtn {
+    opacity: 1;
+  }
+
+  .deleteBtn:hover {
+    background: var(--danger-soft);
+    color: var(--danger);
+  }
+}
+
+/*
+  移动端（无 hover）让删除按钮常驻半透明，保证可见可点；
+  active 会话上加深、tap × 后由 .deleteBtnConfirming 接管完整高亮。
+*/
+@media (hover: none) {
+  .deleteBtn {
+    opacity: 0.5;
+  }
+  .historyItemActive .deleteBtn {
+    opacity: 0.7;
+  }
+}
+
+/* 确认态：常驻显示，红色背景，宽度自适应 */
+.deleteBtnConfirming {
+  opacity: 1 !important;
+  background: var(--danger-soft);
+  color: var(--danger);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  white-space: nowrap;
+  padding: 0 4px;
+  width: auto;
+  border-radius: var(--r-xs);
+}
+
+/* 置顶按钮：复用 deleteBtn 的尺寸/显隐节奏，hover 用 primary 高亮 */
+.pinBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--r-xs);
+  border: none;
+  background: none;
+  color: var(--muted);
+  flex-shrink: 0;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity var(--t-fast), background var(--t-fast), color var(--t-fast);
+}
+
+@media (hover: hover) {
+  .historyItem:hover .pinBtn,
+  .historyItem:focus-within .pinBtn {
+    opacity: 1;
+  }
+
+  .pinBtn:hover {
+    background: var(--hover-soft);
+    color: var(--primary, var(--text));
+  }
+}
+
+@media (hover: none) {
+  .pinBtn {
+    opacity: 0.5;
+  }
+  .historyItemActive .pinBtn {
+    opacity: 0.7;
+  }
+}
+
+/* 已置顶：颜色常驻高亮；显隐与未置顶一致（悬浮/聚焦时出现） */
+.pinBtnActive {
+  color: var(--primary, var(--text));
+}
+
+.emptyState {
+  padding: var(--s-4) var(--s-2);
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  text-align: left;
+  line-height: 1.8;
+}
+
+/* ────────────────────────────────────────────
+   Footer（展开态）
+   ─────────────────────────────────────────── */
+.footer {
+  padding: var(--s-4);
+  flex-shrink: 0;
+}
+
+.userBadge {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--r-full);
+  background: var(--primary);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.userName {
+  font-size: var(--fs-sm);
+  color: var(--sub);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.modelInfo {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  margin-top: var(--s-3);
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--r-full);
+  background: var(--ai-accent);
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(127, 118, 255, 0.5);
+}
+
+/* ────────────────────────────────────────────
+   Rail 内容层样式
+   ─────────────────────────────────────────── */
+.railBrand {
+  height: var(--topbar-h);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background var(--t-fast);
+}
+
+.railBrand:hover {
+  background: var(--hover-soft);
+}
+
+.railIcons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-1);
+  margin-top: var(--s-2);
+}
+
+.railItem {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  border-radius: var(--r-sm);
+  color: var(--muted);
+  cursor: pointer;
+  transition: background var(--t-fast), color var(--t-fast);
+}
+
+.railItem:hover {
+  background: var(--hover-soft);
+  color: var(--text);
+}
+
+.railItem:focus-visible {
+  outline: none;
+}
+
+.railItemActive {
+  background: var(--hover-soft);
+  color: var(--text);
+}
+
+/* rail 按钮的 hover 提示由 <Tooltip> 组件（./Tooltip.tsx）独立承担，
+   通过 React Portal 渲染到 body，不再需要在此叠加伪元素或调整 overflow。 */
+
+/* ────────────────────────────────────────────
+   Accessibility：prefers-reduced-motion
+   ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar,
+  .expandedPane,
+  .railPane,
+  .toggleBtn,
+  .chevron,
+  .historyDrawer {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ────────────────────────────────────────────
+   Undo Snackbar
+   ─────────────────────────────────────────── */
+.undoSnackbar {
+  position: absolute;
+  bottom: var(--s-4);
+  left: var(--s-3);
+  right: var(--s-3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-3);
+  background: var(--text);
+  border-radius: var(--r-sm);
+  box-shadow: var(--shadow-md);
+  z-index: calc(var(--z-sidebar) + 1);
+  animation: snackbarIn 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes snackbarIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.undoText {
+  font-size: var(--fs-xs);
+  color: var(--shell-text);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.undoBtn {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--shell-sub);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px var(--s-1);
+  border-radius: var(--r-xs);
+  flex-shrink: 0;
+  transition: color var(--t-fast);
+}
+
+.undoBtn:hover {
+  color: var(--shell-text);
+}

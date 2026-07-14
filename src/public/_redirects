@@ -1,0 +1,12 @@
+# EdgeOne Pages clean-URL 重写（Netlify 兼容语法，200=重写不改变地址栏）
+# 首个匹配生效，SPA 各入口回退到对应 HTML。
+/skill-hub       /skill-hub.html   200
+/skill-hub/*     /skill-hub.html   200
+/admin           /admin.html       200
+/admin/*         /admin.html       200
+/s/*             /share.html       200
+/rs/*            /share.html       200
+/share           /share.html       200
+/chat            /index.html       200
+/chat/*          /index.html       200
+/*               /index.html       200

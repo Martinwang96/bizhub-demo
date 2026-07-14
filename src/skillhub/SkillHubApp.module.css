@@ -1,0 +1,528 @@
+.shell {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.sidebar {
+  width: 240px;
+  flex: 0 0 240px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--line);
+}
+
+.sidebarHeader {
+  height: var(--topbar-h);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 22px var(--s-4) 0;
+}
+
+.brandLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: 36px;
+  max-width: 100%;
+  padding: 0 var(--s-2) 0 0;
+  border-radius: var(--r-sm);
+  color: var(--sub);
+  text-decoration: none;
+  transition:
+    background var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+}
+
+.brandLink:hover {
+  background: var(--hover-soft);
+  color: var(--primary);
+}
+
+.brandLink:focus-visible,
+.backLink:focus-visible,
+.navItem:focus-visible {
+  outline: none;
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  gap: 2px;
+  line-height: 1.15;
+}
+
+.brandTitle {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  color: var(--sub);
+  font-size: var(--fs-md);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.brandSub {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.logoSlot {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sideNav {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--s-10) var(--s-3) var(--s-3);
+}
+
+.navItem {
+  width: 100%;
+  display: grid;
+  gap: var(--s-1);
+  min-height: 58px;
+  padding: var(--s-3);
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--sub);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.navItem + .navItem {
+  margin-top: var(--s-1);
+}
+
+.navItem:hover {
+  background: var(--hover-soft);
+  color: var(--primary);
+}
+
+.navItem:active {
+  transform: scale(var(--press-scale));
+}
+
+.navItemActive {
+  border-color: rgba(var(--primary-rgb), 0.14);
+  background: var(--active-soft);
+  color: var(--primary);
+}
+
+.navMain {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+  color: inherit;
+  font-size: var(--fs-md);
+  font-weight: 700;
+}
+
+.navDesc {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  line-height: 1.45;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pendingBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 var(--s-2);
+  border-radius: var(--r-full);
+  background: var(--warn-soft);
+  color: var(--warn);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.sidebarFooter {
+  flex-shrink: 0;
+  display: grid;
+  gap: var(--s-2);
+  padding: var(--s-4);
+  border-top: 1px solid var(--line);
+}
+
+.meChip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+  height: var(--control-h);
+  min-height: var(--control-h);
+  max-width: 100%;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  background: var(--card);
+  color: var(--text);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  box-shadow: var(--shadow-xs);
+  box-sizing: border-box;
+}
+
+.roleText {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--control-h);
+  padding: 0 var(--s-3);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--primary);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.backLink:hover {
+  background: var(--hover-soft);
+  border-color: rgba(var(--primary-rgb), 0.24);
+}
+
+.backLink:active {
+  transform: scale(var(--press-scale));
+}
+
+.workspace {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+
+.workspaceTopbar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-5);
+  min-height: var(--topbar-h);
+  padding: 27px var(--s-8) 0 ;
+  background: var(--bg);
+  white-space: nowrap;
+}
+
+.topbarTitleGroup {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-5);
+  min-width: 0;
+  flex: 1;
+}
+
+.topbarActions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex-shrink: 0;
+}
+
+.topbarRefreshBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--control-h);
+  padding: 0 var(--s-3);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--primary);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.topbarRefreshBtn:hover:not(:disabled) {
+  background: var(--hover-soft);
+  border-color: rgba(var(--primary-rgb), 0.24);
+}
+
+.topbarRefreshBtn:active:not(:disabled) {
+  transform: scale(var(--press-scale));
+}
+
+.topbarRefreshBtn:focus-visible {
+  outline: none;
+}
+
+.topbarRefreshBtn:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+.iconBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.iconBtn:hover {
+  background: var(--hover-soft);
+  border-color: rgba(var(--primary-rgb), 0.18);
+  color: var(--primary);
+}
+
+.iconBtn:active {
+  background: var(--primary);
+  color: var(--shell-text);
+}
+
+.iconBtn:focus-visible {
+  outline: none;
+}
+
+.workspaceTitle {
+  margin: 0;
+  color: var(--text);
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.workspaceSubtitle {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  color: var(--sub);
+  font-size: var(--fs-lg);
+  font-weight: 400;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+  overflow: auto;
+  padding: var(--s-8) var(--s-8) 96px;
+  /* 让所有 panel 叠在同一格子里，便于 opacity/visibility 切换 */
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.panel,
+.panelActive {
+  grid-column: 1;
+  grid-row: 1;
+  width: 100%;
+  transition: opacity var(--t-mid) var(--ease-expo);
+}
+
+.panel {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.panelActive {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  animation: panelIn 160ms var(--ease-expo);
+}
+
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(4px); }
+}
+
+.guestOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s-6);
+  background: color-mix(in oklch, var(--bg) 96%, var(--card));
+}
+
+.guestCard {
+  width: min(420px, 100%);
+  text-align: center;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: var(--s-10) var(--s-8);
+  box-shadow: var(--shadow-md);
+}
+
+.guestIcon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto var(--s-4);
+  border-radius: var(--r-full);
+  background: var(--danger-soft);
+  color: var(--danger);
+  font-size: var(--fs-xl);
+  font-weight: 700;
+}
+
+.guestTitle {
+  margin: 0 0 var(--s-2);
+  color: var(--text);
+  font-size: var(--fs-xl);
+  font-weight: 700;
+}
+
+.guestDesc {
+  margin: 0;
+  color: var(--sub);
+  font-size: var(--fs-base);
+  line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+  .shell {
+    display: block;
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .sidebarHeader {
+    height: auto;
+    padding: var(--s-6) var(--s-5) var(--s-3);
+  }
+
+  .sideNav {
+    display: flex;
+    gap: var(--s-1);
+    overflow-x: auto;
+    padding: 0 var(--s-5) var(--s-3);
+  }
+
+  .navItem {
+    width: auto;
+    min-width: 148px;
+  }
+
+  .navItem + .navItem {
+    margin-top: 0;
+  }
+
+  .sidebarFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--s-3) var(--s-5);
+  }
+
+  .workspaceTopbar {
+    padding-inline: var(--s-5);
+  }
+
+  .main {
+    padding: var(--s-6) var(--s-5) 80px;
+  }
+}
+
+@media (max-width: 640px) {
+  .sidebarHeader,
+  .sideNav,
+  .sidebarFooter,
+  .workspaceTopbar,
+  .main {
+    padding-inline: var(--s-4);
+  }
+
+  .workspaceTopbar {
+    min-height: auto;
+    padding-top: var(--s-4);
+    padding-bottom: var(--s-3);
+  }
+
+  .workspaceSubtitle {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panelActive {
+    animation-duration: 0.01ms;
+  }
+
+  .brandLink,
+  .backLink,
+  .navItem {
+    transition-duration: 0.01ms;
+  }
+}

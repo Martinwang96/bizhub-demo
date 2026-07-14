@@ -1,0 +1,726 @@
+/* ===== Skill Hub 移动端 · 技能页样式 ===== */
+
+/* 主容器：底部 76 + 56 TabBar + safe-area。
+   与 apply / review 页保持一致的 padding 算法。 */
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding:
+    var(--s-2)
+    var(--s-4)
+    calc(56px + 76px + env(safe-area-inset-bottom, 0px) + var(--s-4));
+  background: var(--bg);
+  min-height: 100dvh;
+}
+
+/* 顶部分段控件已抽取至 mobile/shared/MobileSegmentTabs */
+
+/* ───────────────────────── 列表段：工具栏 ───────────────────────── */
+.listSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.searchWrap {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: var(--s-3);
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.searchInput {
+  flex: 1;
+  height: 36px;
+  padding: 0 var(--s-3) 0 calc(var(--s-3) + 22px);
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  background: var(--card);
+  color: var(--text);
+  font-size: var(--fs-sm);
+  outline: none;
+  transition:
+    border-color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.searchInput:focus {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-focus, 0 0 0 3px rgba(0, 82, 217, 0.15));
+}
+
+.searchInput::placeholder {
+  color: var(--muted);
+}
+
+.filterBtn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  height: 36px;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  background: var(--card);
+  color: var(--text);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.filterBtn:hover:not(:disabled) {
+  background: var(--hover-soft, var(--surface-2));
+}
+
+.filterCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: var(--r-full);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.refreshBtn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  background: var(--card);
+  color: var(--primary);
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.refreshBtn:hover:not(:disabled) {
+  background: var(--primary-soft, #e8f3ff);
+}
+
+.refreshBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.errorNotice {
+  padding: var(--s-3) var(--s-4);
+  background: var(--danger-soft, #ffece8);
+  color: var(--danger);
+  border-radius: var(--r-md);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+}
+
+/* ───────────────────────── 卡片列表 ───────────────────────── */
+.cardList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-4);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-xs);
+  transition: border-color var(--t-fast) var(--ease);
+}
+
+.card:hover {
+  border-color: var(--primary);
+}
+
+.cardHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-2);
+}
+
+.cardTitle {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-family: 'SF Mono', 'Roboto Mono', Menlo, Monaco, Consolas, monospace;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.statusBadge {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 var(--s-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xs, 4px);
+  background: var(--surface-2, #f2f3f9);
+  color: var(--sub, var(--muted));
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.statusBadgeActive {
+  background: var(--accent-soft, #e8f8e8);
+  color: var(--accent, #52c41a);
+  border-color: var(--accent, #52c41a);
+}
+
+.statusBadgeWarn {
+  background: var(--warn-soft, #fff7e6);
+  color: var(--warn, #fa8c16);
+  border-color: var(--warn, #fa8c16);
+}
+
+.statusBadgeDanger {
+  background: var(--danger-soft, #ffece8);
+  color: var(--danger, #f53f3f);
+  border-color: var(--danger, #f53f3f);
+}
+
+.metaLine {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: var(--fs-xs, 12px);
+  color: var(--muted);
+  flex-wrap: wrap;
+}
+
+.metaDot {
+  width: 3px;
+  height: 3px;
+  border-radius: var(--r-full);
+  background: var(--line-strong, var(--line));
+}
+
+.cardDesc {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--sub, var(--muted));
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.tablesChip {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  padding: var(--s-1) var(--s-2);
+  background: var(--primary-soft, #e8f3ff);
+  color: var(--primary);
+  border-radius: var(--r-xs, 4px);
+  font-size: 12px;
+  font-weight: 600;
+  font-family: 'SF Mono', 'Roboto Mono', Menlo, Monaco, Consolas, monospace;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tablesChipIcon {
+  flex: none;
+  color: var(--primary);
+}
+
+.cardActions {
+  display: flex;
+  gap: var(--s-2);
+  margin-top: var(--s-2);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--line);
+}
+
+.actionBtn {
+  flex: 1;
+  height: 28px;
+  border: none;
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--primary);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.actionBtn:hover:not(:disabled) {
+  background: var(--primary-soft, #e8f3ff);
+}
+
+.actionBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* 下线按钮：危险红色调；上线按钮：恢复主色加粗 */
+.actionBtnDanger {
+  color: var(--danger, #d93025);
+}
+.actionBtnDanger:hover:not(:disabled) {
+  background: var(--danger-soft, #fdecea);
+}
+.actionBtnPrimary {
+  color: var(--primary);
+  background: var(--primary-soft, #e8f3ff);
+}
+
+/*
+ * 下线 skill 卡片整体视觉降权：用 filter 不连带 stacking context 影响子元素的
+ * 子层 opacity，仍可读便于运营后续上线。文字部分的对比度足够保证按钮可点。
+ */
+.cardUnavailable {
+  filter: grayscale(0.4) opacity(0.85);
+}
+
+/* ───────────────────────── Filter Sheet ───────────────────────── */
+.filterSheet {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  padding: var(--s-2) 0 var(--s-3);
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.filterLabel {
+  font-size: var(--fs-xs, 12px);
+  font-weight: 700;
+  color: var(--sub, var(--muted));
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.filterChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+
+.filterChip {
+  height: 32px;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  background: var(--card);
+  color: var(--text);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+
+.filterChipActive {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+.filterFooter {
+  display: flex;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-4) var(--s-3);
+}
+
+.sheetCancelBtn {
+  flex: 1;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--text);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.sheetCancelBtn:hover:not(:disabled) {
+  background: var(--hover-soft, var(--surface-2));
+}
+
+.sheetConfirmBtn {
+  flex: 1;
+  height: 44px;
+  border: none;
+  border-radius: var(--r-sm);
+  background: var(--primary);
+  color: #fff;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.sheetConfirmBtn:hover:not(:disabled) {
+  background: var(--primary-strong, #003e9c);
+}
+
+/* ───────────────────────── 配置段：metric stack ───────────────────────── */
+.configSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.metricStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.metricCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: var(--s-4);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-xs);
+}
+
+.metricInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  min-width: 0;
+}
+
+.metricLabel {
+  margin: 0;
+  font-size: var(--fs-xs, 12px);
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.metricValue {
+  margin: 0;
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.metricDot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--r-full);
+}
+
+.metricDotOn {
+  background: var(--accent, #52c41a);
+}
+
+.metricDotOff {
+  background: var(--danger, #f53f3f);
+}
+
+.metricIconWrap {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-full);
+  background: var(--primary-soft, #e8f3ff);
+  color: var(--primary);
+}
+
+.metricIconWrapAlt {
+  background: var(--surface-2, #f2f3f9);
+  color: var(--sub, var(--muted));
+}
+
+/* ───────────────────────── 配置段：折叠卡片 ───────────────────────── */
+.collapseList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.collapseCard {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  transition: border-color var(--t-fast) var(--ease);
+}
+
+.collapseCardOpen {
+  border-color: var(--primary);
+}
+
+.collapseHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--s-4);
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.collapseHeader:hover {
+  background: var(--hover-soft, var(--surface-2));
+}
+
+.collapseHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.collapseIcon {
+  flex: none;
+  color: var(--primary);
+}
+
+.collapseTitle {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.collapseExpand {
+  flex: none;
+  color: var(--muted);
+  transition: transform var(--t-fast) var(--ease);
+}
+
+.collapseExpandOpen {
+  transform: rotate(180deg);
+}
+
+.collapseBody {
+  padding: var(--s-4);
+  border-top: 1px solid var(--line);
+  background: var(--surface-2, #f2f3f9);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.collapseDesc {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--sub, var(--muted));
+  line-height: 1.5;
+}
+
+.collapseRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--fs-xs, 12px);
+}
+
+.collapseRowKey {
+  color: var(--muted);
+}
+
+.collapseRowVal {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.codeBlock {
+  margin: 0;
+  padding: var(--s-3);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  font-family: 'SF Mono', 'Roboto Mono', Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text);
+  overflow-x: auto;
+  white-space: pre;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ───────────────────────── 配置段：底部 reload 按钮 ───────────────────────── */
+.reloadButtonWrap {
+  padding-top: var(--s-2);
+}
+
+.reloadButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: var(--r-md);
+  background: var(--primary);
+  color: #fff;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition:
+    background var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.reloadButton:hover:not(:disabled) {
+  background: var(--primary-strong, #003e9c);
+}
+
+.reloadButton:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.reloadButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.adminEmpty {
+  padding: var(--s-6) var(--s-4);
+  background: var(--card);
+  border: 1px dashed var(--line);
+  border-radius: var(--r-lg);
+  text-align: center;
+}
+
+.adminEmptyTitle {
+  margin: 0 0 var(--s-2);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.adminEmptyDesc {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ───────────────────────── 空 / 骨架 ───────────────────────── */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s-8) var(--s-4);
+  background: var(--card);
+  border: 1px dashed var(--line);
+  border-radius: var(--r-lg);
+  text-align: center;
+}
+
+.emptyTitle {
+  margin: 0 0 var(--s-2);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.emptyDesc {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  max-width: 240px;
+  line-height: 1.6;
+}
+
+.skeletonStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.skeletonCard {
+  height: 168px;
+  border-radius: var(--r-lg);
+  background: linear-gradient(
+    90deg,
+    var(--surface-2, #f2f3f9) 0%,
+    var(--card) 50%,
+    var(--surface-2, #f2f3f9) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShine 1.4s linear infinite;
+}
+
+@keyframes skeletonShine {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .filterBtn,
+  .refreshBtn,
+  .actionBtn,
+  .filterChip,
+  .sheetCancelBtn,
+  .sheetConfirmBtn,
+  .reloadButton,
+  .collapseHeader,
+  .collapseExpand,
+  .card,
+  .searchInput {
+    transition-duration: 0.01ms;
+  }
+  .skeletonCard {
+    animation: none;
+  }
+}

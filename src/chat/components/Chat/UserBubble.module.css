@@ -1,0 +1,24 @@
+.row {
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--s-2) 0;
+}
+
+.bubble {
+  background: var(--primary);
+  color: #FFFFFF;
+  padding: var(--s-3) var(--s-4);
+  border-radius: var(--r-lg) var(--r-lg) var(--r-xs) var(--r-lg);
+  max-width: 64%;
+  font-size: var(--fs-base);
+  line-height: 1.6;
+  word-break: break-word;
+  box-shadow: var(--shadow-xs);
+}
+
+.time {
+  font-size: var(--fs-xs);
+  color: color-mix(in oklch, #FFFFFF 70%, transparent);
+  text-align: right;
+  margin-top: var(--s-1);
+}
