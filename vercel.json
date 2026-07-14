@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/admin/:path*", "destination": "/admin.html" },
+    { "source": "/skill-hub/:path*", "destination": "/skill-hub.html" },
+    { "source": "/share/:path*", "destination": "/share.html" },
+    { "source": "/s/:path*", "destination": "/share.html" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
